@@ -3,6 +3,8 @@ import requests
 from bs4 import BeautifulSoup, Tag, NavigableString
 from pymongo import MongoClient
 from pprint import pprint
+from os import path
+import json
 
 
 def getSoup(url):
@@ -21,7 +23,8 @@ def saveToMongoDB(collection, entry):
     try:
         collection.insert_one(entry)
         return True
-    except:
+    except Exception as e:
+        print("Error in saving to MongoDB: ", e)
         return False
 
 
@@ -42,9 +45,18 @@ def initializeDB(dbName, collectionName):
         collection = db['doha']
     elif collectionName == 'kavita':
         collection = db['kavita']
+    elif collectionName == 'muhavare':
+        collection = db['muhavare']
     else:
         return None
     return collection
+
+
+
+def saveToLocalDB(fileName, content):
+    filePath = path.relpath(fileName)
+    with open (filePath, 'w') as outfile:
+        json.dump(content, outfile)
 
 
 def viewCollection(collection):
