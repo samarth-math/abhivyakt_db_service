@@ -114,6 +114,59 @@ def api_kavita():
         return 'This HTTP verb is currently not supported.'
 
 
+@app.route('/muhavare', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def api_muhavare():
+    if request.method == 'GET':
+        nextItemURL = 'http://127.0.0.1:5000/muhavare?'
+        limit = 50
+        nextItem = None
+        if 'limit' in request.args:
+            print('You requested limit')
+            limit = request.args['limit']
+        if 'nextItem' in request.args:
+            nextItem = request.args['nextItem']
+            print('next item is;', nextItem)
+
+        if 'muhavara' in request.args:
+            content = request.args['muhavara']
+            data, hasMore, lastItem = Res.getKavitaByContent(
+                content, limit, nextItem)
+            js = data
+            data, hasMore, lastItem = Res.getKavitaByTitle(
+                content, limit, nextItem)
+            print('Return type of data from muhavara.py', type(data))
+            print('last item: ', lastItem)
+            if hasMore is True:
+                nextItemURL = nextItemURL + 'muhavara=' + \
+                    content + '&nextItem=' + lastItem
+                return jsonify(
+                    data=js,
+                    hasMore=True,
+                    nextItem=nextItemURL
+                )
+            else:
+                return jsonify(
+                    data=js,
+                    hasMore=False
+                )
+        else:
+            data, hasMore, lastItem = Res.getAllKavita(limit, nextItem)
+            if hasMore is False:
+                return jsonify(
+                    data=data,
+                    hasMore=False
+                )
+            else:
+                nextItemURL = nextItemURL + '&nextItem=' + lastItem
+                return jsonify(
+                    data=data,
+                    hasMore=hasMore,
+                    nextItem=nextItemURL)
+    else:
+        response = Response(status=404, mimetype='text')
+        return 'This HTTP verb is currently not supported.'
+
+
 @app.route('/kavita/<kavitaid>')
 def api_article(kavitaID):
     return 'You are reading ' + kavitaID
@@ -121,5 +174,3 @@ def api_article(kavitaID):
 
 if __name__ == '__main__':
     app.run()
-
-
