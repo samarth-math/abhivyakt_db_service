@@ -5,8 +5,6 @@ from flask import request
 from flask import Response
 from flask import jsonify
 import resources.kavita as Res
-from bson import json_util, ObjectId
-import json
 app = Flask(__name__)
 
 
@@ -20,28 +18,26 @@ def api_kavita():
     if request.method == 'GET':
         nextItemURL = 'http://127.0.0.1:5000/kavita?'
         limit = 50
-        offset = 0
         nextItem = None
         response = Response(status=404, mimetype='text')
         if 'limit' in request.args:
             print('You requested limit')
             limit = request.args['limit']
-        if 'offset' in request.args:
-            print('You requested list of all kavitas')
-            offset = request.args['offset']
         if 'nextItem' in request.args:
             nextItem = request.args['nextItem']
             print('next item is;', nextItem)
+
         if 'title' in request.args:
             title = request.args['title']
             print('Title:', title)
             data, hasMore, lastItem = Res.getKavitaByTitle(
-                title, limit, offset, nextItem)
+                title, limit, nextItem)
             js = data
             print('Return type of data from kavita.py', type(data))
             print('last item: ', lastItem)
             if hasMore is True:
-                nextItemURL = nextItemURL + 'title=' + title + '&nextItem=' + lastItem
+                nextItemURL = nextItemURL + 'title=' + \
+                    title + '&nextItem=' + lastItem
                 return jsonify(
                     data=js,
                     hasMore=True,
@@ -57,27 +53,63 @@ def api_kavita():
             return response
 
         elif 'author' in request.args:
-            author = request.args['autho']
-            response = Res.getKavitaByAuthor(author, limit, offset, nextItem)
+            author = request.args['author']
+            data, hasMore, lastItem = Res.getKavitaByAuthor(
+                author, limit, nextItem)
             js = data
-            response = Response(
-                js, status=200, mimetype='application/json')
-            return jsonify(
-                data=js
-            )
+            data, hasMore, lastItem = Res.getKavitaByTitle(
+                author, limit, nextItem)
+            print('Return type of data from kavita.py', type(data))
+            print('last item: ', lastItem)
+            if hasMore is True:
+                nextItemURL = nextItemURL + 'author=' + \
+                    author + '&nextItem=' + lastItem
+                return jsonify(
+                    data=js,
+                    hasMore=True,
+                    nextItem=nextItemURL
+                )
+            else:
+                return jsonify(
+                    data=js,
+                    hasMore=False
+                )
+
         elif 'content' in request.args:
             content = request.args['content']
-            data = Res.getKavitaByContent(content, limit, offset, nextItem)
+            data, hasMore, lastItem = Res.getKavitaByContent(
+                content, limit, nextItem)
             js = data
-            response = Response(
-                js, status=200, mimetype='application/json')
-            return jsonify(
-                data=js
-            )
+            data, hasMore, lastItem = Res.getKavitaByTitle(
+                content, limit, nextItem)
+            print('Return type of data from kavita.py', type(data))
+            print('last item: ', lastItem)
+            if hasMore is True:
+                nextItemURL = nextItemURL + 'content=' + \
+                    content + '&nextItem=' + lastItem
+                return jsonify(
+                    data=js,
+                    hasMore=True,
+                    nextItem=nextItemURL
+                )
+            else:
+                return jsonify(
+                    data=js,
+                    hasMore=False
+                )
         else:
-            # getKavita('all')
-            print('You requested list of all kavitas')
-            return response
+            data, hasMore, lastItem = Res.getAllKavita(limit, nextItem)
+            if hasMore is False:
+                return jsonify(
+                    data=data,
+                    hasMore=False
+                )
+            else:
+                nextItemURL = nextItemURL + '&nextItem=' + lastItem
+                return jsonify(
+                    data=data,
+                    hasMore=hasMore,
+                    nextItem=nextItemURL)
     else:
         return 'This HTTP verb is currently not supported.'
 
@@ -89,3 +121,5 @@ def api_article(kavitaID):
 
 if __name__ == '__main__':
     app.run()
+
+
