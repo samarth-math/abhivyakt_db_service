@@ -5,6 +5,8 @@ from flask import request
 from flask import Response
 from flask import jsonify
 import resources.kavita as Res
+import resources.dohe as Dohe
+import resources.muhavare as Muhavare
 app = Flask(__name__)
 
 
@@ -114,6 +116,85 @@ def api_kavita():
         return 'This HTTP verb is currently not supported.'
 
 
+
+
+@app.route('/dohe', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def api_dohe():
+    if request.method == 'GET':
+        nextItemURL = 'http://127.0.0.1:5000/dohe?'
+        limit = 50
+        nextItem = None
+        response = Response(status=404, mimetype='text')
+        if 'limit' in request.args:
+            print('You requested limit')
+            limit = request.args['limit']
+        if 'nextItem' in request.args:
+            nextItem = request.args['nextItem']
+            print('next item is;', nextItem)
+
+        if 'author' in request.args:
+            author = request.args['author']
+            data, hasMore, lastItem = Dohe.getKavitaByAuthor(
+                author, limit, nextItem)
+            js = data
+            data, hasMore, lastItem = Res.getKavitaByTitle(
+                author, limit, nextItem)
+            print('Return type of data from kavita.py', type(data))
+            print('last item: ', lastItem)
+            if hasMore is True:
+                nextItemURL = nextItemURL + 'author=' + \
+                    author + '&nextItem=' + lastItem
+                return jsonify(
+                    data=js,
+                    hasMore=True,
+                    nextItem=nextItemURL
+                )
+            else:
+                return jsonify(
+                    data=js,
+                    hasMore=False
+                )
+
+        elif 'content' in request.args:
+            content = request.args['content']
+            data, hasMore, lastItem = Dohe.getKavitaByContent(
+                content, limit, nextItem)
+            js = data
+            data, hasMore, lastItem = Dohe.getKavitaByTitle(
+                content, limit, nextItem)
+            print('Return type of data from dohe.py', type(data))
+            print('last item: ', lastItem)
+            if hasMore is True:
+                nextItemURL = nextItemURL + 'content=' + \
+                    content + '&nextItem=' + lastItem
+                return jsonify(
+                    data=js,
+                    hasMore=True,
+                    nextItem=nextItemURL
+                )
+            else:
+                return jsonify(
+                    data=js,
+                    hasMore=False
+                )
+        else:
+            data, hasMore, lastItem = Res.getAllKavita(limit, nextItem)
+            if hasMore is False:
+                return jsonify(
+                    data=data,
+                    hasMore=False
+                )
+            else:
+                nextItemURL = nextItemURL + '&nextItem=' + lastItem
+                return jsonify(
+                    data=data,
+                    hasMore=hasMore,
+                    nextItem=nextItemURL)
+    else:
+        return 'This HTTP verb is currently not supported.'
+
+
+
 @app.route('/muhavare', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_muhavare():
     if request.method == 'GET':
@@ -129,7 +210,7 @@ def api_muhavare():
 
         if 'muhavara' in request.args:
             content = request.args['muhavara']
-            data, hasMore, lastItem = Res.getKavitaByContent(
+            data, hasMore, lastItem = Muhavare.getMuhavareByContent(
                 content, limit, nextItem)
             js = data
             data, hasMore, lastItem = Res.getKavitaByTitle(
@@ -150,7 +231,7 @@ def api_muhavare():
                     hasMore=False
                 )
         else:
-            data, hasMore, lastItem = Res.getAllKavita(limit, nextItem)
+            data, hasMore, lastItem = Muhavare.getAllMuhavare(limit, nextItem)
             if hasMore is False:
                 return jsonify(
                     data=data,

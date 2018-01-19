@@ -68,4 +68,40 @@ def testMuhavare():
     print(r.json().get('nextItem'))
 
 
-testMuhavare()
+
+
+def testDohe():
+    r = requests.get('http://127.0.0.1:5000/dohe?=doha=क')
+    r = requests.get('http://127.0.0.1:5000/dohe')
+    print(r.status_code)
+    print(r.headers['content-type'])
+    print(r.json())
+    js = r.json()
+    data = js.get('data')
+    hasMore = js.get('hasMore')
+    print('hasMore; ', hasMore)
+    url = requests.get('http://127.0.0.1:5000/')
+    if hasMore is True:
+        nextItem = js.get('nextItem')
+        print ('url: ', nextItem)
+        url = nextItem
+
+    print(type(data))
+    print(len(data))
+    r = requests.get(url)
+    print(r.status_code)
+    print(r.headers['content-type'])
+    print('2nd req. ',r.json())
+    js = r.json()
+    data = js.get('data')
+    print(type(data))
+    hasMore = r.json().get('hasMore')
+    print('2nd req. hasMore; ', hasMore)
+    print(url)
+    print(r.json().get('nextItem'))
+
+try:
+    testMuhavare()
+    # testDohe()
+except Exception as e:
+    print(e)

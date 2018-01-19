@@ -41,8 +41,8 @@ def initializeDB(dbName, collectionName):
     # pprint(serverStatusResult)
     if collectionName == 'kahani':
         collection = db['kahani']
-    elif collectionName == 'doha':
-        collection = db['doha']
+    elif collectionName == 'dohe':
+        collection = db['dohe']
     elif collectionName == 'kavita':
         collection = db['kavita']
     elif collectionName == 'muhavare':
