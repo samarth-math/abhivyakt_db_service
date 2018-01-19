@@ -5,11 +5,34 @@ import helperfunctions as H
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 
-collection = H.initializeDB('literature', 'dohe')
-TAG = "In dohe.py file"
+collection = H.initializeDB('literature', 'kahani')
+TAG = "In kahani.py file"
 
 
-def getDoheByAuthor(author, userLimit, lastItem):
+def getKahaniByTitle(author, userLimit, lastItem):
+    limit = 50
+    if userLimit < limit:
+        limit = userLimit
+    regx = re.compile(".*" + author + ".*", re.IGNORECASE)
+    if lastItem is not None:
+        print(lastItem, " is not None")
+        cursor = collection.find(
+            {'title': regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
+    else:
+        cursor = collection.find({'title': regx}).limit(limit)
+    count = cursor.count()
+    last_index = max(0, min(limit, count) - 1)
+    print('last_index is: ', last_index)
+    last_id = cursor.__getitem__(last_index).get("_id")
+    print('last_index is: ', last_index, ' last_id is: ', str(last_id))
+    serializedData = dumps(cursor)
+    more = hasMore(count, limit, userLimit)
+    print('count: ', count, ' hasMore ', more)
+    return serializedData, more, str(last_id)
+
+
+
+def getKahaniByAuthor(author, userLimit, lastItem):
     limit = 50
     if userLimit < limit:
         limit = userLimit
@@ -31,7 +54,7 @@ def getDoheByAuthor(author, userLimit, lastItem):
     return serializedData, more, str(last_id)
 
 
-def getDoheByContent(content, userLimit, lastItem):
+def getKahaniByContent(content, userLimit, lastItem):
     limit = 50
     if userLimit < limit:
         limit = userLimit
@@ -40,9 +63,9 @@ def getDoheByContent(content, userLimit, lastItem):
     if lastItem is not None:
         print(lastItem, " is not None")
         cursor = collection.find(
-            {'doha': regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
+            {'kahaniText': regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
     else:
-        cursor = collection.find({'doha': regx}).limit(limit)
+        cursor = collection.find({'kahaniText': regx}).limit(limit)
     count = cursor.count()
     last_index = max(0, min(limit, count) - 1)
     print('last_index is: ', last_index)
@@ -54,7 +77,7 @@ def getDoheByContent(content, userLimit, lastItem):
     return serializedData, more, str(last_id)
 
 
-def getAllDohe(userLimit, lastItem):
+def getAllKahani(userLimit, lastItem):
     limit = 50
     if userLimit < limit:
         limit = userLimit
@@ -73,7 +96,7 @@ def getAllDohe(userLimit, lastItem):
     print('last_index is: ', last_index, ' last_id is: ', str(last_id))
     serializedData = dumps(cursor)
     more = hasMore(count, limit, userLimit)
-    print('count: ', count, ' userLimit: ', userLimit, ' hasMore ', more)
+    print('count: ', count, ' hasMore ', more)
     return serializedData, more, str(last_id)
 
 
@@ -88,6 +111,6 @@ try:
     limit = 5
     last = None
     char = 'क'
-    #getAllDohe(limit, last)
+    # getKahaniByTitle(char, limit, last)
 except Exception as e:
     print('Exception', e)
