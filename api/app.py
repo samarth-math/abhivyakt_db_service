@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Flask, url_for
+from flask import Flask, url_for,render_template
 from flask import request
 from flask import Response
 from flask import jsonify
@@ -11,6 +11,10 @@ import resources.kahani as Kahani
 import resources.dictionary as Dictionary
 
 app = Flask(__name__)
+
+@app.route("/")
+def main():
+    return render_template('index.html')
 
 
 @app.route('/')
