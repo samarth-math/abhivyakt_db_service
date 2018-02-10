@@ -9,9 +9,11 @@ import resources.dohe as Dohe
 import resources.muhavare as Muhavare
 import resources.kahani as Kahani
 import resources.dictionary as Dictionary
+import json
+import requests
 
 app = Flask(__name__)
-
+import pdb
 @app.route("/")
 def main():
     return render_template('index.html')
@@ -21,6 +23,14 @@ def main():
 def api_root():
     return 'Welcome to the new world of Hindi. You are gonna love it.'
 
+@app.route('/kavita_random',methods=['GET'])
+def api_kavita_random():
+    data, hasMore, lastItem = Kavita.getAllKavita(1, None)
+    #pdb.set_trace()
+    js  = data
+    # response = Response(
+    #     js, status=200, mimetype='application/json')
+    return render_template('kavita.html',kavita_text = js)
 
 @app.route('/kavita', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kavita():
@@ -33,7 +43,7 @@ def api_kavita():
             limit = int(request.args['limit'])
         if 'nextItem' in request.args:
             nextItem = request.args['nextItem']
-            print('next item is;', nextItem)
+            #print('next item is;', nextItem)
 
         if 'title' in request.args:
             title = request.args['title']
