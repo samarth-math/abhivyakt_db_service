@@ -38,7 +38,7 @@ def getKavitaByTitle(title, userLimit, lastItem):
     if userLimit < limit:
         more = False
     else:
-        more = hasMore(count, limit)
+        more = hasMore(count, limit, userLimit)
     print("Cursor count: ", count)
     return serializedData, more, str(last_id)
 
