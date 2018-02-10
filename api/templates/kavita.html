@@ -78,6 +78,12 @@
     height: 300px;
                 
 }
+                    
+                    .content{
+                        align-content: center
+    max-width:200px;
+    word-wrap:break-word;
+}
 
 
                 </style>
@@ -107,75 +113,21 @@
                                 </li>
                             </ul>
                  </div>
-                    <hr align="center" width="60%" color="#ccc">
+           
                     <div class="header">
-                        <h3 align="center" style="font-family: 'Arya', sans-serif;">चुनिंदा</h3>
+                        {% if title %}
+                        <h3 align="center" style="font-family: 'Arya', sans-serif;" >{{title}} - {{authorName}}</h3>
+                        {% endif %}
                     </div>
-                    <hr align="center" width="60%" color="#ccc">
+        
                     
-             <div id="grid">
-
-                    <div class="grid-element">
-                        <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                        <span class="vl"></span>
-                        <div class="text">
-                            कविता 
-                        </div>
-                    </div>
-                 
-                    <div class="vr">&nbsp;</div>
-                    
-                    <div class="grid-element"> 
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                        <div class="text">
-                            कहानी 
-                        </div>
-                    </div>
-                 
-                  <div class="vr">&nbsp;</div>
-
-                    <div class="grid-element">
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                        <div class="text">
-                            शब्दकोश 
-                        </div>
-                    </div>
-
-                    <div class="grid-element">
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                        <div class="text">
-                            मुहावरे 
-                        </div>
-                    </div>
-
-                  <div class="vr">&nbsp;</div>
-                 
-                    <div class="grid-element">
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                         <div class="text">
-                         दोहे 
-                        </div>
-                    </div>
-
-                  <div class="vr">&nbsp;</div>
-                 
-                    <div class="grid-element">
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                         <div class="text">
-                            लोकोक्तियाँ 
-                        </div>
-                    </div> 
-            </div>
-
                 </nav> 
                     <footer class="footer">
                         <p></p>
                     </footer>
 
-                    {% if kavita_text %}
-                        <div>{{ kavita_text }}</div>
+                    {% if content %}
+                        <div class="content" align="center">{{content}}</div>
                     {% endif %}
-
-
             </body>
             </html>

@@ -30,7 +30,11 @@ def api_kavita_random():
     js  = data
     # response = Response(
     #     js, status=200, mimetype='application/json')
-    return render_template('kavita.html',kavita_text = js)
+    data = json.loads(js)
+    content = data[0]['content'].replace ('||', '||\n').replace('|', '|\n')
+    authorName = data[0]['authorName']
+    title = data[0]['title']
+    return render_template('kavita.html',title = title, authorName = authorName, content = content)
 
 @app.route('/kavita', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kavita():
