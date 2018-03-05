@@ -1,0 +1,14 @@
+#!/bin/bash
+if ! service mongod status | grep "running"; then
+	echo "No mongodb server running..."
+	read -n1 -p "Should I start it for you using sudo start service mongod?(y/n)" answer
+	echo
+	case $answer in
+	    y|Y) sudo service mongod start ;;
+	    *) echo "Exiting..." ;
+	        exit ;;
+	esac
+fi
+export FLASK_DEBUG=1
+export FLASK_APP=api/app.py
+python -m flask run
