@@ -244,6 +244,8 @@ def api_muhavare():
                 )
         else:
             data, hasMore, lastItem = Muhavare.getAllMuhavare(limit, nextItem)
+            if data==None:
+                return render_template('muhavare.html',title = 'test', authorName = 'author', content = 'test')
             if hasMore is False:
                 return jsonify(
                     data=data,

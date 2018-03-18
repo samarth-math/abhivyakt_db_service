@@ -45,6 +45,8 @@ def getAllMuhavare(userLimit, lastItem):
     count = cursor.count()
     last_index = max(0, min(limit, count) - 1)
     print('last_index is: ', last_index)
+    if count==0:
+        return None, False, str(0)
     last_id = cursor.__getitem__(last_index).get("_id")
     print('last_index is: ', last_index, ' last_id is: ', str(last_id))
     serializedData = dumps(cursor)

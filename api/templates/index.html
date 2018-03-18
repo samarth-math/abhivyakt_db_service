@@ -1,176 +1,63 @@
-            <!DOCTYPE html>
-            <html lang="en">
+{% extends "layout.html" %}
+{% block bodyContent %}
 
-            <head>
-             <title>अभिव्यक्त</title>
-             <link rel="stylesheet" href="assets/stylesheets/main.css">
-             <link href="https://fonts.googleapis.com/css?family=Arya:700&amp;subset=devanagari" rel="stylesheet">
-                <style>
-                li {
-                display: inline;
-                font-size: 20px;
-                }
-                    a.action_link {
-                        text-decoration: none;
-                        font-family: Arya;
-                        font: sans-serif;
-                        color: black;
-                        padding: 15px;
-            }
-                    h1{
-                        font-size: 70px;
-                        margin: 0;
-                        margin-bottom: 0;
-                    }
-                    
-                     h3{
-                        font-size: 30px;
-                        margin: 0;
-                    }
-                    
-                  .nav{
-                    border:1px solid #ccc;
-                    border-width:1px 0;
-                    list-style:none;
-                    margin:0;
-                    padding:0;
-                    text-align:center;
-                }
-            .nav li{
-                display:inline;
-                padding: 10px;
-            }
-            .nav a{
-                display:inline-block;
-                padding:10px;
-            }
-            div#nav ul{
-              display: inline-block;
-            }
+<hr align="center" width="60%" color="#ccc">
+<div class="header">
+    <h3 align="center" style="font-family: 'Arya', sans-serif;">चुनिंदा</h3>
+</div>
+<hr align="center" width="60%" color="#ccc">
 
-                    .nav a:hover {
-                        text-decoration: underline;
-                        color: black
-                    }
-                    .vl {
-                        border-left: blue   
-                        height: 300px;
-                        float: inherit
-                    }
+<div id="grid">
 
+    <div class="grid-element">
+        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
+        <span class="vl"></span>
+        <div class="text">
+            कविता
+        </div>
+    </div>
 
-                    #grid{
-                        width: 1200px;
-                        margin-left:450px;
+    <div class="vr">&nbsp;</div>
 
-                    }
-                    .grid-element{ 
-                        width:350px;
-                        margin: 20px;
-                        float: left
-                    }
-                    .vr {
-    width:1px;
-    background-color:lightgray;
-    float: left;
-    top:0;
-    bottom:0;
-    height: 300px;
-                
-}
+    <div class="grid-element">
+        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
+        <div class="text">
+            कहानी
+        </div>
+    </div>
 
+    <div class="vr">&nbsp;</div>
 
-                </style>
-            </head>
+    <div class="grid-element">
+        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
+        <div class="text">
+            शब्दकोश
+        </div>
+    </div>
 
-            <body>
-                <div class="container">
-                    <div class="header">
-                        <h1 align="center" style="font-family: 'Arya', sans-serif;">अभिव्यक्त</h1>
-                    </div>
-                </div>
+    <div class="grid-element">
+        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
+        <div class="text">
+            मुहावरे
+        </div>
+    </div>
 
-                <nav>
-                     <div class="navigation">
-                            <ul class="nav">
-                                <li ><a class="action_link" href="/kavita_random">कविता</a>
-                                </li>
-                                <li ><a class="action_link" href="#">कहानी</a>
-                                </li>
-                                <li ><a class="action_link" href="#">शब्दकोश</a>
-                                </li>
-                                <li ><a class="action_link"  href="#">मुहावरे</a>
-                                </li>
-                                <li ><a class="action_link" href="#">दोहे</a>
-                                </li>
-                                <li ><a class="action_link" href="#">लोकोक्तियाँ</a>
-                                </li>
-                            </ul>
-                 </div>
-                    <hr align="center" width="60%" color="#ccc">
-                    <div class="header">
-                        <h3 align="center" style="font-family: 'Arya', sans-serif;">चुनिंदा</h3>
-                    </div>
-                    <hr align="center" width="60%" color="#ccc">
-                    
-             <div id="grid">
+    <div class="vr">&nbsp;</div>
 
-                    <div class="grid-element">
-                        <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                        <span class="vl"></span>
-                        <div class="text">
-                            कविता 
-                        </div>
-                    </div>
-                 
-                    <div class="vr">&nbsp;</div>
-                    
-                    <div class="grid-element"> 
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                        <div class="text">
-                            कहानी 
-                        </div>
-                    </div>
-                 
-                  <div class="vr">&nbsp;</div>
+    <div class="grid-element">
+        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
+        <div class="text">
+            दोहे
+        </div>
+    </div>
 
-                    <div class="grid-element">
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                        <div class="text">
-                            शब्दकोश 
-                        </div>
-                    </div>
+    <div class="vr">&nbsp;</div>
 
-                    <div class="grid-element">
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                        <div class="text">
-                            मुहावरे 
-                        </div>
-                    </div>
-
-                  <div class="vr">&nbsp;</div>
-                 
-                    <div class="grid-element">
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                         <div class="text">
-                         दोहे 
-                        </div>
-                    </div>
-
-                  <div class="vr">&nbsp;</div>
-                 
-                    <div class="grid-element">
-                         <img src="{{url_for('static', filename='premchand.jpg')}}" />
-                         <div class="text">
-                            लोकोक्तियाँ 
-                        </div>
-                    </div> 
-            </div>
-
-                </nav> 
-                    <footer class="footer">
-                        <p></p>
-                    </footer>
-
-            </body>
-            </html>
+    <div class="grid-element">
+        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
+        <div class="text">
+            लोकोक्तियाँ
+        </div>
+    </div>
+</div>
+{% endblock %}
