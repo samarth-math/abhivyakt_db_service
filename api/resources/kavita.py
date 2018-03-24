@@ -108,8 +108,8 @@ def getAllKavita(userLimit, lastItem):
     return serializedData, more, str(last_id)
 
 
-def hasMore(count, limit, userLimit):
-    if count > userLimit:
+def hasMore(count, limit):
+    if count > limit:
         return True
     else:
         return False
