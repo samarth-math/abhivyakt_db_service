@@ -2,20 +2,19 @@ from bson.objectid import ObjectId
 from bson.json_util import dumps
 import re
 
-
 API_LIMIT = 50
 
+
 def hasMore(count, limit):
-    if count > limit:
-        return True
-    else:
-        return False
+    return True if (count > limit) else False
+
 
 def getLimit(userLimit):
-    return userLimit if (userLimit<API_LIMIT) else API_LIMIT
+    return userLimit if (userLimit < API_LIMIT) else API_LIMIT
+
 
 def getAllObjects(collection, lastItem, userLimit):
-    if collection is None:#TODO throw exception
+    if collection is None:  # TODO throw exception
         print('Collection is None')
 
     limit = getLimit(userLimit)
@@ -35,8 +34,8 @@ def getAllObjects(collection, lastItem, userLimit):
     return serializedData, more, str(last_id)
 
 
-def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm,):
-    if collection is None:#TODO throw exception
+def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm):
+    if collection is None:  # TODO throw exception
         print('Collection is None')
 
     limit = getLimit(userLimit)
@@ -58,4 +57,3 @@ def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm,):
     more = hasMore(count, limit)
     print('count: ', count, ' hasMore ', more)
     return serializedData, more, str(last_id)
-
