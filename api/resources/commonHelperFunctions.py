@@ -10,7 +10,7 @@ def hasMore(count, limit):
 
 
 def getLimit(userLimit):
-    return userLimit if (userLimit < API_LIMIT) else API_LIMIT
+    return userLimit if (userLimit < API_LIMIT and userLimit > 0) else API_LIMIT
 
 
 def getAllObjects(collection, lastItem, userLimit):
