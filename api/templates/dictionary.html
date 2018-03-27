@@ -1,5 +1,5 @@
     {% extends "layout.html" %}
-    <head>
+    {% block bodyContent %}
                   <script type="text/javascript" src="http://www.google.com/jsapi">
                   </script>
             <script type="text/javascript">
@@ -34,11 +34,6 @@
               }
               google.setOnLoadCallback(onLoad);
             </script>
-                </head>
-
-
-    {% block bodyContent %}
-
             <form action="/dictionary" method="post">
             <input "type="text" placeholder="Search..." id="language"  name="word" />
             </form>
