@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block bodyContent %}
+{{ super() }}
+
+
+<div align="center">{{poem.key}}</div>
+{% for meaning in poem.meanings %}
+<div  align="center">{{meaning}}</div>
+{% else %}
+<div align="center"> No meanings for it</div>
+{% endfor %}
+
+{% endblock %}
+</body>
+</html>
