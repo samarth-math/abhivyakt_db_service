@@ -7,7 +7,7 @@ TAG = "In dictionary.py file"
 
 
 def getWord(content, userLimit, lastItem):
-    helper.getObjectsByField(collection, lastItem, userLimit, 'word', content)
+    return helper.getObjectsByField(collection, lastItem, userLimit, 'key', content)
 
 
 def getAllWords(userLimit, lastItem):
@@ -21,4 +21,4 @@ try:
     # getWord(char, limit, last)
     # getAlldictionary(limit, last)
 except Exception as e:
-    print('Exception', e)
+    print('Exeption', e)

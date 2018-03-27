@@ -56,4 +56,5 @@ def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm):
     serializedData = dumps(cursor)
     more = hasMore(count, limit)
     print('count: ', count, ' hasMore ', more)
+    print('serializedData', serializedData)
     return serializedData, more, str(last_id)

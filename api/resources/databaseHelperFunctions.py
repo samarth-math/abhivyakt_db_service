@@ -47,6 +47,8 @@ def initializeDB(dbName, collectionName):
         collection = db['kavita']
     elif collectionName == 'muhavare':
         collection = db['muhavare']
+    elif collectionName == 'dictionary':
+        collection = db['dictionary']
     else:
         return None
     return collection
