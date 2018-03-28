@@ -6,9 +6,6 @@ from flask import jsonify
 import commonHelperFunctions as helper
 import json
 
-nextItemURL = 'http://127.0.0.1:5000/dohe?'
-
-
 @routes.route('/dohe', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_dohe():
     if request.method == 'GET':
@@ -18,6 +15,8 @@ def api_dohe():
         return render_template('dohe.html', dohe=dohe, error=error)
 
 def parseGetRequest(request):
+    nextItemURL = 'http://127.0.0.1:5000/dohe?'
+
     limit, nextItem, author, content = getParams(request)
 
     if author is not None:
