@@ -1,9 +1,14 @@
 {% extends "layout.html" %}
 {% block bodyContent %}
-{{ super() }}
-{% if content %}
-<div class="content" align="center">{{content}}</div>
+{% if error %}
+<div class="content" align="center">{{error}}</div>
+{% endif %}
+
+{% if poems %}
+{% for poem in poems%}
+<center><h3>{{poem.title}}</h3></center>
+<div class="content" align="center">{{poem.content}}</div>
+{% endfor %}
 {% endif %}
 {% endblock %}
-</body>
-</html>
+

@@ -12,7 +12,7 @@ def getDoheByAuthor(author, userLimit, lastItem):
 
 
 def getDoheByContent(content, userLimit, lastItem):
-    helper.getObjectsByField(collection, lastItem, userLimit, 'doha', content)
+    return helper.getObjectsByField(collection, lastItem, userLimit, 'doha', content)
 
 def getAllDohe(userLimit, lastItem):
     return helper.getAllObjects(collection, lastItem, userLimit)
