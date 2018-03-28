@@ -7,7 +7,7 @@ collection = db.initializeDB('literature', 'muhavare')
 TAG = "In muhavare.py file"
 
 def getMuhavareByContent(content, userLimit, lastItem):
-    helper.getObjectsByField(collection, lastItem, userLimit, 'muhavara', content)
+    return helper.getObjectsByField(collection, lastItem, userLimit, 'muhavara', content)
 
 
 def getAllMuhavare(userLimit, lastItem):

@@ -1,79 +1,68 @@
 from ..resources import kahani as Kahani
-from flask import Flask, url_for,render_template
+from flask import render_template
 from . import routes
 from flask import request
-from flask import jsonify
+import commonHelperFunctions as helper
+import json
 
 @routes.route('/kahani', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kahani():
     if request.method == 'GET':
-        nextItemURL = 'http://127.0.0.1:5000/kahani?'
-        limit = 50
-        nextItem = None
-        if 'limit' in request.args:
-            print('You requested limit')
-            limit = int(request.args['limit'])
-        if 'nextItem' in request.args:
-            nextItem = request.args['nextItem']
-            print('next item is;', nextItem)
+        dataObject = parseGetRequest(request)
+        stories = json.loads(dataObject.get('content'))
+        error = dataObject.get('error')
+        return render_template('kahani.html', stories=stories, error=error)
 
-        if 'title' in request.args:
-            content = request.args['title']
-            data, hasMore, lastItem = Kahani.getKahaniByTitle(
-                content, limit, nextItem)
-            js = data
-            data, hasMore, lastItem = Kahani.getKahaniByTitle(
-                content, limit, nextItem)
-            print('Return type of data from kahani.py', type(data))
-            print('last item: ', lastItem)
-            if hasMore is True:
-                nextItemURL = nextItemURL + 'kahani=' + \
-                    content + '&nextItem=' + lastItem
-                return jsonify(
-                    data=js,
-                    hasMore=True,
-                    nextItem=nextItemURL
-                )
-            else:
-                return jsonify(
-                    data=js,
-                    hasMore=False
-                )
-        elif 'content' in request.args:
-            content = request.args['content']
-            data, hasMore, lastItem = Kahani.getKahaniByContent(
-                content, limit, nextItem)
-            js = data
-            data, hasMore, lastItem = Kahani.getKahaniByContent(
-                content, limit, nextItem)
-            print('Return type of data from kahani.py', type(data))
-            print('last item: ', lastItem)
-            if hasMore is True:
-                nextItemURL = nextItemURL + 'kahani=' + \
-                    content + '&nextItem=' + lastItem
-                return jsonify(
-                    data=js,
-                    hasMore=True,
-                    nextItem=nextItemURL
-                )
-            else:
-                return jsonify(
-                    data=js,
-                    hasMore=False
-                )
+def parseGetRequest(request):
+    nextItemURL = 'http://127.0.0.1:5000/kahani?'
 
-        else:
-            data, hasMore, lastItem = Kahani.getAllKahani(limit, nextItem)
-            if hasMore is False:
-                return jsonify(
-                    data=data,
-                    hasMore=False
-                )
-            else:
-                nextItemURL = nextItemURL + '&nextItem=' + lastItem
-                return jsonify(
-                    data=data,
-                    hasMore=hasMore,
-                    nextItem=nextItemURL)
+    limit, nextItem, title, author, content = getParams(request)
+
+    if title is not None:
+        data, hasMore, lastItem = Kahani.getKahaniByTitle(
+            title, limit, nextItem)
+        return helper.createReturnObject(data,
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL,
+                                         'title',
+                                         title)
+
+    if author is not None:
+        data, hasMore, lastItem = Kahani.getKahaniByAuthor(
+            author, limit, nextItem)
+        return helper.createReturnObject(data,
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL,
+                                         'author',
+                                         author)
+
+    if content is not None:
+        data, hasMore, lastItem = Kahani.getKahaniByContent(
+            content, limit, nextItem)
+        return helper.createReturnObject(data,
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL,
+                                         'content',
+                                         content)
+
     else:
-        return 'This HTTP verb is currently not supported.'
+        data, hasMore, lastItem = Kahani.getAllKahani(
+            limit, nextItem)
+        return helper.createReturnObject(data,
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL)
+
+
+def getParams(request):
+    nextItem = request.args.get('nextItem')
+    title = request.args.get('title')
+    author = request.args.get('author')
+    content = request.args.get('content')
+    limit = request.args.get('limit')
+    if limit is None:
+        limit = 0
+    return limit, nextItem, title, author, content
