@@ -7,6 +7,7 @@ from flask import Response
 import json
 import commonHelperFunctions as helper
 
+
 @routes.route('/muhavare', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_muhavare():
     if request.method == 'GET':
@@ -16,33 +17,33 @@ def api_muhavare():
         return render_template('muhavare.html', muhavare=muhavare, error=error)
 
 
-def parseGetRequest(request):
+@routes.route('/muhavarejs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def api_muhavare_json():
+    if request.method == 'GET':
+        return parseGetRequest(request, True)
+
+
+def parseGetRequest(request, isJson=False):
     nextItemURL = 'http://127.0.0.1:5000/muhavare?'
-    limit, nextItem, content = getParams(request)
+    limit, nextItem, content, _, _ = helper.getParams(request)
 
     if content is not None:
         data, hasMore, lastItem = Muhavare.getMuhavareByContent(
             content, limit, nextItem)
-        return helper.createReturnObject(data,
-                                  hasMore,
-                                  lastItem,
-                                  nextItemURL,
-                                  'content',
-                                  content)
+        return helper.createResponse(data,
+                                     hasMore,
+                                     lastItem,
+                                     nextItemURL,
+                                     'content',
+                                     content,
+                                     isJson)
+
 
     else:
         data, hasMore, lastItem = Muhavare.getAllMuhavare(
             limit, nextItem)
-        return helper.createReturnObject(data,
-                                         hasMore,
-                                         lastItem,
-                                         nextItemURL)
-
-
-def getParams(request):
-    nextItem = request.args.get('nextItem')
-    content = request.args.get('content')
-    limit = request.args.get('limit')
-    if limit is None:
-        limit = 0
-    return limit, nextItem, content
+        return helper.createResponse(data,
+                                     hasMore,
+                                     lastItem,
+                                     nextItemURL,
+                                     isJson=isJson)

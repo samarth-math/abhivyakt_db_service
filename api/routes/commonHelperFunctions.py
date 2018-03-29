@@ -9,7 +9,25 @@ def validateNotNull(object):
         print (object + " is None")
 
 
-def createReturnJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName=None, fieldValue=None):
+def getParams(request):
+    nextItem = request.args.get('nextItem')
+    title = request.args.get('title')
+    author = request.args.get('author')
+    content = request.args.get('content')
+    limit = request.args.get('limit')
+    if limit is None:
+        limit = 0
+    return limit, nextItem, content, author, title
+
+
+def createResponse(data, hasMore, lastItem, nextItemURL, fieldName=None, fieldValue=None, isJson=False):
+    if isJson:
+        return createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue)
+    else:
+        return createResponseObjectForTemplate(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue)
+
+
+def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue):
     if data is None:
         return jsonify(
             error=DATABASE_END,
@@ -34,13 +52,13 @@ def createReturnJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName=Non
     )
 
 
-def createReturnObject(data, hasMore, lastItem, nextItemURL, fieldName=None, fieldValue=None):
+def createResponseObjectForTemplate(data, hasMore, lastItem, nextItemURL, fieldName=None, fieldValue=None):
     if data is None:
         obj = {'content': "{}", 'error': DATABASE_END, 'hasMore': False}
         return obj
 
     if hasMore is False:
-        obj = {'content': data, 'error':"", 'hasMore': False}
+        obj = {'content': data, 'error': "", 'hasMore': False}
         return obj
 
     validateNotNull(lastItem)

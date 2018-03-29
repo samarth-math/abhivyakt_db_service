@@ -5,6 +5,7 @@ from flask import request
 import commonHelperFunctions as helper
 import json
 
+
 @routes.route('/kahani', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kahani():
     if request.method == 'GET':
@@ -13,56 +14,55 @@ def api_kahani():
         error = dataObject.get('error')
         return render_template('kahani.html', stories=stories, error=error)
 
-def parseGetRequest(request):
-    nextItemURL = 'http://127.0.0.1:5000/kahani?'
 
-    limit, nextItem, title, author, content = getParams(request)
+@routes.route('/kahanijs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def api_kahani_json():
+    if request.method == 'GET':
+        return parseGetRequest(request, True)
+
+
+def parseGetRequest(request, isJson=False):
+    nextItemURL = 'http://127.0.0.1:5000/kahani?'
+    limit, nextItem, content, author, title = helper.getParams(request)
 
     if title is not None:
         data, hasMore, lastItem = Kahani.getKahaniByTitle(
             title, limit, nextItem)
-        return helper.createReturnObject(data,
-                                         hasMore,
-                                         lastItem,
-                                         nextItemURL,
-                                         'title',
-                                         title)
+        return helper.createResponse(data,
+                                     hasMore,
+                                     lastItem,
+                                     nextItemURL,
+                                     'title',
+                                     title,
+                                     isJson)
 
     if author is not None:
         data, hasMore, lastItem = Kahani.getKahaniByAuthor(
             author, limit, nextItem)
-        return helper.createReturnObject(data,
-                                         hasMore,
-                                         lastItem,
-                                         nextItemURL,
-                                         'author',
-                                         author)
+        return helper.createResponse(data,
+                                     hasMore,
+                                     lastItem,
+                                     nextItemURL,
+                                     'author',
+                                     author,
+                                     isJson)
 
     if content is not None:
         data, hasMore, lastItem = Kahani.getKahaniByContent(
             content, limit, nextItem)
-        return helper.createReturnObject(data,
-                                         hasMore,
-                                         lastItem,
-                                         nextItemURL,
-                                         'content',
-                                         content)
+        return helper.createResponse(data,
+                                     hasMore,
+                                     lastItem,
+                                     nextItemURL,
+                                     'content',
+                                     content,
+                                     isJson)
 
     else:
         data, hasMore, lastItem = Kahani.getAllKahani(
             limit, nextItem)
-        return helper.createReturnObject(data,
-                                         hasMore,
-                                         lastItem,
-                                         nextItemURL)
-
-
-def getParams(request):
-    nextItem = request.args.get('nextItem')
-    title = request.args.get('title')
-    author = request.args.get('author')
-    content = request.args.get('content')
-    limit = request.args.get('limit')
-    if limit is None:
-        limit = 0
-    return limit, nextItem, title, author, content
+        return helper.createResponse(data,
+                                     hasMore,
+                                     lastItem,
+                                     nextItemURL,
+                                     isJson=isJson)
