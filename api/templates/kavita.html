@@ -1,3 +1,16 @@
+{% macro poemRow(p) %}
+    <div class="row">
+        <div class="col-9">
+            <h3>{{p.title}}</h3>
+            {{p.content}}
+        </div>
+        <div class="col-3">
+            {{p.authorName}}
+        </div>
+    </div>
+{% endmacro %}
+
+
 {% extends "layout.html" %}
 {% block bodyContent %}
 {% if error %}
@@ -6,8 +19,7 @@
 
 {% if poems %}
 {% for poem in poems%}
-<center><h3>{{poem.title}}</h3></center>
-<div class="content" align="center">{{poem.content}}</div>
+{{ poemRow(poem) }}
 {% endfor %}
 {% endif %}
 {% endblock %}
