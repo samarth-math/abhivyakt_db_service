@@ -50,8 +50,6 @@
 </nav>
 {% endblock %}
 
-{% block bodyContent %}
-
 <div class="header">
     {% if title %}
     <h3 align="center" style="font-family: 'Arya', sans-serif;">{{title}} - {{authorName}}</h3>
@@ -59,14 +57,11 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="container-fluid">
-        </div>
-        <div class="container-fluid">
-        </div>
-    </div>
+    {% block bodyContent %}
+
+    {% endblock %}
+
 </div>
-{% endblock %}
 {% block footer %}
 <footer class="footer">
     <p></p>
