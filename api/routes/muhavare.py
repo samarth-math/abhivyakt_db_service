@@ -25,6 +25,9 @@ def api_muhavare_json():
 
 def parseGetRequest(request, isJson=False):
     nextItemURL = 'http://127.0.0.1:5000/muhavare?'
+    if (isJson):
+        nextItemURL = 'http://127.0.0.1:5000/muhavarejs?'
+
     limit, nextItem, content, _, _ = helper.getParams(request)
 
     if content is not None:

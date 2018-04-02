@@ -1,3 +1,16 @@
+{% macro muhavaraRow(m) %}
+    <div class="row">
+        <div class="col-8">
+            <h3>{{m.title}}</h3>
+            {{m.muhavara}}
+        </div>
+        <div class="col-4">
+            {{m.meaning}}
+        </div>
+    </div>
+{% endmacro %}
+
+
 {% extends "layout.html" %}
 {% block bodyContent %}
 {% if error %}
@@ -6,7 +19,7 @@
 
 {% if muhavare %}
 {% for muhavara in muhavare%}
-<div class="content" align="center">{{muhavara.content}}</div>
+{{muhavaraRow(muhavara)}}
 {% endfor %}
 {% endif %}
 {% endblock %}
