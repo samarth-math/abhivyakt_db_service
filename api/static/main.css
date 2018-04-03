@@ -6,3 +6,22 @@
 .nav-link {
     font-size: 18px;
 }
+
+h3 {
+    font-family: 'Arya', sans-serif;
+    align: 'center';
+}
+
+.header3 {
+    font-family: 'Arya', sans-serif;
+    font-size: 24px;
+    font-style: strong;
+}
+
+.space-right-sm {
+    margin-right:10px;
+}
+
+.color-pink {
+    color: #ff5c5c;
+}

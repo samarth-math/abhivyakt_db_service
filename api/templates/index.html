@@ -1,62 +1,53 @@
 {% extends "layout.html" %}
 {% block bodyContent %}
+<div class="row">
+    <div class="col-4">
+        <div class="row">
+            <div class="col">
+            <i class="fas fa-circle space-right-sm color-pink"></i>
+                <span class="header3"> चुनिंदा कविताएँ</span>
+            </div>
 
-<hr align="center" width="60%" color="#ccc">
-<div class="header">
-    <h3 align="center" style="font-family: 'Arya', sans-serif;">चुनिंदा</h3>
-</div>
-<hr align="center" width="60%" color="#ccc">
+        </div>
+        <div class="row">
+            <div class="col">
 
-<div id="grid">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
 
-    <div class="grid-element">
-        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
-        <div class="text">
-            कविता
+            </div>
         </div>
     </div>
-
-    <div class="vr">&nbsp;</div>
-
-    <div class="grid-element">
-        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
-        <div class="text">
-            कहानी
-        </div>
-    </div>
-
-    <div class="vr">&nbsp;</div>
-
-    <div class="grid-element">
-        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
-        <div class="text">
-            शब्दकोश
-        </div>
-    </div>
-
-    <div class="grid-element">
-        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
-        <div class="text">
-            मुहावरे
-        </div>
-    </div>
-
-    <div class="vr">&nbsp;</div>
-
-    <div class="grid-element">
-        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
-        <div class="text">
-            दोहे
-        </div>
-    </div>
-
-    <div class="vr">&nbsp;</div>
-
-    <div class="grid-element">
-        <img src="{{url_for('static', filename='premchand.jpg')}}"/>
-        <div class="text">
-            लोकोक्तियाँ
-        </div>
+    <div class="col-8">
+    <img src="{{url_for('static', filename='img/RabindranathTagore.jpg')}}"/>
     </div>
 </div>
+<hr>
+<div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+
+    </div>
+    <div class="col">
+
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+
+    </div>
+    <div class="col">
+
+    </div>
+</div>
+
+
 {% endblock %}
