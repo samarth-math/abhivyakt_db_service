@@ -18,8 +18,15 @@ h3 {
     font-weight: 900;
 }
 
+.sub-heading {
+    font-size: 22px;
+}
 .space-right-sm {
     margin-right:10px;
+}
+
+.space-left-sm {
+    margin-left:10px;
 }
 
 .color-pink {
