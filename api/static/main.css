@@ -4,18 +4,18 @@
 }
 
 .nav-link {
-    font-size: 18px;
+    font-size: 24px;
 }
 
 h3 {
     font-family: 'Arya', sans-serif;
-    align: 'center';
+    text-align: center;
 }
 
 .header3 {
     font-family: 'Arya', sans-serif;
     font-size: 24px;
-    font-style: strong;
+    font-weight: 900;
 }
 
 .space-right-sm {
