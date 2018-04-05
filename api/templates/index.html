@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 {% block bodyContent %}
 <div class="row">
-    <div class="offset-1 col-3">
+    <div class="offset-lg-1 col-lg-3 col-md-4">
         <div class="row">
             <div class="col">
             <i class="fas fa-circle space-right-sm color-pink"></i>
-                <span class="header3"> चुनिंदा कविताएँ</span><br/>
-                <span class="sub-heading">चाँद रोज़ और मेरी जान</span>
+                <div class="no-padding-margin">
+                    <span class="header3"> चुनिंदा कविताएँ</span><br/>
+                    <span class="sub-heading">चाँद रोज़ और मेरी जान</span><br/>
+                    <span class="sub-heading2">फ़ैज़ अहमद फ़ैज़</span>
+                </div>
             </div>
-
         </div>
         <div class="row">
             <div class="col">
@@ -22,7 +24,7 @@
         </div>
     </div>
     <div class="col-8">
-    <img src="{{url_for('static', filename='img/RabindranathTagore.jpg')}}"/>
+    <img src="{{url_for('static', filename='img/RabindranathTagore.jpg')}}" class="img-fluid"/>
     </div>
 </div>
 <hr>
