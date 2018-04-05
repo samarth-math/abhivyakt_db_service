@@ -12,21 +12,44 @@ h3 {
     text-align: center;
 }
 
+.no-padding-margin {
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.fa-circle {
+    vertical-align: middle;
+    font-size: 8px;
+    margin-top: 10px;
+}
+
 .header3 {
     font-family: 'Arya', sans-serif;
-    font-size: 24px;
-    font-weight: 900;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .sub-heading {
+    font-size: 20px;
+}
+
+.sub-heading2 {
     font-size: 22px;
+    color: #666;
+
 }
 .space-right-sm {
-    margin-right:10px;
+    margin-right:5px;
 }
 
 .space-left-sm {
-    margin-left:10px;
+    margin-left:5px;
+}
+
+.space-top-lg {
+    margin-top:15px;
 }
 
 .color-pink {
