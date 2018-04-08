@@ -10,10 +10,10 @@ import commonHelperFunctions as helper
 def api_kavita_random():
     nextItemURL = 'http://127.0.0.1:5000/kavita?'
     data, hasMore, lastItem = Kavita.getAllKavita(1, None)
-    dataObject = helper.createResponseObjectForTemplate(data,
-                                                        hasMore,
-                                                        lastItem,
-                                                        nextItemURL)
+    dataObject = helper.createResponse(data,
+                                       hasMore,
+                                       lastItem,
+                                       nextItemURL)
     poems = json.loads(dataObject.get('content'))
     error = dataObject.get('error')
     return render_template('kavita.html', poems=poems, error=error)
@@ -32,6 +32,14 @@ def api_kavita():
 def api_kavita_json():
     if request.method == 'GET':
         return parseGetRequest(request, True)
+
+
+@routes.route('/kavita_randomjs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def api_kavita_random_json():
+    if request.method == 'GET':
+        nextItemURL = 'http://127.0.0.1:5000/kavita?'
+        data, hasMore, lastItem = Kavita.getAllKavita(1, None)
+        return helper.createResponse(data, hasMore, lastItem, nextItemURL, isJson=True)
 
 
 def parseGetRequest(request, isJson=False):
