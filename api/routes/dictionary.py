@@ -17,11 +17,17 @@ def api_dictionary():
         nextItem = None
         content = word
         data, hasMore, lastItem = Dictionary.getWord(content, limit, nextItem)
-	data = json.loads(data)
-	data_render = {}
-	data_render["key"] = data[0]["key"]
-	data_render["meanings"] = data[0]["meanings"]
-	return render_template('dictionary_2.html',poem=data_render)
+        try:
+            data = json.loads(data)
+        except:
+            data = None
+        if data is not None:
+            data_render = {}
+            data_render["key"] = data[0]["key"]
+            data_render["meanings"] = data[0]["meanings"]
+        else:
+            data_render= None
+        return render_template('dictionary_2.html',dictionary=data_render)
 #        return jsonify(
 #            data = data,
 #            hasMore = hasMore

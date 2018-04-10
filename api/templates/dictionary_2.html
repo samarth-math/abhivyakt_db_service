@@ -2,14 +2,14 @@
 {% block bodyContent %}
 {{ super() }}
 
-
-<div align="center">{{poem.key}}</div>
-{% for meaning in poem.meanings %}
+{% if dictionary is not none %}
+<div align="center">{{dictionary.key}}</div>
+{% for meaning in dictionary.meanings %}
 <div  align="center">{{meaning}}</div>
+{% endfor %}
 {% else %}
 <div align="center"> No meanings for it</div>
-{% endfor %}
-
+{% endif %}
 {% endblock %}
 </body>
 </html>
