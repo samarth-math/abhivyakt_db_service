@@ -7,7 +7,7 @@ TAG = "In dictionary.py file"
 
 
 def getWord(content, userLimit, lastItem):
-    return helper.getObjectsByField(collection, lastItem, userLimit, 'key', content)
+    return helper.getObjectsByFieldExactSearch(collection, lastItem, userLimit, 'key', content)
 
 
 def getAllWords(userLimit, lastItem):

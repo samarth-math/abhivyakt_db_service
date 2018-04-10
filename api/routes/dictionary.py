@@ -22,9 +22,9 @@ def api_dictionary():
         except:
             data = None
         if data is not None:
-            data_render = {}
-            data_render["key"] = data[0]["key"]
-            data_render["meanings"] = data[0]["meanings"]
+            data_render =data
+#            data_render["key"] = data[0]["key"]
+#            data_render["meanings"] = data[0]["meanings"]
         else:
             data_render= None
         return render_template('dictionary_2.html',dictionary=data_render)
