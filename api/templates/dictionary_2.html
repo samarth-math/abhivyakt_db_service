@@ -3,10 +3,14 @@
 {{ super() }}
 
 {% if dictionary is not none %}
-<div align="center">{{dictionary.key}}</div>
-{% for meaning in dictionary.meanings %}
-<div  align="center">{{meaning}}</div>
-{% endfor %}
+{% set ct = 0 %}
+{% for item in dictionary %}
+    <div >{{item["key"]}} - 
+    {% for meaning in item["meanings"] %}
+    {{meaning}} ,</div>
+    {% endfor %}
+    {% set ct = ct+1%}
+{%endfor%}
 {% else %}
 <div align="center"> No meanings for it</div>
 {% endif %}
