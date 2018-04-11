@@ -16,11 +16,11 @@ def getParams(request):
     content = request.args.get('content')
     limit = request.args.get('limit')
     if limit is None:
-        limit = 0
+        limit = -1
     return limit, nextItem, content, author, title
 
 
-def createResponse(data, hasMore, lastItem, nextItemURL, fieldName=None, fieldValue=None, isJson=False):
+def createResponse(data, hasMore, lastItem, nextItemURL='', fieldName=None, fieldValue=None, isJson=False):
     if isJson:
         return createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue)
     else:

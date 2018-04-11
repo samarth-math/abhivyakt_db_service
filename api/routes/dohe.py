@@ -2,7 +2,6 @@ from ..resources import dohe as Dohe
 from flask import Flask, url_for, render_template
 from . import routes
 from flask import request
-from flask import jsonify
 import commonHelperFunctions as helper
 import json
 

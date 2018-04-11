@@ -1,18 +1,15 @@
 {% extends "layout.html" %}
 {% block bodyContent %}
-{{ super() }}
+{% if error %}
+<div class="content" align="center">{{error}}</div>
+{% endif %}
 
-{% if dictionary is not none %}
-{% set ct = 0 %}
 {% for item in dictionary %}
-    <div >{{item["key"]}} - 
-    {% for meaning in item["meanings"] %}
+    <div >{{item.key}} -
+    {% for meaning in item.meanings %}
     {{meaning}} ,</div>
     {% endfor %}
-    {% set ct = ct+1%}
 {%endfor%}
-{% else %}
-<div align="center"> No meanings for it</div>
-{% endif %}
+
 {% endblock %}
 

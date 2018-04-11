@@ -2,8 +2,6 @@ from ..resources import muhavare as Muhavare
 from flask import Flask, url_for, render_template
 from . import routes
 from flask import request
-from flask import jsonify
-from flask import Response
 import json
 import commonHelperFunctions as helper
 
