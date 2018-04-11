@@ -6,11 +6,11 @@ collection = db.initializeDB('literature', 'dictionary')
 TAG = "In dictionary.py file"
 
 
-def getWord(content, userLimit, lastItem):
+def getWord(content, userLimit=-1, lastItem=None):
     return helper.getObjectsByFieldExactSearch(collection, lastItem, userLimit, 'key', content)
 
 
-def getAllWords(userLimit, lastItem):
+def getAllWords(userLimit=-1, lastItem=None):
     return helper.getAllObjects(collection, lastItem, userLimit)
 
 
