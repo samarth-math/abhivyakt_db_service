@@ -33,12 +33,13 @@ def getAllObjects(collection, lastItem, userLimit):
     return serializedData, more, str(last_id)
 
 
-def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm):
+def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx=None):
     if collection is None:  # TODO throw exception
         print('Collection is None')
 
     limit = getLimit(userLimit)
-    regx = re.compile(".*" + searchTerm + ".*", re.IGNORECASE)
+    if regx is None:
+        regx = re.compile(".*" + searchTerm + ".*", re.IGNORECASE)
     if lastItem is not None:
         cursor = collection.find(
             {fieldName: regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
@@ -56,23 +57,5 @@ def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm):
     return serializedData, more, str(last_id)
 
 def getObjectsByFieldExactSearch(collection, lastItem, userLimit, fieldName, searchTerm):
-    if collection is None:  # TODO throw exception
-        print('Collection is None')
-
-    limit = getLimit(userLimit)
-    regx = re.compile( searchTerm , re.IGNORECASE)
-    if lastItem is not None:
-        cursor = collection.find(
-            {fieldName: regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
-    else:
-        cursor = collection.find({fieldName: regx}).limit(limit)
-    count = cursor.count()
-    if count == 0:
-        return None, False, str(0)
-    last_index = max(0, min(limit, count) - 1)
-    last_id = cursor.__getitem__(last_index).get("_id")
-    serializedData = dumps(cursor)
-    more = hasMore(count, limit)
-    print('count: ', count, ' hasMore ', more)
-    print('serializedData', serializedData)
-    return serializedData, more, str(last_id)
+    regx = re.compile(searchTerm, re.IGNORECASE)
+    return getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx)
