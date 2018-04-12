@@ -4,7 +4,15 @@ execute the following command in the terminal
 
 ./startApp
 
-To start it in a windows system :
-1. Download and install linux
-2. Uninstall windows
-3. Refer to the above steps
+To populate the database : 
+
+./populateDB
+
+
+To do this in a windows system :
+<ul>
+<li> Download and install linux </li>
+<li> Uninstall windows </li>
+<li> Refer to the above steps </li>
+</ul>
+
