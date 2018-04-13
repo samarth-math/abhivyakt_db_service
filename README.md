@@ -1,5 +1,3 @@
-<html>
-<body>
 # Complete Hindi Ved 
 To start the server on a unix system :
 execute the following command in the terminal
@@ -12,11 +10,6 @@ To populate the database :
 
 
 To do this in a windows system :
-<ul>
-<li> Download and install linux </li>
-<li> Uninstall windows </li>
-<li> Refer to the above steps </li>
-</ul>
-
-</body>
-</html>
+* Download and install linux
+* Uninstall windows
+* Refer to the above steps
