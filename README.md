@@ -10,6 +10,6 @@ To populate the database :
 
 
 To do this in a windows system :
-* Download and install linux
-* Uninstall windows
-* Refer to the above steps
+- Download and install linux
+- Uninstall windows
+- Refer to the above steps
