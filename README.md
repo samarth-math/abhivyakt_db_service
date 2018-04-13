@@ -1,3 +1,5 @@
+<html>
+<body>
 # Complete Hindi Ved 
 To start the server on a unix system :
 execute the following command in the terminal
@@ -16,3 +18,5 @@ To do this in a windows system :
 <li> Refer to the above steps </li>
 </ul>
 
+</body>
+</html>
