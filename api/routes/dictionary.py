@@ -17,7 +17,7 @@ def api_dictionary():
         dataObject = helper.createResponse(data, hasMore, lastItem) # create a response out of it
         data = json.loads(dataObject.get('content')) # store data from the response in an object
         error = dataObject.get('error') # get error if there's any from the response
-        return render_template('dictionary_2.html', dictionary=data, error=error) # render
+        return render_template('dictionary.html', dictionary=data, error=error) # render
 
 
 @routes.route('/dictionaryjs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])

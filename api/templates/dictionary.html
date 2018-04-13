@@ -1,8 +1,8 @@
-    {% extends "layout.html" %}
-    {% block bodyContent %}
-                  <script type="text/javascript" src="http://www.google.com/jsapi">
-                  </script>
-            <script type="text/javascript">
+{% extends "layout.html" %}
+{% block bodyContent %}
+<script type="text/javascript" src="http://www.google.com/jsapi">
+</script>
+<script type="text/javascript">
               // Load the Google Transliteration API
               google.load("elements", "1", {
                     packages: "transliteration"
@@ -33,9 +33,23 @@
                 control.showControl('translControl');
               }
               google.setOnLoadCallback(onLoad);
-            </script>
-            <form action="/dictionary" method="post">
-            <input "type="text" placeholder="Search..." id="language"  name="word" />
-            </form>
-    {% endblock %}
+
+</script>
+<form action="/dictionary" method="post">
+    <input type="text" placeholder="Search..." id="language" name="word" />
+</form>
+
+{% if error %}
+<div class="content" align="center">{{error}}</div>
+{% endif %}
+
+{% for item in dictionary %}
+<div>{{item.key}} -
+    {% for meaning in item.meanings %}
+    {{meaning}} ,
+</div>
+{% endfor %}
+{%endfor%}
+
+{% endblock %}
                                                                                   
