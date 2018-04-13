@@ -10,6 +10,8 @@ To populate the database :
 
 
 To do this in a windows system :
-- Download and install linux
-- Uninstall windows
-- Refer to the above steps
+1. Download and install linux
+2. Uninstall windows
+3. Refer to the above steps
+
+HowtoEditReadMe : https://bitbucket.org/tutorials/markdowndemo
