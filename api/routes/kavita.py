@@ -1,8 +1,7 @@
 from ..resources import kavita as Kavita
-from flask import Flask, url_for, render_template
+from flask import render_template
 from . import routes
 from flask import request
-import json
 import commonHelperFunctions as helper
 
 
@@ -14,7 +13,7 @@ def api_kavita_random():
                                        hasMore,
                                        lastItem,
                                        nextItemURL)
-    poems = json.loads(dataObject.get('content'))
+    poems = dataObject.get('content')
     error = dataObject.get('error')
     return render_template('kavita.html', poems=poems, error=error)
 
@@ -23,7 +22,7 @@ def api_kavita_random():
 def api_kavita():
     if request.method == 'GET':
         dataObject = parseGetRequest(request)
-        poems = json.loads(dataObject.get('content'))
+        poems = dataObject.get('content')
         error = dataObject.get('error')
         return render_template('kavita.html', poems=poems, error=error)
 

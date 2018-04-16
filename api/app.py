@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from routes import *
+from flask import Flask
 
 # This file is where the program starts
 # but each API has it's own file in the routes
@@ -13,6 +14,8 @@ from routes import *
 
 app = Flask(__name__)
 app.register_blueprint(routes)
+
+
 @app.route("/")
 def main():
     return render_template('index.html')

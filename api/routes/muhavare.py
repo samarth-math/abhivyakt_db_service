@@ -1,8 +1,7 @@
 from ..resources import muhavare as Muhavare
-from flask import Flask, url_for, render_template
+from flask import render_template
 from . import routes
 from flask import request
-import json
 import commonHelperFunctions as helper
 
 
@@ -10,7 +9,7 @@ import commonHelperFunctions as helper
 def api_muhavare():
     if request.method == 'GET':
         dataObject = parseGetRequest(request)
-        muhavare = json.loads(dataObject.get('content'))
+        muhavare = dataObject.get('content')
         error = dataObject.get('error')
         return render_template('muhavare.html', muhavare=muhavare, error=error)
 
@@ -38,7 +37,6 @@ def parseGetRequest(request, isJson=False):
                                      'content',
                                      content,
                                      isJson)
-
 
     else:
         data, hasMore, lastItem = Muhavare.getAllMuhavare(

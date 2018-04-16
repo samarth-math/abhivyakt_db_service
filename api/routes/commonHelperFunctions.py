@@ -34,6 +34,7 @@ def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldVal
             hasMore=False
         )
 
+    data = json.loads(data)
     if hasMore is False:
         return jsonify(
             content=data,
@@ -57,6 +58,7 @@ def createResponseObjectForTemplate(data, hasMore, lastItem, nextItemURL, fieldN
         obj = {'content': "{}", 'error': DATABASE_END, 'hasMore': False}
         return obj
 
+    data = json.loads(data)
     if hasMore is False:
         obj = {'content': data, 'error': "", 'hasMore': False}
         return obj

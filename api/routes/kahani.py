@@ -3,14 +3,13 @@ from flask import render_template
 from . import routes
 from flask import request
 import commonHelperFunctions as helper
-import json
 
 
 @routes.route('/kahani', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kahani():
     if request.method == 'GET':
         dataObject = parseGetRequest(request)
-        stories = json.loads(dataObject.get('content'))
+        stories = dataObject.get('content')
         error = dataObject.get('error')
         return render_template('kahani.html', stories=stories, error=error)
 

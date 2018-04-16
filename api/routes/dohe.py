@@ -1,16 +1,15 @@
 from ..resources import dohe as Dohe
-from flask import Flask, url_for, render_template
+from flask import render_template
 from . import routes
 from flask import request
 import commonHelperFunctions as helper
-import json
 
 
 @routes.route('/dohe', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_dohe():
     if request.method == 'GET':
         dataObject = parseGetRequest(request)
-        dohe = json.loads(dataObject.get('content'))
+        dohe = dataObject.get('content')
         error = dataObject.get('error')
         return render_template('dohe.html', dohe=dohe, error=error)
 
