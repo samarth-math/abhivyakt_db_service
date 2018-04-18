@@ -21,7 +21,9 @@ def api_kahani_json():
 
 
 def parseGetRequest(request, isJson=False):
-    nextItemURL = 'http://127.0.0.1:5000/kahani?'
+    nextItemURL = '/kahani?'
+    if (isJson):
+        nextItemURL = '/kahanijs?'
     limit, nextItem, content, author, title = helper.getParams(request)
 
     if title is not None:

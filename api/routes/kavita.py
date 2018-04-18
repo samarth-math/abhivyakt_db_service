@@ -36,13 +36,15 @@ def api_kavita_json():
 @routes.route('/kavita_randomjs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kavita_random_json():
     if request.method == 'GET':
-        nextItemURL = 'http://127.0.0.1:5000/kavita?'
+        nextItemURL = '/kavita?'
         data, hasMore, lastItem = Kavita.getAllKavita(1, None)
         return helper.createResponse(data, hasMore, lastItem, nextItemURL, isJson=True)
 
 
 def parseGetRequest(request, isJson=False):
-    nextItemURL = 'http://127.0.0.1:5000/kavita?'
+    nextItemURL = '/kavita?'
+    if (isJson):
+        nextItemURL = '/kavitajs?'
     limit, nextItem, content, author, title = helper.getParams(request)
 
     if title is not None:

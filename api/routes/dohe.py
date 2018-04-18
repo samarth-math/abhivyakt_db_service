@@ -21,7 +21,9 @@ def api_dohe_json():
 
 
 def parseGetRequest(request, isJson=False):
-    nextItemURL = 'http://127.0.0.1:5000/dohe?'
+    nextItemURL = '/dohe?'
+    if (isJson):
+        nextItemURL = '/dohejs?'
 
     limit, nextItem, content, author, _ = helper.getParams(request)
 
