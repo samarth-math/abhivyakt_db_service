@@ -10,6 +10,7 @@ def hasMore(count, limit):
 
 
 def getLimit(userLimit):
+    userLimit = int(userLimit)
     return userLimit if (userLimit < API_LIMIT and userLimit > 0) else API_LIMIT
 
 
