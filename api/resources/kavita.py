@@ -10,6 +10,7 @@ TAG = "In Kavita.py file"
 def getKavitaByTitle(title, userLimit, lastItem):
     return helper.getObjectsByField(collection, lastItem, userLimit, "title", title)
 
+
 def getKavitaByAuthor(author, userLimit, lastItem):
     return helper.getObjectsByField(collection, lastItem, userLimit, "authorName", author)
 

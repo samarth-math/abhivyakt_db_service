@@ -45,7 +45,6 @@ def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldVal
         nextItemURL = nextItemURL + fieldName + fieldValue + '&nextItem=' + lastItem
     else:
         nextItemURL = nextItemURL + '&nextItem=' + lastItem
-    print("returning here")
     return jsonify(
         content=data,
         hasMore=True,

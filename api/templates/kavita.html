@@ -1,25 +1,28 @@
-{% macro poemRow(p) %}
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <h3><i class="fas fa-circle space-right-sm color-pink"></i>
-                <span>{{p.title}}</span></h3>
-            <h3 class="sub-heading2">{{p.authorName}}</h3>
-            {{p.content}}
-        </div>
-    </div>
-{% endmacro %}
-
-
 {% extends "layout.html" %}
 {% block bodyContent %}
-{% if error %}
-<div class="content" align="center">{{error}}</div>
-{% endif %}
+<div id="kavita">
 
-{% if poems %}
-{% for poem in poems%}
-{{ poemRow(poem) }}
-{% endfor %}
-{% endif %}
+<ul v-if="errors && errors.length">
+    <li v-for="error of errors">
+      [{error.message}]
+    </li>
+  </ul>
+
+  <div v-if="loadedPoems && loadedPoems.length" class="row justify-content-center">
+      <div class="col-lg-8">
+          <h3><i class="fas fa-circle space-right-sm color-pink"></i>
+              <span>[{loadedPoems[currentRec].title}]</span></h3>
+          <h3 class="sub-heading2">[{loadedPoems[currentRec].authorName}]</h3>
+          [{loadedPoems[currentRec].content}]
+      </div>
+  </div>
+
+
+  <button v-on:click="nextPoem">Crappy next button</button>
+  <button v-on:click="prevPoem">Crappy prev button</button>
+</div>
 {% endblock %}
 
+{% block scripts %}
+<script src="{{url_for('static', filename='vuejsResources/kavita.js')}}"></script>
+{% endblock scripts %}
