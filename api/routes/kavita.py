@@ -5,26 +5,10 @@ from flask import request
 import commonHelperFunctions as helper
 
 
-@routes.route('/kavita_random', methods=['GET'])
-def api_kavita_random():
-    nextItemURL = 'http://127.0.0.1:5000/kavita?'
-    data, hasMore, lastItem = Kavita.getAllKavita(1, None)
-    dataObject = helper.createResponse(data,
-                                       hasMore,
-                                       lastItem,
-                                       nextItemURL)
-    poems = dataObject.get('content')
-    error = dataObject.get('error')
-    return render_template('kavita.html', poems=poems, error=error)
-
-
 @routes.route('/kavita', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kavita():
     if request.method == 'GET':
-        dataObject = parseGetRequest(request)
-        poems = dataObject.get('content')
-        error = dataObject.get('error')
-        return render_template('kavita.html', poems=poems, error=error)
+        return render_template('kavita.html')
 
 
 @routes.route('/kavitajs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])

@@ -56,3 +56,8 @@ h3 {
 .color-pink {
     color: #ff5c5c;
 }
+
+.color-change-hover:hover {
+    color: #434f75;
+    cursor: pointer;
+}
