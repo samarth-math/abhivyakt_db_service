@@ -16,8 +16,8 @@
   <div v-if="loadedPoems && loadedPoems.length" class="row justify-content-center">
     <div class="col-lg-8">
       <h3><i class="fas fa-circle space-right-sm color-pink"></i>
-        <span>[{loadedPoems[currentRec].title}]</span></h3>
-        <h3 class="sub-heading2">[{loadedPoems[currentRec].authorName}]</h3>
+        <span>[{loadedPoems[currentPoem].title}]</span></h3>
+        <h3 class="sub-heading2">[{loadedPoems[currentPoem].authorName}]</h3>
         <center>
           <span v-on:click="prevPoem">
             <i class="fas fa-chevron-circle-left color-change-hover color-pink"></i>
@@ -26,7 +26,7 @@
             <i class="fas fa-chevron-circle-right color-change-hover color-pink"></i>
           </span>
         </center>
-        [{loadedPoems[currentRec].content}]
+        [{loadedPoems[currentPoem].content}]
       </div>
   </div>
 </div>

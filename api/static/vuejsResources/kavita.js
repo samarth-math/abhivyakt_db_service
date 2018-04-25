@@ -2,7 +2,7 @@ var poem = new Vue({
   el: '#kavita',
   data: {
     loadedPoems: [],
-    currentRec: 0,
+    currentPoem: 0,
     hasMore:"",
     nextItems:"",
     errors: []
@@ -18,28 +18,27 @@ var poem = new Vue({
     })
   },
   methods: {
-    fetchNext: function() {
+    fetchNextPoem: function() {
       axios.get(this.nextItems)
       .then(response => {
         this.loadedPoems = this.loadedPoems.concat(response.data.content)
         this.hasMore = response.data.hasMore
         this.nextItems = response.data.nextItem
+        this.currentPoem+=1
       }).catch(e => {
         //TODO CLEAR errors before pushing
         this.errors.push(e)
       })
     },
     nextPoem: function() {
-      if (this.currentRec+1 < this.loadedPoems.length) {
-        this.currentRec+=1
+      if (this.currentPoem+1 < this.loadedPoems.length) {
+        this.currentPoem+=1
       } else {
-        // TODO probably update currentRec in a promise
-        this.fetchNext()
-        this.currentRec+=1
+        this.fetchNextPoem()
       }
     },
     prevPoem: function() {
-      this.currentRec = (this.currentRec-1>-1?this.currentRec-1:0)
+      this.currentPoem = (this.currentPoem-1>-1?this.currentPoem-1:0)
     }
   },
   delimiters: ['[{', '}]']
