@@ -8,10 +8,7 @@ import commonHelperFunctions as helper
 @routes.route('/kahani', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kahani():
     if request.method == 'GET':
-        dataObject = parseGetRequest(request)
-        stories = dataObject.get('content')
-        error = dataObject.get('error')
-        return render_template('kahani.html', stories=stories, error=error)
+        return render_template('kahani.html')
 
 
 @routes.route('/kahanijs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
