@@ -1,25 +1,40 @@
-{% macro muhavaraRow(m) %}
-    <div class="row">
-        <div class="col-8">
-            <h3>{{m.title}}</h3>
-            {{m.muhavara}}
-        </div>
-        <div class="col-4">
-            {{m.meaning}}
-        </div>
-    </div>
-{% endmacro %}
-
-
 {% extends "layout.html" %}
+{% block muhavare_nav %}
+<li class="nav-item active">
+    <a class="nav-link" href="/muhavare">मुहावरे <span class="sr-only">(current)</span></a>
+</li>
+{% endblock muhavare_nav %}
 {% block bodyContent %}
-{% if error %}
-<div class="content" align="center">{{error}}</div>
-{% endif %}
+<div id="muhavare">
 
-{% if muhavare %}
-{% for muhavara in muhavare%}
-{{muhavaraRow(muhavara)}}
-{% endfor %}
-{% endif %}
-{% endblock %}
+<ul v-if="errors && errors.length">
+    <li v-for="error of errors">
+      [{error.message}]
+    </li>
+  </ul>
+
+  <div v-if="loaded && loaded.length" class="row justify-content-center">
+    <div class="col-lg-8">
+      <h3><i class="fas fa-circle space-right-sm color-pink"></i>
+        <span>[{loaded[current].title}]</span></h3>
+        <h3 class="sub-heading2">[{loaded[current].muhavara}]</h3>
+        <center>
+          <span v-on:click="prev">
+            <i class="fas fa-chevron-circle-left color-change-hover color-pink"></i>
+          </span>
+          <span v-on:click="next">
+            <i class="fas fa-chevron-circle-right color-change-hover color-pink"></i>
+          </span>
+        </center>
+        <center>
+          [{loaded[current].meaning}]
+        </center>
+      </div>
+  </div>
+</div>
+
+  {% endblock %}
+
+  {% block scripts %}
+  <script src="{{url_for('static', filename='vuejsResources/muhavare.js')}}"></script>
+  {% endblock scripts %}

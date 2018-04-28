@@ -8,10 +8,7 @@ import commonHelperFunctions as helper
 @routes.route('/muhavare', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_muhavare():
     if request.method == 'GET':
-        dataObject = parseGetRequest(request)
-        muhavare = dataObject.get('content')
-        error = dataObject.get('error')
-        return render_template('muhavare.html', muhavare=muhavare, error=error)
+        return render_template('muhavare.html')
 
 
 @routes.route('/muhavarejs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
