@@ -9,9 +9,7 @@ import commonHelperFunctions as helper
 def api_dohe():
     if request.method == 'GET':
         dataObject = parseGetRequest(request)
-        dohe = dataObject.get('content')
-        error = dataObject.get('error')
-        return render_template('dohe.html', dohe=dohe, error=error)
+        return render_template('dohe.html')
 
 
 @routes.route('/dohejs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
