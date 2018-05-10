@@ -1,10 +1,43 @@
+# -*- coding: UTF-8 -*-
 from . import routes
 from flask import request, jsonify
+from ..resources import kavita as Kavita
+from ..resources import commonHelperFunctions as resource_helper
+from ..resources import databaseHelperFunctions as db
+import json
 
-@routes.route('/manualtest', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+collection = db.initializeDB('literature', 'kavita')
+
+
+@routes.route('/manual_test', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_manual_test():
     if request.method == 'GET':
-        # call any function, and put the result in the content = line below
+        # call any function, and put the result in the content = line below like shown
+        content = featured()
         return jsonify(
-            content="Replace this line with a value returned by the function you're trying to test"
+        content=content
         )
+        
+
+
+def featured() :
+    content = Kavita.featured()
+    return content
+
+def resourceTestById() :
+    poem = {
+    "title":"कलजुगी दोहे",
+    "authorName":"अंसार कम्बरी",
+    "objectId" : "5a53058e74ad350ba00ae68b"
+    }
+    print poem['objectId']
+    content = resource_helper.getObjectById(collection, poem['objectId'])
+    return content
+
+def resourceTest() :
+    poem = {
+    "title":"कलजुगी दोहे",
+    "authorName":"अंसार कम्बरी"
+    }
+    content = resource_helper.getObjectByMultifieldSearch(collection, poem)
+    return content

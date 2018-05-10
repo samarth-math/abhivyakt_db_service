@@ -32,27 +32,13 @@ def initializeDB(dbName, collectionName):
     host = 'localhost'
     PORT = 27017
     client = MongoClient(host, PORT)
-    db = client.literature
-    if dbName == 'literature':
-        db = client.literature
-    else:
-        return None
-    serverStatusResult = db.command("serverStatus")
-    # pprint(serverStatusResult)
-    if collectionName == 'kahani':
-        collection = db['kahani']
-    elif collectionName == 'dohe':
-        collection = db['dohe']
-    elif collectionName == 'kavita':
-        collection = db['kavita']
-    elif collectionName == 'muhavare':
-        collection = db['muhavare']
-    elif collectionName == 'dictionary':
-        collection = db['dictionary']
-    else:
-        return None
-    return collection
-
+    dbNames = set(['literature'])
+    collections = set(['kahani', 'dohe', 'dictionary', 'kavita', 'muhavare'])
+    if dbName in dbNames:
+        db = client[dbName]
+        if collectionName in collections:
+            return db[collectionName]
+    return None
 
 
 def saveToLocalDB(fileName, content):
@@ -62,9 +48,5 @@ def saveToLocalDB(fileName, content):
 
 
 def viewCollection(collection):
-    cursor = collection.find({})
-    c = 0
-    for document in cursor:
-        c = c + 1
-        print(document)
+    c = collection.find({}).count()
     print("Number of documents: ", c)

@@ -1,8 +1,11 @@
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 import re
+import json
+import os
 
 API_LIMIT = 50
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))   # refers to application_top
 
 
 def hasMore(count, limit):
@@ -31,7 +34,24 @@ def getAllObjects(collection, lastItem, userLimit):
     last_id = cursor.__getitem__(last_index).get("_id")
     serializedData = dumps(cursor)
     more = hasMore(count, limit)
-    return serializedData, more, str(last_id)
+    data = json.loads(serializedData)
+    return data, more, str(last_id)
+
+def getObjectById(collection, objectId):
+    if collection is None:  # TODO throw exception
+        print('Collection is None')
+    cursor = collection.find_one({"_id":ObjectId(objectId)})
+    serializedData = dumps(cursor)
+    data = json.loads(serializedData)
+    return data
+
+def getObjectByMultifieldSearch(collection, fieldValueMap): 
+    if collection is None:  # TODO throw exception
+        print('Collection is None')
+    cursor = collection.find_one(fieldValueMap)
+    serializedData = dumps(cursor)
+    data = json.loads(serializedData)
+    return data
 
 
 def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx=None):
@@ -53,9 +73,8 @@ def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, re
     last_id = cursor.__getitem__(last_index).get("_id")
     serializedData = dumps(cursor)
     more = hasMore(count, limit)
-    print('count: ', count, ' hasMore ', more)
-    print('serializedData', serializedData)
-    return serializedData, more, str(last_id)
+    data = json.loads(serializedData)
+    return data, more, str(last_id)
 
 def getObjectsByFieldExactSearch(collection, lastItem, userLimit, fieldName, searchTerm):
     regx = re.compile(searchTerm, re.IGNORECASE)
