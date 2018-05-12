@@ -2,13 +2,12 @@ from ..resources import dohe as Dohe
 from flask import render_template
 from . import routes
 from flask import request
-import commonHelperFunctions as helper
+from . import commonHelperFunctions as helper
 
 
 @routes.route('/dohe', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_dohe():
     if request.method == 'GET':
-        dataObject = parseGetRequest(request)
         return render_template('dohe.html')
 
 

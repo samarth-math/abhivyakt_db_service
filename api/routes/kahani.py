@@ -2,7 +2,7 @@ from ..resources import kahani as Kahani
 from flask import render_template
 from . import routes
 from flask import request
-import commonHelperFunctions as helper
+from . import commonHelperFunctions as helper
 
 
 @routes.route('/kahani', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])

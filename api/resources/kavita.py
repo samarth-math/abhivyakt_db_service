@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import databaseHelperFunctions as db
-import commonHelperFunctions as helper
+from . import databaseHelperFunctions as db
+from . import commonHelperFunctions as helper
 import json
 import os
 import threading
@@ -42,8 +41,9 @@ def featured():
                     retrievedPoem = helper.getObjectByMultifieldSearch(collection, poem)
                     poem["objectId"] = retrievedPoem["_id"]["$oid"]
                     featuredPoems.append(retrievedPoem)
-            fp.seek(0)
-            json.dump(d, fp)
+                    fp.seek(0)
+                    json.dump(d, fp, ensure_ascii=False, indent=4)
+                    fp.truncate()
             fp.close()
 
     return featuredPoems

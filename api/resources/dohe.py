@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import databaseHelperFunctions as db
-import commonHelperFunctions as helper
+from . import databaseHelperFunctions as db
+from . import commonHelperFunctions as helper
 
 collection = db.initializeDB('literature', 'dohe')
 TAG = "In dohe.py file"

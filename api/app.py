@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from routes import *
-from flask import Flask
+from . routes import routes
+from flask import Flask, render_template
 
 # This file is where the program starts
 # but each API has it's own file in the routes

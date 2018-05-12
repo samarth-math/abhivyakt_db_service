@@ -30,7 +30,6 @@ def resourceTestById() :
     "authorName":"अंसार कम्बरी",
     "objectId" : "5a53058e74ad350ba00ae68b"
     }
-    print poem['objectId']
     content = resource_helper.getObjectById(collection, poem['objectId'])
     return content
 

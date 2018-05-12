@@ -2,7 +2,7 @@ from ..resources import kavita as Kavita
 from flask import render_template
 from . import routes
 from flask import request
-import commonHelperFunctions as helper
+from . import commonHelperFunctions as helper
 
 
 @routes.route('/kavita', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
