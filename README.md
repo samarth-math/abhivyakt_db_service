@@ -16,9 +16,9 @@ To do this in a windows system :
 
 
 Development Guidelines:
-1. Create a development-[login] branch in your name.
+1. Create a feature/branch for the feature you're building
 2. Commit however you want to on the development branch
 3. If you've completed coding the feature, raise a pull request
-4. DO NOT close branch on merge (whoever merges)
+4. Close branch on merge (whoever merges)
 
 HowtoEditReadMe : https://bitbucket.org/tutorials/markdowndemo
