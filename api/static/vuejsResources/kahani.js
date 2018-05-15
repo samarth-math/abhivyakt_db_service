@@ -7,7 +7,7 @@ var content = new Vue({
     nextItems:"",
     errors: []
   },
-  mounted() {
+  created() {
     axios.get("/kahanijs")
     .then(response => {
       this.loaded = this.loaded.concat(response.data.content)
@@ -33,7 +33,7 @@ var content = new Vue({
     next: function() {
       if (this.current+1 < this.loaded.length) {
         this.current+=1
-      } else {
+      } else if (this.hasMore==true){
         this.fetchNext()
       }
     },

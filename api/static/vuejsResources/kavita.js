@@ -7,7 +7,7 @@ var poem = new Vue({
     nextItems:"",
     errors: []
   },
-  mounted() {
+  created() {
     axios.get("/kavitajs")
     .then(response => {
       this.loadedPoems = this.loadedPoems.concat(response.data.content)
@@ -33,7 +33,7 @@ var poem = new Vue({
     nextPoem: function() {
       if (this.currentPoem+1 < this.loadedPoems.length) {
         this.currentPoem+=1
-      } else {
+      } else if (this.hasMore==true){
         this.fetchNextPoem()
       }
     },
