@@ -3,11 +3,11 @@
 <head>
     {% block head %}
     <title>अभिव्यक्त</title>
-    <link href="https://fonts.googleapis.com/css?family=Arya:700&amp;subset=devanagari" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Arya:700&amp;subset=devanagari" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
             integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
             crossorigin="anonymous"></script>
@@ -20,17 +20,21 @@
 </head>
 
 <body>
-<div class="bg-light">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">अभिव्यक्त</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <div id="header" class="container d-none d-md-block">
+                <h3><i class="fas fa-circle space-bottom-md color-pink"></i>
+                    <a href="/">अभिव्यक्त</a></h3>
+            </div>
+<div class="wide-nav sticky-top">
+    <div class="container ">
+        <nav class="navbar navbar-expand-md navbar-light">
+            <a class="navbar-brand d-block d-md-none" href="/"><i class="fas fa-circle space-bottom-md color-pink"></i>अभिव्यक्त</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+                    aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <div class="collapse navbar-collapse  justify-content-center " id="navbarToggler">
+                <ul class="navbar-nav">
                   {% block kavita_nav %}
                     <li class="nav-item">
                         <a class="nav-link" href="/kavita">कविता</a>
@@ -54,14 +58,7 @@
                         <a class="nav-link" href="/dohe">दोहे</a>
                     </li>
                     {% endblock dohe_nav %}
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="/lokoktiyan">लोकोक्तियाँ</a>
-                    </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
         </nav>
     </div>

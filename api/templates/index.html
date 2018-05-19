@@ -1,60 +1,100 @@
 {% extends "layout.html" %}
 {% block bodyContent %}
 <div class="row">
-    <div class="offset-lg-1 col-lg-3 col-4">
+    <div class="col-4">
         <div class="row">
-            <div class="col">
-            <i class="fas fa-circle space-right-sm color-pink"></i>
+            <div class="col-12">
                 <div class="no-padding-margin">
-                    <span class="header3"> चुनिंदा कविताएँ</span><br/>
-                    <span class="sub-heading">चाँद रोज़ और मेरी जान</span><br/>
+                    <span class="header3  color-pink"> चुनिंदा कविताएँ</span>
+                    <br/>
+                    <span class="sub-heading">चाँद रोज़ और मेरी जान</span>
+                    <br/>
                     <span class="sub-heading2">फ़ैज़ अहमद फ़ैज़</span>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-            <i class="fas fa-circle space-right-sm color-pink"></i>
+            <div class="col-12">
                 <div class="no-padding-margin">
-                    <span class="header3"> चुनिंदा कवी</span><br/>
-                    <span class="sub-heading">रामधारी सिंघ दिन्कर</span><br/>
+                    <span class="header3 color-pink"> प्रमुख रचनाकार </span>
+                    <br/>
+                    <span class="sub-heading">रामधारी सिंघ दिन्कर</span>
+                    <br/>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-
+            <div class="col-12">
             </div>
         </div>
     </div>
     <div class="col-8">
-    <img src="{{url_for('static', filename='img/RabindranathTagore.jpg')}}" class="img-fluid"/>
+            <div class="img-box max-width-600">
+                <img src="{{url_for('static', filename='img/RabindranathTagore.png')}}"/>
+                <div class="text-box">
+                    Testing out the thing
+                </div>
+            </div>
     </div>
 </div>
-<hr>
 <div class="row">
-    <div class="col">
-        <img src="{{url_for('static', filename='img/moon.png')}}" class="img-fluid"/>
+    <div class="col-12 section-heading">
+        <center>Spotlight</center>
     </div>
-    <div class="col">
-        <img src="{{url_for('static', filename='img/man.png')}}" class="img-fluid"/>
+    <div class="col-12 ">
+        <div class="row space-bottom-md">
+            <div class="tile col ">
+                <span class="type">कहानी</span><br>
+                <span class="title">Tobha Tek Singh</span><br>
+                <span class="text">Saadat Hasan Manto</span>
+            </div>
+                <div class="tile col">
+                <span class="type">कहानी</span><br>
+                <span class="title">Tobha Tek Singh</span><br>
+                <span class="text">Saadat Hasan Manto</span>
+            </div>
+            <div class="tile col no-border">
+                <span class="type">कहानी</span><br>
+                <span class="title">Tobha Tek Singh</span><br>
+                <span class="text">Saadat Hasan Manto</span>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="tile col">
+                <span class="type">कहानी</span><br>
+                <span class="title">Tobha Tek Singh</span><br>
+                <span class="text">Saadat Hasan Manto</span>
+            </div>
+                <div class="tile col">
+                <span class="type">कहानी</span><br>
+                <span class="title">Tobha Tek Singh</span><br>
+                <span class="text">Saadat Hasan Manto</span>
+            </div>
+            <div class="tile col no-border">
+                <span class="type">कहानी</span><br>
+                <span class="title">Tobha Tek Singh</span><br>
+                <span class="text">Saadat Hasan Manto</span>
+            </div>
+        </div>
     </div>
-    <div class="col">
-        <img src="{{url_for('static', filename='img/art.png')}}" class="img-fluid"/>
+    <div class="col-12 section-end">
+        <!--Leave this empty, it's the section end-->
     </div>
 </div>
-<hr>
 <div class="row">
-    <div class="col">
-
+    <div class="col lightbox">
+        Aaj ka Muhavara
+        Andhere ghar ka ujala
+        A beautiful child or person
     </div>
-    <div class="col">
-
-    </div>
-    <div class="col">
+    <div class="col darkbox">
+        Aaj ka shabd
+        Ojasvi
 
     </div>
 </div>
+<div class="row">
+    <div class="col-12 section-heading">
+        <center>Selected Poetry Collections</center>
+    </div>
+</div>
+
 
 
 {% endblock %}

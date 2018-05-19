@@ -1,22 +1,65 @@
+/***** CSS global website colors *****/
+:root {
+    --pink: #ff5c5c;
+    --grey: #515052;
+    --golden: #eee8e5 ;
+    --lightgrey : #f0f0f0;
+}
+
+/***** CSS global website colors *****/
+
+
+/* ---Start Nav bar related Css ---*/
 .navbar-brand {
     font-family: 'Arya', sans-serif;
     font-size: 32px;
 }
 
-.nav-link {
-    font-size: 24px;
+#header {
+    padding-top: 1rem;
 }
+
+#header a{
+    color:rgb(0,0,0,0.9);
+    text-decoration:none;
+    font-size: 34px;
+}
+
+.wide-nav {
+    border-bottom: 1.5px solid var(--golden);
+    border-top: 1.5px solid var(--golden);
+    background-color : #fff;
+}
+
+.navbar {
+    padding: 2px;
+}
+
+.navbar-nav > li {
+    padding: 0rem 1.5rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-size: 24px;
+    padding: 0rem;
+    color: rgb(0,0,0);
+
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color:var(--grey);
+    text-decoration: underline;
+    text-decoration-color: var(--pink);
+}
+
+/* ---End Nav bar related Css ---*/
+
+/* --- Start reusable elements ---*/
+
 
 h3 {
     font-family: 'Arya', sans-serif;
     text-align: center;
-}
-
-.no-padding-margin {
-    padding: 0px;
-    margin: 0px;
-    display: inline-block;
-    vertical-align: top;
 }
 
 .fa-circle {
@@ -39,8 +82,84 @@ h3 {
     line-height:1.0;
     font-size: 22px;
     color: #666;
-
 }
+
+/****Section******/
+.section-heading {
+    border-bottom: 1.5px solid var(--golden);
+    border-top: 1.5px solid var(--golden);
+    margin: 1rem 0rem;
+    padding: 2px 0px;
+}
+
+.tile {
+    border-right: 1.5px solid var(--golden);
+}
+.tile .type {
+    color: var(--pink);
+    font-size: 1rem;
+}
+.tile .title {
+    font-size: 1rem;
+}
+.tile .text {
+    font-size:0.8rem;
+}
+
+.section-end {
+    margin-top:10px;
+    height: 10px;
+    max-height:10px;
+    border-bottom: 1.5px solid var(--golden);
+    border-top: 1.5px solid var(--golden);
+    margin-bottom: 10px;
+}
+/****Section******/
+
+.lightbox {
+    border: 6px solid var(--lightgrey);
+    color: var(--grey);
+    margin: 5px;
+}
+
+.darkbox {
+    background-color: var(--grey);
+    color:#fff;
+    margin: 5px;
+}
+
+/********IMG box and text ************************
+usage : create image box put image in it, put textbox in it
+might need to define max-width-600 kind of classes depending on image size or
+textbox tends to spill over
+*/
+.img-box {
+    position: relative;
+}
+
+.img-box img {
+    max-width: 100%;
+}
+
+.img-box .text-box {
+    padding-left:5px;
+    position: absolute;
+    bottom: 0px;
+    height: 2rem;
+    background-color: black;
+    color: white;
+    width: 100%;
+    opacity: 0.6;
+}
+/********IMG box and text ************************/
+
+/* --- End reusable elements ---*/
+
+/* ---Start Specific Objects - possibly id'ed things-- */
+
+/* --- End Specific Objects --- */
+
+/* ---Start reusable primitives ---*/
 .space-right-sm {
     margin-right:5px;
 }
@@ -53,11 +172,39 @@ h3 {
     margin-top:15px;
 }
 
+.space-bottom-md {
+    margin-bottom:10px;
+}
+
 .color-pink {
-    color: #ff5c5c;
+    color:var(--pink);
 }
 
 .color-change-hover:hover {
     color: #434f75;
     cursor: pointer;
 }
+
+.no-padding-margin {
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.max-width-600 {
+    max-width: 600px;
+}
+
+.float-left {
+    float:left;
+}
+
+.float-right {
+    float:right;
+}
+
+.no-border {
+    border:0px;
+}
+/* ---End reusable primitives ---*/
