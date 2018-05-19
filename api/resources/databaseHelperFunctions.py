@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from pprint import pprint
 from os import path
 import json
+import urllib.parse
 
 
 def getSoup(url):
@@ -30,8 +31,13 @@ def saveToMongoDB(collection, entry):
 
 def initializeDB(dbName, collectionName):
     host = 'localhost'
-    PORT = 27017
-    client = MongoClient(host, PORT)
+    PORT = '27017'
+    username = 'public'
+    password = 'mongo@mongo'
+    URL = 'mongodb://' + urllib.parse.quote_plus(username) + ':' + urllib.parse.quote_plus(
+        password) + '@' + host + ':' + PORT + '/literature'
+    print(URL)
+    client = MongoClient(URL)
     dbNames = set(['literature'])
     collections = set(['kahani', 'dohe', 'dictionary', 'kavita', 'muhavare'])
     if dbName in dbNames:

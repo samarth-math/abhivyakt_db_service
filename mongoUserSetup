@@ -1,0 +1,22 @@
+#!/bin/bash
+#Usage: For creating a user for 'admin' database, use following parameters:
+#           database: admin
+#           user name: root
+#           password: Did you expect, I will write here?
+#       For creating a user for 'literature' database, use following parameters:
+#           database: literature
+#           user name: public
+#           password: mongo@mongo (Well, it really doesn't matter in keeptng this secret.)
+read -p "Enter database name for which user needs to be created: " database
+read -p "Enter user name for $database: " user
+echo "Enter password:"
+read -s password
+if [ $database == "admin" ]; then
+    echo "$database chosen."
+    mongo --eval "db=db.getSiblingDB('$database'); db.createUser({user:'$user', pwd:'$password', roles:['root']} );"
+elif [ $database == "literature" ]; then
+    mongo --eval "db=db.getSiblingDB('$database'); db.createUser( {user:'$user', pwd:'$password', roles:['read']} )"
+else
+    echo "Database name is not valid. Exiting."
+    exit
+fi
