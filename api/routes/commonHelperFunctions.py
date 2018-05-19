@@ -1,5 +1,6 @@
 from flask import jsonify
 import json
+from . utilities import logger
 
 DATABASE_END = "Oops, looks like we are out of content"
 
@@ -10,6 +11,8 @@ def validateNotNull(object):
 
 
 def getParams(request):
+    # sample server side logging..
+    logger.info("Making request " + request.url + "..")
     nextItem = request.args.get('nextItem')
     title = request.args.get('title')
     author = request.args.get('author')
