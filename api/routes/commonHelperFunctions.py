@@ -6,8 +6,8 @@ DATABASE_END = "Oops, looks like we are out of content"
 
 
 def validateNotNull(object):
-    if object is None:  # TODO throw exception
-        print (object + " is None")
+    if object is None:
+        raise ("ValidationERROR : Unexpected null object found")
 
 
 def getParams(request):

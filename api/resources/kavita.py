@@ -30,20 +30,20 @@ def getAllKavita(userLimit, lastItem):
 def featured():
     lock = threading.Lock()
     with lock:
-        with open(os.path.join(FEATURED_FILE_PATH, "featured.json"), "r+") as fp:
+        with open(os.path.join(FEATURED_FILE_PATH, "featuredPoems.json"), "r+") as fp:
             d = json.load(fp)
-            featuredPoems = []
-            for poem in d["featuredPoems"]:
-                if 'objectId' in poem and poem['objectId']!="":
-                    objectId = poem['objectId']
-                    featuredPoems.append(helper.getObjectById(collection, objectId))
+            featuredKavitas = []
+            for kavita in d["featuredKavitas"]:
+                if 'objectId' in kavita and kavita['objectId']!="":
+                    objectId = kavita['objectId']
+                    featuredKavitas.append(helper.getObjectById(collection, objectId))
                 else:
-                    retrievedPoem = helper.getObjectByMultifieldSearch(collection, poem)
-                    poem["objectId"] = retrievedPoem["_id"]["$oid"]
-                    featuredPoems.append(retrievedPoem)
+                    retrievedKavita = helper.getObjectByMultifieldSearch(collection, kavita)
+                    kavita["objectId"] = retrievedKavita["_id"]["$oid"]
+                    featuredKavitas.append(retrievedKavita)
                     fp.seek(0)
                     json.dump(d, fp, ensure_ascii=False, indent=4)
                     fp.truncate()
             fp.close()
 
-    return featuredPoems
+    return featuredKavitas

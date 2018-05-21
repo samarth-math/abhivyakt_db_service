@@ -2,6 +2,8 @@
 from . import routes
 from flask import request, jsonify
 from ..resources import kavita as Kavita
+from ..resources import kahani as Kahani
+
 from ..resources import commonHelperFunctions as resource_helper
 from ..resources import databaseHelperFunctions as db
 import json
@@ -21,7 +23,7 @@ def api_manual_test():
 
 
 def featured() :
-    content = Kavita.featured()
+    content = Kahani.featured()
     return content
 
 def resourceTestById() :
