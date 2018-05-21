@@ -30,7 +30,7 @@ def getAllKavita(userLimit, lastItem):
 def featured():
     lock = threading.Lock()
     with lock:
-        with open(os.path.join(FEATURED_FILE_PATH, "featuredPoems.json"), "r+") as fp:
+        with open(os.path.join(FEATURED_FILE_PATH, "featuredKavitas.json"), "r+") as fp:
             d = json.load(fp)
             featuredKavitas = []
             for kavita in d["featuredKavitas"]:

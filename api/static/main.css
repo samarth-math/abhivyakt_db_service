@@ -4,6 +4,8 @@
     --grey: #515052;
     --golden: #eee8e5 ;
     --lightgrey : #f0f0f0;
+    --midgrey : #d9d9d9;
+    --footer-black : #3e3d3f;
 }
 
 /***** CSS global website colors *****/
@@ -54,6 +56,14 @@
 
 /* ---End Nav bar related Css ---*/
 
+/* ---Start Footer CSS --- */
+#footer a{
+    text-decoration: none;
+    color: var(--footer-black);
+    font-weight: 600;
+}
+/* ---End Footer CSS --- */
+
 /* --- Start reusable elements ---*/
 
 
@@ -85,11 +95,16 @@ h3 {
 }
 
 /****Section******/
+.section-margin {
+    margin:1rem 0;
+}
+
 .section-heading {
     border-bottom: 1.5px solid var(--golden);
     border-top: 1.5px solid var(--golden);
     margin: 1rem 0rem;
     padding: 2px 0px;
+    text-align: center;
 }
 
 .tile {
@@ -109,10 +124,15 @@ h3 {
 .section-end {
     margin-top:10px;
     height: 10px;
-    max-height:10px;
     border-bottom: 1.5px solid var(--golden);
     border-top: 1.5px solid var(--golden);
     margin-bottom: 10px;
+}
+
+.page-end {
+    height: 10px;
+    border-bottom: 1.5px solid var(--footer-black);
+    border-top: 1.5px solid var(--footer-black);
 }
 /****Section******/
 
@@ -128,6 +148,33 @@ h3 {
     margin: 5px;
 }
 
+img.icon {
+    border-radius: 50%;
+    max-height: 120px;
+}
+
+.pink-break {
+    margin-top:5px;
+    height:40px;
+    background-color: var(--pink);
+    color: #fff;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+}
+
+.genre-tile {
+    margin:2px;
+    background-color: var(--golden);
+}
+
+.light {
+    background-color: var(--golden);
+}
+
+.dark {
+    background-color: var(--midgrey);
+}
 /********IMG box and text ************************
 usage : create image box put image in it, put textbox in it
 might need to define max-width-600 kind of classes depending on image size or
@@ -172,12 +219,20 @@ textbox tends to spill over
     margin-top:15px;
 }
 
+.space-top-sm {
+    margin-top:5px;
+}
+
 .space-bottom-md {
     margin-bottom:10px;
 }
 
 .color-pink {
     color:var(--pink);
+}
+
+.color-red {
+    color:red;
 }
 
 .color-change-hover:hover {
@@ -206,5 +261,13 @@ textbox tends to spill over
 
 .no-border {
     border:0px;
+}
+
+.center-it{
+    text-align: center;
+}
+
+.position-relative {
+    position: relative;
 }
 /* ---End reusable primitives ---*/
