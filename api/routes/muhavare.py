@@ -3,6 +3,7 @@ from flask import render_template
 from . import routes
 from flask import request
 from . import commonHelperFunctions as helper
+from flask import jsonify
 
 
 @routes.route('/muhavare', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
@@ -15,6 +16,12 @@ def api_muhavare():
 def api_muhavare_json():
     if request.method == 'GET':
         return parseGetRequest(request, True)
+
+
+@routes.route('/featuredmuhavare', methods=['GET'])
+def api_featured_muhavare():
+    content = Muhavare.featuredMuhavare()
+    return jsonify(content=content)
 
 
 def parseGetRequest(request, isJson=False):

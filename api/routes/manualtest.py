@@ -23,7 +23,7 @@ def api_manual_test():
 
 
 def featured() :
-    content = Kahani.featured()
+    content = Kavita.featuredKavita()
     return content
 
 def resourceTestById() :

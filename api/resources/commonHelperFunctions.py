@@ -3,9 +3,12 @@ from bson.json_util import dumps
 import re
 import json
 import os
+import threading
+
 
 API_LIMIT = 50
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))   # refers to application_top
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+FEATURED_FILE_PATH = os.path.join(CURRENT_DIR, 'featuredContent')
 
 
 def hasMore(count, limit):
@@ -37,15 +40,17 @@ def getAllObjects(collection, lastItem, userLimit):
     data = json.loads(serializedData)
     return data, more, str(last_id)
 
+
 def getObjectById(collection, objectId):
     if collection is None:  # TODO throw exception
         print('Collection is None')
-    cursor = collection.find_one({"_id":ObjectId(objectId)})
+    cursor = collection.find_one({"_id": ObjectId(objectId)})
     serializedData = dumps(cursor)
     data = json.loads(serializedData)
     return data
 
-def getObjectByMultifieldSearch(collection, fieldValueMap): 
+
+def getObjectByMultifieldSearch(collection, fieldValueMap):
     if collection is None:  # TODO throw exception
         print('Collection is None')
     cursor = collection.find_one(fieldValueMap)
@@ -76,6 +81,30 @@ def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, re
     data = json.loads(serializedData)
     return data, more, str(last_id)
 
+
 def getObjectsByFieldExactSearch(collection, lastItem, userLimit, fieldName, searchTerm):
     regx = re.compile(searchTerm, re.IGNORECASE)
     return getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx)
+
+
+def featured(collection, fileName, ObjectName):
+    lock = threading.Lock()
+    with lock:
+        with open(os.path.join(FEATURED_FILE_PATH, fileName), "r+") as fp:
+            d = json.load(fp)
+            featuredObjects = []
+            for item in d[ObjectName]:
+                if 'objectId' in item and item['objectId'] != "":
+                    objectId = item['objectId']
+                    featuredObjects.append(getObjectById(collection, objectId))
+                else:
+                    retrievedItem = getObjectByMultifieldSearch(
+                        collection, item)
+                    item["objectId"] = retrievedItem["_id"]["$oid"]
+                    featuredObjects.append(retrievedItem)
+                    fp.seek(0)
+                    json.dump(d, fp, ensure_ascii=False, indent=4)
+                    fp.truncate()
+            fp.close()
+
+    return featuredObjects

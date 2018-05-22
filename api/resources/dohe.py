@@ -16,10 +16,5 @@ def getDoheByContent(content, userLimit, lastItem):
 def getAllDohe(userLimit, lastItem):
     return helper.getAllObjects(collection, lastItem, userLimit)
 
-try:
-    limit = 5
-    last = None
-    char = 'क'
-    #getAllDohe(limit, last)
-except Exception as e:
-    print('Exception', e)
+def featuredDohe():
+    return helper.featured(collection, "featuredDohe.json", "featuredDohe")

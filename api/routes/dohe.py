@@ -3,6 +3,7 @@ from flask import render_template
 from . import routes
 from flask import request
 from . import commonHelperFunctions as helper
+from flask import jsonify
 
 
 @routes.route('/dohe', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
@@ -15,6 +16,12 @@ def api_dohe():
 def api_dohe_json():
     if request.method == 'GET':
         return parseGetRequest(request, True)
+
+
+@routes.route('/featureddohe', methods=['GET'])
+def api_featured_dohe():
+    content = Dohe.featuredDohe()
+    return jsonify(content=content)
 
 
 def parseGetRequest(request, isJson=False):

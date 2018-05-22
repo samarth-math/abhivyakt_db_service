@@ -13,11 +13,5 @@ def getAllMuhavare(userLimit, lastItem):
     return helper.getAllObjects(collection, lastItem, userLimit)
 
 
-try:
-    limit = 5
-    last = None
-    char = ''
-    getMuhavareByContent(char, limit, last)
-    # getAllmuhavare(limit, last)
-except Exception as e:
-    print('Exception', e)
+def featuredMuhavare():
+    return helper.featured(collection, "featuredMuhavare.json", "featuredMuhavare")

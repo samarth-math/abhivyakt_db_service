@@ -3,6 +3,7 @@ from flask import render_template
 from . import routes
 from flask import request
 from . import commonHelperFunctions as helper
+from flask import jsonify
 
 
 @routes.route('/kavita', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
@@ -17,12 +18,10 @@ def api_kavita_json():
         return parseGetRequest(request, True)
 
 
-@routes.route('/kavita_randomjs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
-def api_kavita_random_json():
-    if request.method == 'GET':
-        nextItemURL = '/kavita?'
-        data, hasMore, lastItem = Kavita.getAllKavita(1, None)
-        return helper.createResponse(data, hasMore, lastItem, nextItemURL, isJson=True)
+@routes.route('/featuredkavitas', methods=['GET'])
+def api_featured_kavita():
+    content = Kavita.featuredKavita()
+    return jsonify(content=content)
 
 
 def parseGetRequest(request, isJson=False):
