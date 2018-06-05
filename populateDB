@@ -14,7 +14,7 @@ fi
 
 echo "populating database from git dumps..."
 
-declare -a arr=("kavita" "dohe" "kahani" "muhavare" "dictionary")
+declare -a arr=("kavita" "dohe" "kahani" "muhavare" "dictionary" "author")
 
 for i in "${arr[@]}"
 do

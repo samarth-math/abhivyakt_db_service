@@ -39,7 +39,7 @@ def initializeDB(dbName, collectionName):
     print(URL)
     client = MongoClient(URL)
     dbNames = set(['literature'])
-    collections = set(['kahani', 'dohe', 'dictionary', 'kavita', 'muhavare'])
+    collections = set(['kahani', 'dohe', 'dictionary', 'kavita', 'muhavare', 'author'])
     if dbName in dbNames:
         db = client[dbName]
         if collectionName in collections:
