@@ -1,46 +1,45 @@
-{% extends "layout.html" %}
-{% block kahani_nav %}
+{% extends "layout.html" %} {% block kahani_nav %}
 <li class="nav-item active">
-    <a class="nav-link" href="/kavita">कहानी <span class="sr-only">(current)</span></a>
+  <a class="nav-link" href="/kavita">कहानी
+    <span class="sr-only">(current)</span>
+  </a>
 </li>
-{% endblock kahani_nav %}
-{% block bodyContent %}
+{% endblock kahani_nav %} {% block bodyContent %}
 <div id="kahani">
 
-<ul v-if="errors && errors.length">
+  <ul v-if="errors && errors.length">
     <li v-for="error of errors">
       [{error.message}]
     </li>
   </ul>
 
   <div class="error-message" v-if="errors && errors.length">
-      <div class="alert alert-danger alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <span v-for="error of errors">
-          [{error.message}]
-        </span>
+    <div class="alert alert-danger alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span v-for="error of errors">
+        [{error.message}]
+      </span>
     </div>
   </div>
 
   <div v-if="loaded && loaded.length" class="row justify-content-center">
     <div class="col-lg-8">
-        <h3><i class="fas fa-circle space-bottom-md color-pink"></i>
-          <span>[{loaded[current].title}]</span></h3>
-        <h3 class="sub-heading2">[{loaded[current].author}]</h3>
-        <center>
-          <span v-on:click="prev">
-            <i class="fas fa-chevron-circle-left color-change-hover color-pink"></i>
-          </span>
-          <span v-on:click="next">
-            <i class="fas fa-chevron-circle-right color-change-hover color-pink"></i>
-          </span>
-        </center>
-        [{loaded[current].kahaniText}]
-      </div>
+      <h3>
+        <i class="fas fa-circle space-bottom-md color-pink"></i>
+        <span>[{loaded[current].title}]</span>
+      </h3>
+      <h3 class="sub-heading2">[{loaded[current].author}]</h3>
+      <center>
+        <span v-on:click="prev">
+          <i class="fas fa-chevron-circle-left color-change-hover color-pink"></i>
+        </span>
+        <span v-on:click="next">
+          <i class="fas fa-chevron-circle-right color-change-hover color-pink"></i>
+        </span>
+      </center>
+      [{loaded[current].kahaniText}]
+    </div>
   </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{url_for('static', filename='vuejsResources/kahani.js')}}"></script>
-{% endblock scripts %}
+{% endblock %} {% block scripts %}
+<script src="{{url_for('send_js', path='vue/kahani.js')}}"></script> {% endblock scripts %}

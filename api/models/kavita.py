@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from . import databaseHelperFunctions as db
-from . import commonHelperFunctions as helper
+from .helpers import databaseHelperFunctions as db
+from .helpers import modelHelper as helper
 
 
 collection = db.initializeDB('literature', 'kavita')
@@ -21,6 +21,7 @@ def getKavitaByContent(content, userLimit, lastItem):
 
 def getAllKavita(userLimit, lastItem):
     return helper.getAllObjects(collection, lastItem, userLimit)
+
 
 def featuredKavita():
     return helper.featured(collection, "featuredKavitas.json", "featuredKavitas")

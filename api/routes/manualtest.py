@@ -1,11 +1,11 @@
 # -*- coding: UTF-8 -*-
 from . import routes
 from flask import request, jsonify
-from ..resources import kavita as Kavita
-from ..resources import kahani as Kahani
+from api.models import kavita as Kavita
+from api.models import kahani as Kahani
 
-from ..resources import commonHelperFunctions as resource_helper
-from ..resources import databaseHelperFunctions as db
+from api.models.helpers import modelHelper as model_helper
+from api.models.helpers import databaseHelperFunctions as db
 import json
 
 collection = db.initializeDB('literature', 'kavita')
@@ -17,28 +17,29 @@ def api_manual_test():
         # call any function, and put the result in the content = line below like shown
         content = featured()
         return jsonify(
-        content=content
+            content=content
         )
-        
 
 
-def featured() :
+def featured():
     content = Kavita.featuredKavita()
     return content
 
-def resourceTestById() :
+
+def resourceTestById():
     poem = {
-    "title":"कलजुगी दोहे",
-    "authorName":"अंसार कम्बरी",
-    "objectId" : "5a53058e74ad350ba00ae68b"
+        "title": "कलजुगी दोहे",
+        "authorName": "अंसार कम्बरी",
+        "objectId": "5a53058e74ad350ba00ae68b"
     }
-    content = resource_helper.getObjectById(collection, poem['objectId'])
+    content = model_helper.getObjectById(collection, poem['objectId'])
     return content
 
-def resourceTest() :
+
+def resourceTest():
     poem = {
-    "title":"कलजुगी दोहे",
-    "authorName":"अंसार कम्बरी"
+        "title": "कलजुगी दोहे",
+        "authorName": "अंसार कम्बरी"
     }
-    content = resource_helper.getObjectByMultifieldSearch(collection, poem)
+    content = model_helper.getObjectByMultifieldSearch(collection, poem)
     return content

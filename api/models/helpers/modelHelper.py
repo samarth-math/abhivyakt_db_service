@@ -4,11 +4,11 @@ import re
 import json
 import os
 import threading
+from api.globalHelpers.utilities import logger
+from api.globalHelpers.constants import API_LIMIT
+from api.globalHelpers.constants import FEATURED_FILE_PATH
 
-
-API_LIMIT = 50
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-FEATURED_FILE_PATH = os.path.join(CURRENT_DIR, 'featuredContent')
+logger.info(FEATURED_FILE_PATH)
 
 
 def hasMore(count, limit):

@@ -1,8 +1,8 @@
-from ..resources import dictionary as Dictionary
+from api.models import dictionary as Dictionary
 from flask import render_template
 from . import routes
 from flask import request
-from . import commonHelperFunctions as helper
+from .helpers import routeHelper as helper
 
 
 @routes.route('/dictionary', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])

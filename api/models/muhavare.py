@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from . import databaseHelperFunctions as db
-from . import commonHelperFunctions as helper
+from .helpers import databaseHelperFunctions as db
+from .helpers import modelHelper as helper
 
 collection = db.initializeDB('literature', 'muhavare')
 TAG = "In muhavare.py file"
+
 
 def getMuhavareByContent(content, userLimit, lastItem):
     return helper.getObjectsByField(collection, lastItem, userLimit, 'muhavara', content)

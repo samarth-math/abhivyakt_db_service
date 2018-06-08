@@ -1,8 +1,8 @@
-from ..resources import dohe as Dohe
+from api.models import dohe as Dohe
 from flask import render_template
 from . import routes
 from flask import request
-from . import commonHelperFunctions as helper
+from .helpers import routeHelper as helper
 from flask import jsonify
 
 

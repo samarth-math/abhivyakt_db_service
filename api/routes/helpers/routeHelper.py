@@ -1,8 +1,7 @@
 from flask import jsonify
 import json
-from . utilities import logger
-
-DATABASE_END = "Oops, looks like we are out of content"
+from api.globalHelpers.utilities import logger
+from api.globalHelpers.constants import END_OF_CONTENT
 
 
 def validateNotNull(object):
@@ -33,7 +32,7 @@ def createResponse(data, hasMore, lastItem, nextItemURL='', fieldName=None, fiel
 def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue):
     if data is None:
         return jsonify(
-            error=DATABASE_END,
+            error=END_OF_CONTENT,
             hasMore=False
         )
 
@@ -56,7 +55,7 @@ def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldVal
 
 def createResponseObjectForTemplate(data, hasMore, lastItem, nextItemURL, fieldName=None, fieldValue=None):
     if data is None:
-        obj = {'content': "{}", 'error': DATABASE_END, 'hasMore': False}
+        obj = {'content': "{}", 'error': END_OF_CONTENT, 'hasMore': False}
         return obj
 
     if hasMore is False:

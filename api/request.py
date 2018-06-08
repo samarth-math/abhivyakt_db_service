@@ -104,7 +104,7 @@ def testDohe():
 
 def testKahani():
     r = requests.get('http://127.0.0.1:5000/kahani?title=क')
-    r = requests.get('http://127.0.0.1:5000/kahani')
+    r = requests.get('http:/standalone/127.0.0.1:5000/kahani')
     print(r.status_code)
     print(r.headers['content-type'])
     print(r.json())

@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-from . import databaseHelperFunctions as db
-from . import commonHelperFunctions as helper
-from ..routes.utilities import logger
+from .helpers import databaseHelperFunctions as db
+from .helpers import modelHelper as helper
+from .helpers.modelHelper import FEATURED_FILE_PATH
+from api.globalHelpers.utilities import logger
 import threading
 import os
 import json
 
 collection = db.initializeDB('literature', 'kahani')
 TAG = "In kahani.py file"
-
-FEATURED_FILE_PATH = os.path.join(helper.CURRENT_DIR, 'featuredContent')
 
 
 def getKahaniByTitle(title, userLimit, lastItem):
