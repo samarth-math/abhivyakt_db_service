@@ -1,4 +1,4 @@
-var kahaniComponent = {
+var baseComponent = Vue.extend({
   data: function() {
     return {
       loaded: [],
@@ -46,7 +46,27 @@ var kahaniComponent = {
       this.current = this.current - 1 >= 0 ? this.current - 1 : 0;
     }
   },
+  delimiters: ["[{", "}]"]
+});
+
+var kahaniComponent = baseComponent.extend({
   template: `
+<div>
+<ul v-if="errors && errors.length">
+  <li v-for="error of errors">
+    [{error.message}]
+  </li>
+</ul>
+
+<div class="error-message" v-if="errors && errors.length">
+  <div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span v-for="error of errors">
+      [{error.message}]
+    </span>
+  </div>
+</div>
+
 <div v-if="loaded && loaded.length" class="row justify-content-center">
   <div class="col-lg-8">
     <h3>
@@ -64,9 +84,9 @@ var kahaniComponent = {
     </center>
     [{loaded[current].kahaniText}]
   </div>
-</div>`,
-  delimiters: ["[{", "}]"]
-};
+</div>
+</div>`
+});
 
 new Vue({
   el: "#kahani",

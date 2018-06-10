@@ -6,22 +6,6 @@
 </li>
 {% endblock kahani_nav %} {% block bodyContent %}
 <div id="kahani">
-
-  <ul v-if="errors && errors.length">
-    <li v-for="error of errors">
-      [{error.message}]
-    </li>
-  </ul>
-
-  <div class="error-message" v-if="errors && errors.length">
-    <div class="alert alert-danger alert-dismissible">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <span v-for="error of errors">
-        [{error.message}]
-      </span>
-    </div>
-  </div>
-
   <kahani-component></kahani-component>
 </div>
 {% endblock %} {% block scripts %}
