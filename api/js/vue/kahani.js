@@ -1,4 +1,4 @@
-Vue.component("kahani-component", {
+var kahaniComponent = {
   data: function() {
     return {
       loaded: [],
@@ -66,10 +66,13 @@ Vue.component("kahani-component", {
   </div>
 </div>`,
   delimiters: ["[{", "}]"]
-});
+};
 
 new Vue({
-  el: "#kahani"
+  el: "#kahani",
+  components: {
+    "kahani-component": kahaniComponent
+  }
 });
 
 /*
