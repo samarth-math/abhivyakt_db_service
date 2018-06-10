@@ -9,6 +9,18 @@ var baseComponent = Vue.extend({
     };
   },
   methods: {
+    fetchContent: function(apiEndpoint) {
+      axios
+        .get(apiEndpoint)
+        .then(response => {
+          this.loaded = this.loaded.concat(response.data.content);
+          this.hasMore = response.data.hasMore;
+          this.nextItems = response.data.nextItem;
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    },
     fetchNext: function() {
       axios
         .get(this.nextItems)
