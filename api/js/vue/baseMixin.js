@@ -1,4 +1,4 @@
-var baseComponent = Vue.extend({
+var baseMixin = {
   data: function() {
     return {
       loaded: [],
@@ -33,7 +33,6 @@ var baseComponent = Vue.extend({
         .catch(e => {
           //TODO CLEAR errors before pushing
           this.errors.push(e);
-          console.log("base");
         });
     },
     next: function() {
@@ -47,4 +46,4 @@ var baseComponent = Vue.extend({
       this.current = this.current - 1 >= 0 ? this.current - 1 : 0;
     }
   }
-});
+};

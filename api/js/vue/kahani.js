@@ -1,4 +1,5 @@
-var kahaniComponent = baseComponent.extend({
+var kahaniComponent = Vue.extend({
+  mixins: [baseMixin],
   created() {
     this.fetchContent("/kahanijs");
   }
