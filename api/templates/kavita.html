@@ -1,46 +1,44 @@
 {% extends "layout.html" %} {% block kavita_nav %}
 <li class="nav-item active">
-  <a class="nav-link" href="/kavita">कविता
-    <span class="sr-only">(current)</span>
-  </a>
+    <a class="nav-link" href="/kavita">कविता
+        <span class="sr-only">(current)</span>
+    </a>
 </li>
 {% endblock kavita_nav %} {% block bodyContent %}
 <div id="kavita">
 
-  <ul v-if="errors && errors.length">
-    <li v-for="error of errors">
-      [{error.message}]
-    </li>
-  </ul>
-
-  <div class="error-message" v-if="errors && errors.length">
-    <div class="alert alert-danger alert-dismissible">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <span v-for="error of errors">
-        [{error.message}]
-      </span>
-    </div>
-  </div>
+    <kavita-component inline-template>
+        <div>
+            <div class="error-message" v-if="errors && errors.length">
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <span v-for="error of errors">
+                        [{error.message}]
+                    </span>
+                </div>
+            </div>
 
 
-  <div v-if="loadedPoems && loadedPoems.length" class="row justify-content-center">
-    <div class="col-lg-8">
-      <h3>
-        <i class="fas fa-circle space-bottom-md color-pink"></i>
-        <span>[{loadedPoems[currentPoem].title}]</span>
-      </h3>
-      <h3 class="sub-heading2">[{loadedPoems[currentPoem].authorName}]</h3>
-      <center>
-        <span v-on:click="prevPoem">
-          <i class="fas fa-chevron-circle-left color-change-hover color-pink"></i>
-        </span>
-        <span v-on:click="nextPoem">
-          <i class="fas fa-chevron-circle-right color-change-hover color-pink"></i>
-        </span>
-      </center>
-      [{loadedPoems[currentPoem].content}]
-    </div>
-  </div>
+            <div v-if="loaded && loaded.length" class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h3>
+                        <i class="fas fa-circle space-bottom-md color-pink"></i>
+                        <span>[{loaded[current].title}]</span>
+                    </h3>
+                    <h3 class="sub-heading2">[{loaded[current].authorName}]</h3>
+                    <center>
+                        <span v-on:click="prev">
+                            <i class="fas fa-chevron-circle-left color-change-hover color-pink"></i>
+                        </span>
+                        <span v-on:click="next">
+                            <i class="fas fa-chevron-circle-right color-change-hover color-pink"></i>
+                        </span>
+                    </center>
+                    [{loaded[current].content}]
+                </div>
+            </div>
+        </div>
+    </kavita-component inline-template>
 </div>
 {% endblock %} {% block scripts %}
 <script src="{{url_for('send_js', path='vue/kavita.js')}}"></script> {% endblock scripts %}
