@@ -1,38 +1,37 @@
-{% extends "layout.html" %}
-{% block bodyContent %}
+{% extends "layout.html" %} {% block bodyContent %}
 <script type="text/javascript" src="http://www.google.com/jsapi">
 </script>
 <script type="text/javascript">
-              // Load the Google Transliteration API
-              google.load("elements", "1", {
-                    packages: "transliteration"
-                  });
+    // Load the Google Transliteration API
+    google.load("elements", "1", {
+        packages: "transliteration"
+    });
 
-              function onLoad() {
+    function onLoad() {
 
-                var options = {
+        var options = {
 
-                  sourceLanguage: 'en',
+            sourceLanguage: 'en',
 
-                  destinationLanguage: ['hi'],
+            destinationLanguage: ['hi'],
 
-                  shortcutKey: 'ctrl+m',
+            shortcutKey: 'ctrl+m',
 
-                  transliterationEnabled: true
+            transliterationEnabled: true
 
-                };
-                // Create an instance on TransliterationControl with the required
-                // options.
-                var control =
-                    new google.elements.transliteration.TransliterationControl(options);
-                // Enable transliteration in the textfields with the given ids.
-                var ids = [ "language" ];
-                control.makeTransliteratable(ids);
-                // Show the transliteration control which can be used to toggle between
-                // English and Hindi and also choose other destination language.
-                control.showControl('translControl');
-              }
-              google.setOnLoadCallback(onLoad);
+        };
+        // Create an instance on TransliterationControl with the required
+        // options.
+        var control =
+            new google.elements.transliteration.TransliterationControl(options);
+        // Enable transliteration in the textfields with the given ids.
+        var ids = ["language"];
+        control.makeTransliteratable(ids);
+        // Show the transliteration control which can be used to toggle between
+        // English and Hindi and also choose other destination language.
+        control.showControl('translControl');
+    }
+    google.setOnLoadCallback(onLoad);
 
 </script>
 <form method="post">
@@ -41,15 +40,7 @@
 
 {% if error %}
 <div class="content" align="center">{{error}}</div>
-{% endif %}
-
-{% for item in dictionary %}
-<div>{{item.key}} -
-    {% for meaning in item.meanings %}
-    {{meaning}} ,
+{% endif %} {% for item in dictionary %}
+<div>{{item.key}} - {% for meaning in item.meanings %} {{meaning}} ,
 </div>
-{% endfor %}
-{%endfor%}
-
-{% endblock %}
-                                                                                  
+{% endfor %} {%endfor%} {% endblock %}
