@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from .helpers import databaseHelperFunctions as db
-from .helpers import modelHelper as helper
-
-
-collection = db.initializeDB('literature', 'kavita')
+from api.models.helpers.collections import kavitaCollection as collection
+from api.models.helpers import modelHelper as helper
 TAG = "In Kavita.py file"
 
 

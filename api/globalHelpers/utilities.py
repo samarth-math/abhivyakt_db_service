@@ -35,6 +35,7 @@ class Art(Enum):
     dohe = 'dohe'
     kavita = 'kavita'
     kahani = 'kahani'
+    muhavare = 'muhavare'
 
 # Helper to populate all authors from all content
 #

@@ -19,5 +19,5 @@ declare -a arr=("kavita" "dohe" "kahani" "muhavare" "dictionary" "author")
 for i in "${arr[@]}"
 do
 	echo "populating $i"
-	mongorestore -d "literature" -c $i "dump/literature/$i.bson"
+	mongorestore -d "literature" -c $i "../dump/literature/$i.bson"
 done

@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-from .helpers import databaseHelperFunctions as db
-from .helpers import modelHelper as helper
-from .helpers.modelHelper import FEATURED_FILE_PATH
+from api.models.helpers import modelHelper as helper
 from api.globalHelpers.utilities import logger
+from api.models.helpers.collections import kahaniCollection as collection
+
 import threading
 import os
 import json
 
-collection = db.initializeDB('literature', 'kahani')
 TAG = "In kahani.py file"
 
 

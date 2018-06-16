@@ -6,6 +6,7 @@ from pprint import pprint
 from os import path
 import json
 import urllib.parse
+from api.globalHelpers.utilities import logger
 
 
 def getSoup(url):

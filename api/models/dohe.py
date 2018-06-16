@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from .helpers import databaseHelperFunctions as db
-from .helpers import modelHelper as helper
+from api.models.helpers import modelHelper as helper
+from api.models.helpers.collections import doheCollection as collection
 
-collection = db.initializeDB('literature', 'dohe')
 TAG = "In dohe.py file"
 
 

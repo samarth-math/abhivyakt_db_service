@@ -49,6 +49,13 @@ def getObjectById(collection, objectId):
     data = json.loads(serializedData)
     return data
 
+def getObjectsByIds(collection, objectIds):
+    if collection is None:  # TODO throw exception
+        print('Collection is None')
+    cursor = collection.find({'_id': {'$in': objectIds}})
+    serializedData = dumps(cursor)
+    data = json.loads(serializedData)
+    return data
 
 def getObjectByMultifieldSearch(collection, fieldValueMap):
     if collection is None:  # TODO throw exception

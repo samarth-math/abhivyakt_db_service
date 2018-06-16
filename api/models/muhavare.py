@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from .helpers import databaseHelperFunctions as db
 from .helpers import modelHelper as helper
+from api.models.helpers.collections import muhavareCollection as collection
 
-collection = db.initializeDB('literature', 'muhavare')
 TAG = "In muhavare.py file"
 
 
