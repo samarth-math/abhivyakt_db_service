@@ -2,18 +2,17 @@
 :root {
     --pink: #ff5c5c;
     --grey: #515052;
-    --golden: #eee8e5 ;
-    --lightgrey : #f0f0f0;
-    --midgrey : #d9d9d9;
-    --footer-black : #3e3d3f;
+    --golden: #eee8e5;
+    --lightgrey: #f0f0f0;
+    --midgrey: #d9d9d9;
+    --footer-black: #3e3d3f;
 }
 
 /***** CSS global website colors *****/
 
-
 /* ---Start Nav bar related Css ---*/
 .navbar-brand {
-    font-family: 'Arya', sans-serif;
+    font-family: "Arya", sans-serif;
     font-size: 32px;
 }
 
@@ -21,16 +20,16 @@
     padding-top: 1rem;
 }
 
-#header a{
-    color:rgb(0,0,0,0.9);
-    text-decoration:none;
+#header a {
+    color: rgb(0, 0, 0, 0.9);
+    text-decoration: none;
     font-size: 34px;
 }
 
 .wide-nav {
     border-bottom: 1.5px solid var(--golden);
     border-top: 1.5px solid var(--golden);
-    background-color : #fff;
+    background-color: #fff;
 }
 
 .navbar {
@@ -44,12 +43,11 @@
 .navbar-light .navbar-nav .nav-link {
     font-size: 24px;
     padding: 0rem;
-    color: rgb(0,0,0);
-
+    color: rgb(0, 0, 0);
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color:var(--grey);
+    color: var(--grey);
     text-decoration: underline;
     text-decoration-color: var(--pink);
 }
@@ -57,7 +55,7 @@
 /* ---End Nav bar related Css ---*/
 
 /* ---Start Footer CSS --- */
-#footer a{
+#footer a {
     text-decoration: none;
     color: var(--footer-black);
     font-weight: 600;
@@ -66,9 +64,8 @@
 
 /* --- Start reusable elements ---*/
 
-
 h3 {
-    font-family: 'Arya', sans-serif;
+    font-family: "Arya", sans-serif;
     text-align: center;
 }
 
@@ -79,7 +76,7 @@ h3 {
 }
 
 .header3 {
-    font-family: 'Arya', sans-serif;
+    font-family: "Arya", sans-serif;
     font-size: 22px;
     font-weight: bold;
 }
@@ -89,14 +86,14 @@ h3 {
 }
 
 .sub-heading2 {
-    line-height:1.0;
+    line-height: 1;
     font-size: 22px;
     color: #666;
 }
 
 /****Section******/
 .section-margin {
-    margin:1rem 0;
+    margin: 1rem 0;
 }
 
 .section-heading {
@@ -105,6 +102,13 @@ h3 {
     margin: 1rem 0rem;
     padding: 2px 0px;
     text-align: center;
+}
+
+.section-single-line-heading {
+    border-bottom: 1.5px solid var(--golden);
+    text-align: center;
+    margin: 1rem 0rem;
+    padding: 2px 0px;
 }
 
 .tile {
@@ -118,11 +122,11 @@ h3 {
     font-size: 1rem;
 }
 .tile .text {
-    font-size:0.8rem;
+    font-size: 0.8rem;
 }
 
 .section-end {
-    margin-top:10px;
+    margin-top: 10px;
     height: 10px;
     border-bottom: 1.5px solid var(--golden);
     border-top: 1.5px solid var(--golden);
@@ -144,7 +148,7 @@ h3 {
 
 .darkbox {
     background-color: var(--grey);
-    color:#fff;
+    color: #fff;
     margin: 5px;
 }
 
@@ -154,8 +158,8 @@ img.icon {
 }
 
 .pink-break {
-    margin-top:5px;
-    height:40px;
+    margin-top: 5px;
+    height: 40px;
     background-color: var(--pink);
     color: #fff;
     margin-left: calc(50% - 50vw);
@@ -164,7 +168,7 @@ img.icon {
 }
 
 .genre-tile {
-    margin:2px;
+    margin: 2px;
     background-color: var(--golden);
 }
 
@@ -189,7 +193,7 @@ textbox tends to spill over
 }
 
 .img-box .text-box {
-    padding-left:5px;
+    padding-left: 5px;
     position: absolute;
     bottom: 0px;
     height: 2rem;
@@ -208,31 +212,31 @@ textbox tends to spill over
 
 /* ---Start reusable primitives ---*/
 .space-right-sm {
-    margin-right:5px;
+    margin-right: 5px;
 }
 
 .space-left-sm {
-    margin-left:5px;
+    margin-left: 5px;
 }
 
 .space-top-lg {
-    margin-top:15px;
+    margin-top: 15px;
 }
 
 .space-top-sm {
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 .space-bottom-md {
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
 .color-pink {
-    color:var(--pink);
+    color: var(--pink);
 }
 
 .color-red {
-    color:red;
+    color: red;
 }
 
 .color-change-hover:hover {
@@ -252,18 +256,18 @@ textbox tends to spill over
 }
 
 .float-left {
-    float:left;
+    float: left;
 }
 
 .float-right {
-    float:right;
+    float: right;
 }
 
 .no-border {
-    border:0px;
+    border: 0px;
 }
 
-.center-it{
+.center-it {
     text-align: center;
 }
 

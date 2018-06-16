@@ -1,0 +1,30 @@
+/***** CSS global website colors *****/
+:root {
+    --pink: #ff5c5c;
+    --grey: #515052;
+    --golden: #eee8e5;
+    --lightgrey: #f0f0f0;
+    --midgrey: #d9d9d9;
+    --footer-black: #3e3d3f;
+}
+
+/***** CSS global website colors *****/
+#homeHeader {
+    padding: 20px;
+    border-radius: 15px;
+    background: var(--golden);
+    color: var(--footer-black);
+}
+
+#homeHeader .header {
+    font-size: 30pt;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 1.1;
+}
+
+#homeHeader hr {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: 2px solid var(--footer-black);
+}

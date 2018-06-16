@@ -32,5 +32,8 @@
     </muhavare-component>
 </div>
 
-{% endblock %} {% block scripts %}
-<script src="{{url_for('send_js', path='vue/muhavare.js')}}"></script> {% endblock scripts %}
+{% endblock %}
+{% block footer %} {% endblock footer %}
+{% block scripts %}
+<script src="{{url_for('send_js', path='vue/muhavare.js')}}"></script>
+{% endblock scripts %}

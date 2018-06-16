@@ -39,5 +39,8 @@
         </div>
     </kahani-component inline-template>
 </div>
-{% endblock %} {% block scripts %}
-<script src="{{url_for('send_js', path='vue/kahani.js')}}"></script>{% endblock scripts %}
+{% endblock %}
+{% block footer %} {% endblock footer %}
+{% block scripts %}
+<script src="{{url_for('send_js', path='vue/kahani.js')}}"></script>
+{% endblock scripts %}

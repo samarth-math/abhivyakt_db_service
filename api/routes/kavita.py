@@ -12,6 +12,12 @@ def api_kavita():
         return render_template('kavita.html')
 
 
+@routes.route('/kavitah', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def api_kavita_home():
+    if request.method == 'GET':
+        return render_template('kavitahome.html')
+
+
 @routes.route('/kavitajs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kavita_json():
     if request.method == 'GET':
