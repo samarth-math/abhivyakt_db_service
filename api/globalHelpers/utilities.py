@@ -25,6 +25,13 @@ logger.addHandler(handler)
 
 ##################
 
+# Exceptions
+
+class ValidationError(Exception):
+    def __init__(self, message):
+        super().__init__(message)
+
+
 ##### Populate authors #####
 
 from api.models.helpers import databaseHelperFunctions as db

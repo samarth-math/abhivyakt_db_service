@@ -19,7 +19,7 @@ collection = db.initializeDB('literature', 'kavita')
 def api_manual_test():
     if request.method == 'GET':
         # call any function, and put the result in the content = line below like shown
-        content = featured()
+        content = testGetContentForAuthor()
         return jsonify(
             content=content
         )

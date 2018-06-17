@@ -1,7 +1,7 @@
 from flask import jsonify
 import json
 from api.globalHelpers.utilities import logger
-from api.globalHelpers.constants import END_OF_CONTENT
+from api.globalHelpers.constants import Error
 
 
 def validateNotNull(object):
@@ -32,7 +32,7 @@ def createResponse(data, hasMore, lastItem, nextItemURL='', fieldName=None, fiel
 def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue):
     if data is None:
         return jsonify(
-            error=END_OF_CONTENT,
+            error=Error.END_OF_CONTENT,
             hasMore=False
         )
 
@@ -55,7 +55,7 @@ def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldVal
 
 def createResponseObjectForTemplate(data, hasMore, lastItem, nextItemURL, fieldName=None, fieldValue=None):
     if data is None:
-        obj = {'content': "{}", 'error': END_OF_CONTENT, 'hasMore': False}
+        obj = {'content': "{}", 'error': Error.END_OF_CONTENT, 'hasMore': False}
         return obj
 
     if hasMore is False:

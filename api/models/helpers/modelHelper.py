@@ -7,9 +7,8 @@ import threading
 from api.globalHelpers.utilities import logger
 from api.globalHelpers.constants import API_LIMIT
 from api.globalHelpers.constants import FEATURED_FILE_PATH
-
-logger.info(FEATURED_FILE_PATH)
-
+from api.globalHelpers.constants import Error
+from api.globalHelpers.utilities import ValidationError
 
 def hasMore(count, limit):
     return True if (count > limit) else False
@@ -21,9 +20,8 @@ def getLimit(userLimit):
 
 
 def getAllObjects(collection, lastItem, userLimit):
-    if collection is None:  # TODO throw exception
-        print('Collection is None')
-
+    if collection is None:
+        raise ValidationError(Error.COLLECTION_NONE)
     limit = getLimit(userLimit)
     if lastItem is not None:
         cursor = collection.find(
@@ -42,24 +40,24 @@ def getAllObjects(collection, lastItem, userLimit):
 
 
 def getObjectById(collection, objectId):
-    if collection is None:  # TODO throw exception
-        print('Collection is None')
+    if collection is None:
+        raise ValidationError(Error.COLLECTION_NONE)
     cursor = collection.find_one({"_id": ObjectId(objectId)})
     serializedData = dumps(cursor)
     data = json.loads(serializedData)
     return data
 
 def getObjectsByIds(collection, objectIds):
-    if collection is None:  # TODO throw exception
-        print('Collection is None')
+    if collection is None:
+        raise ValidationError(Error.COLLECTION_NONE)
     cursor = collection.find({'_id': {'$in': objectIds}})
     serializedData = dumps(cursor)
     data = json.loads(serializedData)
     return data
 
 def getObjectByMultifieldSearch(collection, fieldValueMap):
-    if collection is None:  # TODO throw exception
-        print('Collection is None')
+    if collection is None:
+        raise ValidationError(Error.COLLECTION_NONE)
     cursor = collection.find_one(fieldValueMap)
     serializedData = dumps(cursor)
     data = json.loads(serializedData)
@@ -67,8 +65,8 @@ def getObjectByMultifieldSearch(collection, fieldValueMap):
 
 
 def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx=None):
-    if collection is None:  # TODO throw exception
-        print('Collection is None')
+    if collection is None:
+        raise ValidationError(Error.COLLECTION_NONE)
 
     limit = getLimit(userLimit)
     if regx is None:
