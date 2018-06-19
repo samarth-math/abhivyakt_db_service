@@ -22,14 +22,7 @@ def getParams(request):
     return limit, nextItem, content, author, title
 
 
-def createResponse(data, hasMore, lastItem, nextItemURL='', fieldName=None, fieldValue=None, isJson=False):
-    if isJson:
-        return createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue)
-    else:
-        return createResponseObjectForTemplate(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue)
-
-
-def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldValue):
+def createJSONResponse(data, hasMore, lastItem, nextItemURL='', fieldName=None, fieldValue=None):
     if data is None:
         return jsonify(
             error=Error.END_OF_CONTENT,
@@ -51,21 +44,3 @@ def createJSONResponse(data, hasMore, lastItem, nextItemURL, fieldName, fieldVal
         hasMore=True,
         nextItem=nextItemURL
     )
-
-
-def createResponseObjectForTemplate(data, hasMore, lastItem, nextItemURL, fieldName=None, fieldValue=None):
-    if data is None:
-        obj = {'content': "{}", 'error': Error.END_OF_CONTENT, 'hasMore': False}
-        return obj
-
-    if hasMore is False:
-        obj = {'content': data, 'error': "", 'hasMore': False}
-        return obj
-
-    validateNotNull(lastItem)
-    if fieldName is not None:
-        nextItemURL = nextItemURL + fieldName + fieldValue + '&nextItem=' + lastItem
-    else:
-        nextItemURL = nextItemURL + '&nextItem=' + lastItem
-    obj = {'content': data, 'hasMore': True, 'nextItem': nextItemURL}
-    return obj

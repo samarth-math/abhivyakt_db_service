@@ -15,7 +15,7 @@ def api_kahani():
 @routes.route('/kahanijs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kahani_json():
     if request.method == 'GET':
-        return parseGetRequest(request, True)
+        return parseGetRequest(request)
 
 
 @routes.route('/featuredkahanis', methods=['GET'])
@@ -24,50 +24,44 @@ def api_featured_kahani():
     return jsonify(content=content)
 
 
-def parseGetRequest(request, isJson=False):
-    nextItemURL = '/kahani?'
-    if (isJson):
-        nextItemURL = '/kahanijs?'
+def parseGetRequest(request):
+    nextItemURL = '/kahanijs?'
     limit, nextItem, content, author, title = helper.getParams(request)
 
     if title is not None:
         data, hasMore, lastItem = Kahani.getKahaniByTitle(
             title, limit, nextItem)
-        return helper.createResponse(data,
+        return helper.createJSONResponse(data,
                                      hasMore,
                                      lastItem,
                                      nextItemURL,
                                      'title',
-                                     title,
-                                     isJson)
+                                     title)
 
     if author is not None:
         data, hasMore, lastItem = Kahani.getKahaniByAuthor(
             author, limit, nextItem)
-        return helper.createResponse(data,
+        return helper.createJSONResponse(data,
                                      hasMore,
                                      lastItem,
                                      nextItemURL,
                                      'author',
-                                     author,
-                                     isJson)
+                                     author)
 
     if content is not None:
         data, hasMore, lastItem = Kahani.getKahaniByContent(
             content, limit, nextItem)
-        return helper.createResponse(data,
+        return helper.createJSONResponse(data,
                                      hasMore,
                                      lastItem,
                                      nextItemURL,
                                      'content',
-                                     content,
-                                     isJson)
+                                     content)
 
     else:
         data, hasMore, lastItem = Kahani.getAllKahani(
             limit, nextItem)
-        return helper.createResponse(data,
+        return helper.createJSONResponse(data,
                                      hasMore,
                                      lastItem,
-                                     nextItemURL,
-                                     isJson=isJson)
+                                     nextItemURL)

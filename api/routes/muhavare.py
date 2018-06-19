@@ -15,7 +15,7 @@ def api_muhavare():
 @routes.route('/muhavarejs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_muhavare_json():
     if request.method == 'GET':
-        return parseGetRequest(request, True)
+        return parseGetRequest(request)
 
 
 @routes.route('/featuredmuhavare', methods=['GET'])
@@ -24,29 +24,25 @@ def api_featured_muhavare():
     return jsonify(content=content)
 
 
-def parseGetRequest(request, isJson=False):
-    nextItemURL = '/muhavare?'
-    if (isJson):
-        nextItemURL = '/muhavarejs?'
+def parseGetRequest(request):
+    nextItemURL = '/muhavarejs?'
 
     limit, nextItem, content, _, _ = helper.getParams(request)
 
     if content is not None:
         data, hasMore, lastItem = Muhavare.getMuhavareByContent(
             content, limit, nextItem)
-        return helper.createResponse(data,
+        return helper.createJSONResponse(data,
                                      hasMore,
                                      lastItem,
                                      nextItemURL,
                                      'content',
-                                     content,
-                                     isJson)
+                                     content)
 
     else:
         data, hasMore, lastItem = Muhavare.getAllMuhavare(
             limit, nextItem)
-        return helper.createResponse(data,
+        return helper.createJSONResponse(data,
                                      hasMore,
                                      lastItem,
-                                     nextItemURL,
-                                     isJson=isJson)
+                                     nextItemURL)
