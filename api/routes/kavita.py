@@ -21,7 +21,7 @@ def api_kavita_home():
 @routes.route('/kavitajs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kavita_json():
     if request.method == 'GET':
-        return parseGetRequest(request)
+        return processGetRequest(request)
 
 
 @routes.route('/featuredkavitas', methods=['GET'])
@@ -30,9 +30,9 @@ def api_featured_kavita():
     return jsonify(content=content)
 
 
-def parseGetRequest(request):
+def processGetRequest(request):
     nextItemURL = '/kavitajs?'
-    limit, nextItem, content, author, title = helper.getParams(request)
+    limit, nextItem, content, author, title = helper.getRequestParams(request)
 
     if title is not None:
         data, hasMore, lastItem = Kavita.getKavitaByTitle(

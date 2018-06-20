@@ -13,7 +13,7 @@ from flask import jsonify
 @routes.route('/authorjs', methods=['GET'])
 def api_author_json():
     if request.method == 'GET':
-        return parseGetRequest(request)
+        return processGetRequest(request)
 
 
 @routes.route('/featuredauthor', methods=['GET'])
@@ -22,10 +22,10 @@ def api_featured_author():
     return jsonify(content=content)
 
 
-def parseGetRequest(request):
+def processGetRequest(request):
     nextItemURL = '/authorjs?'
 
-    limit, nextItem, _ , _ , _ = helper.getParams(request)
+    limit, nextItem, _ , _ , _ = helper.getRequestParams(request)
 
     data, hasMore, lastItem = Author.getAllAuthors(limit, nextItem)
     return helper.createJSONResponse(data,

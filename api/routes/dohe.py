@@ -15,7 +15,7 @@ def api_dohe():
 @routes.route('/dohejs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_dohe_json():
     if request.method == 'GET':
-        return parseGetRequest(request)
+        return processGetRequest(request)
 
 
 @routes.route('/featureddohe', methods=['GET'])
@@ -24,10 +24,10 @@ def api_featured_dohe():
     return jsonify(content=content)
 
 
-def parseGetRequest(request):
+def processGetRequest(request):
     nextItemURL = '/dohejs?'
 
-    limit, nextItem, content, author, _ = helper.getParams(request)
+    limit, nextItem, content, author, _ = helper.getRequestParams(request)
 
     if author is not None:
         data, hasMore, lastItem = Dohe.getDoheByAuthor(

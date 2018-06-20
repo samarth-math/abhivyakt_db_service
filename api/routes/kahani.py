@@ -15,7 +15,7 @@ def api_kahani():
 @routes.route('/kahanijs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_kahani_json():
     if request.method == 'GET':
-        return parseGetRequest(request)
+        return processGetRequest(request)
 
 
 @routes.route('/featuredkahanis', methods=['GET'])
@@ -24,9 +24,9 @@ def api_featured_kahani():
     return jsonify(content=content)
 
 
-def parseGetRequest(request):
+def processGetRequest(request):
     nextItemURL = '/kahanijs?'
-    limit, nextItem, content, author, title = helper.getParams(request)
+    limit, nextItem, content, author, title = helper.getRequestParams(request)
 
     if title is not None:
         data, hasMore, lastItem = Kahani.getKahaniByTitle(

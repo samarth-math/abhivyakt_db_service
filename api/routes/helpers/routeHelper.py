@@ -9,7 +9,7 @@ def validateNotNull(object):
         raise ("ValidationERROR : Unexpected null object found")
 
 
-def getParams(request):
+def getRequestParams(request):
     # sample server side logging..
     logger.info("Making request " + request.url + "..")
     nextItem = request.args.get('nextItem')
