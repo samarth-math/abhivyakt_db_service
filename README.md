@@ -32,5 +32,6 @@ To setup users for the database:
 1. Close branch on merge (whoever merges)
 
 ##Useful Links
-* [IDE environment Recommendations](https://bitbucket.org/rishabhbaid/hindi/wiki/Home)
+* [Home/Next Meeting Agenda](https://bitbucket.org/rishabhbaid/hindi/wiki/Home)
+* [IDE Recommendations](https://bitbucket.org/rishabhbaid/hindi/wiki/IDE_Setup)
 * [How to Edit The ReadMe](https://bitbucket.org/tutorials/markdowndemo)
