@@ -1,27 +1,25 @@
 import json
 import urllib.parse
 from os import path
+from bson.objectid import ObjectId
 
 from pymongo import MongoClient
 
-
-def save_to_mongo_db(collection, entry):
+def save_to_db(collection, entry):
     try:
-        # collection.insert_one(entry)
-        return True
+        collection.insert_one(entry)
     except Exception as e:
         print("Error in saving to MongoDB: ", e)
-        return False
 
 
 def initialize_db(dbName, collectionName):
     host = 'localhost'
     PORT = '27017'
-    username = 'public'
-    password = 'mongo@mongo'
+    username = 'root1'
+    password = 'password'
     URL = 'mongodb://' + urllib.parse.quote_plus(username) + ':' + \
         urllib.parse.quote_plus(password) + '@' + host + ':' + \
-        PORT + '/literature'
+        PORT + '/admin'
     print(URL)
     client = MongoClient(URL)
     dbNames = set(['literature'])
@@ -33,18 +31,25 @@ def initialize_db(dbName, collectionName):
     return None
 
 
-def save_to_local_db(fileName, content):
-    filePath = path.relpath(fileName)
-    with open(filePath, 'w') as outfile:
-        json.dump(content, outfile)
+def update_entry(collection, object, fieldName, updatedFieldValue):
+    print("Updating object's (" + str(object['_id']) + ") field " + fieldName)
+    try:
+        collection.update_one({
+            '_id': object['_id']
+            },{
+            '$set': {
+            fieldName : updatedFieldValue
+            }
+        }, upsert=False)
+    except Exception as e:
+        print(e)
 
-
-def update_entry(collection, field, updatedField):
-    pass
-
-
-def remove_entry(collection, id):
-    pass
+def remove_entry(collection, object):
+    print("Removing object with id: " + str(object['_id']) + " from database")
+    try:
+        collection.remove({ '_id' : ObjectId(object['_id'])})
+    except Exception as e:
+        print(e)
 
 
 # Helper function to view an entire collection.
