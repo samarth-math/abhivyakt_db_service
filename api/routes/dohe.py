@@ -18,12 +18,6 @@ def api_dohe_json():
         return processGetRequest(request)
 
 
-@routes.route('/featureddohe', methods=['GET'])
-def api_featured_dohe():
-    content = Dohe.featuredDohe()
-    return jsonify(content=content)
-
-
 def processGetRequest(request):
     nextItemURL = '/dohejs?'
 

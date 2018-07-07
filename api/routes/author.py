@@ -16,12 +16,6 @@ def api_author_json():
         return processGetRequest(request)
 
 
-@routes.route('/featuredauthor', methods=['GET'])
-def api_featured_author():
-    content = Author.featuredAuthors()
-    return jsonify(content=content)
-
-
 def processGetRequest(request):
     nextItemURL = '/authorjs?'
 

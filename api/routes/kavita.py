@@ -24,12 +24,6 @@ def api_kavita_json():
         return processGetRequest(request)
 
 
-@routes.route('/featuredkavitas', methods=['GET'])
-def api_featured_kavita():
-    content = Kavita.featuredKavita()
-    return jsonify(content=content)
-
-
 def processGetRequest(request):
     nextItemURL = '/kavitajs?'
     limit, nextItem, content, author, title = helper.getRequestParams(request)

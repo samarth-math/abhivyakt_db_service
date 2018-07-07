@@ -22,3 +22,4 @@ class Art(Enum):
     kavita = 'kavita'
     kahani = 'kahani'
     muhavare = 'muhavare'
+    author = 'author'

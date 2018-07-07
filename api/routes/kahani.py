@@ -18,12 +18,6 @@ def api_kahani_json():
         return processGetRequest(request)
 
 
-@routes.route('/featuredkahanis', methods=['GET'])
-def api_featured_kahani():
-    content = Kahani.featuredKahani()
-    return jsonify(content=content)
-
-
 def processGetRequest(request):
     nextItemURL = '/kahanijs?'
     limit, nextItem, content, author, title = helper.getRequestParams(request)

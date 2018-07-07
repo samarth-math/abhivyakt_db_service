@@ -18,12 +18,6 @@ def api_muhavare_json():
         return processGetRequest(request)
 
 
-@routes.route('/featuredmuhavare', methods=['GET'])
-def api_featured_muhavare():
-    content = Muhavare.featuredMuhavare()
-    return jsonify(content=content)
-
-
 def processGetRequest(request):
     nextItemURL = '/muhavarejs?'
 

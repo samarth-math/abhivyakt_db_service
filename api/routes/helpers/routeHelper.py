@@ -4,6 +4,15 @@ from api.globalHelpers.utilities import logger
 from api.globalHelpers.constants import Error
 
 
+def customError(statusCode, message):
+    response = jsonify({
+        'status': statusCode,
+        'message': message
+    })
+    response.status_code = statusCode
+    return response
+
+
 def validateNotNull(object):
     if object is None:
         raise ("ValidationERROR : Unexpected null object found")

@@ -1,14 +1,14 @@
 var featuredKavitaComponent = Vue.extend({
     mixins: [featuredObject],
     created() {
-        this.fetchContent("/featuredkavitas");
+        this.fetchContent("/featured/kavita");
     }
 });
 
 var featuredKahaniComponent = Vue.extend({
     mixins: [featuredObject],
     created() {
-        this.fetchContent("/featuredkahanis");
+        this.fetchContent("/featured/kahani");
     }
 });
 

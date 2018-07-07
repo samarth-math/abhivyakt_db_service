@@ -7,4 +7,5 @@ from .kahani import *
 from .dictionary import *
 from .dohe import *
 from .author import *
+from .featured import *
 from .manualtest import *
