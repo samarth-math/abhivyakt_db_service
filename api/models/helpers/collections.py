@@ -1,5 +1,5 @@
 from api.models.helpers import databaseHelperFunctions as db
-from api.globalHelpers.utilities import Art
+from api.globalHelpers.constants import Art
 
 doheCollection = db.initializeDB('literature', 'dohe')
 kahaniCollection = db.initializeDB('literature', 'kahani')
