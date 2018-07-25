@@ -105,11 +105,16 @@ def featured(collection, fileName, ObjectName):
                 else:
                     retrievedItem = getObjectByMultifieldSearch(
                         collection, item)
-                    item["objectId"] = retrievedItem["_id"]["$oid"]
-                    featuredObjects.append(retrievedItem)
-                    fp.seek(0)
-                    json.dump(d, fp, ensure_ascii=False, indent=4)
-                    fp.truncate()
+                    try:
+                        item["objectId"] = retrievedItem["_id"]["$oid"]
+                        featuredObjects.append(retrievedItem)
+                        fp.seek(0)
+                        json.dump(d, fp, ensure_ascii=False, indent=4)
+                        fp.truncate()
+                    except:
+                        if retrievedItem is None:
+                            raise ValueError("Did not find the object you specified in the featured file " + fileName)
+                        else:
+                            raise
             fp.close()
-
     return featuredObjects
