@@ -9,6 +9,8 @@ from api.globalHelpers.constants import API_LIMIT
 from api.globalHelpers.constants import FEATURED_FILE_PATH
 from api.globalHelpers.constants import Error
 from api.globalHelpers.utilities import ValidationError
+from api.globalHelpers.constants import Art
+from api.models.helpers.collections import collectionByType
 
 def hasMore(count, limit):
     return True if (count > limit) else False
@@ -92,13 +94,13 @@ def getObjectsByFieldExactSearch(collection, lastItem, userLimit, fieldName, sea
     return getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx)
 
 
-def featured(collection, fileName, ObjectName):
+def featured(collection, fileName, objectName):
     lock = threading.Lock()
     with lock:
         with open(os.path.join(FEATURED_FILE_PATH, fileName), "r+") as fp:
             d = json.load(fp)
             featuredObjects = []
-            for item in d[ObjectName]:
+            for item in d[objectName]:
                 if 'objectId' in item and item['objectId'] != "":
                     objectId = item['objectId']
                     featuredObjects.append(getObjectById(collection, objectId))

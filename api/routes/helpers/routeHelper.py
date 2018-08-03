@@ -2,6 +2,7 @@ from flask import jsonify
 import json
 from api.globalHelpers.utilities import logger
 from api.globalHelpers.constants import Error
+from api.globalHelpers.utilities import ValidationError
 
 
 def customError(statusCode, message):
@@ -15,7 +16,7 @@ def customError(statusCode, message):
 
 def validateNotNull(object):
     if object is None:
-        raise ("ValidationERROR : Unexpected null object found")
+        raise ValidationError(Error.UNEXPECTED_NULL)
 
 
 def getRequestParams(request):

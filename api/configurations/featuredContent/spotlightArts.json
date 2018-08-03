@@ -1,9 +1,9 @@
 {
-    "featuredKavitas": [
+    "kavita": [
         {
             "authorName": "अंसार कम्बरी",
-            "objectId": "5a53054c74ad350ba00ae67f",
-            "title": "कलजुगी दोहे"
+            "title": "कलजुगी दोहे",
+            "objectId": "5a53054c74ad350ba00ae67f"
         },
         {
             "authorName": " अंजना भट्ट",
@@ -18,6 +18,20 @@
         {
             "title": "दो शे'र ",
             "objectId": "5a5305b874ad350ba00ae69a"
+        }
+    ],
+    "kahani": [
+        {
+            "title": "बलवान कौन",
+            "objectId": "5a58f49274ad3542130684b1"
+        },
+        {
+            "title": "धिक्कार",
+            "objectId": "5a59e13a74ad350f51f74853"
+        },
+        {
+            "title": "घोड़े को सबक",
+            "objectId": "5a58f52874ad3542130684fa"
         }
     ]
 }
