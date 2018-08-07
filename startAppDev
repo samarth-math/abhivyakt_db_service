@@ -1,4 +1,10 @@
 #!/bin/bash
+startFlaskServer() {
+    export FLASK_DEBUG=1
+    export FLASK_APP=api/app.py
+    python -m flask run
+}
+
 if ! service mongod status | grep "running"; then
 	echo "No mongodb server running..."
 	read -n1 -p "Should I start it for you using sudo start service mongod?(y/n)" answer
@@ -16,6 +22,12 @@ if ! service mongod status | grep "running"; then
 	        exit ;;
 	esac
 fi
-export FLASK_DEBUG=1
-export FLASK_APP=api/app.py
-python -m flask run
+read -n1 -p "Start development server on
+1. localhost:8000 using gunicorn?(default, press enter or 1)
+2. localhost:5000 " answer
+echo
+case $answer in
+        1|"") gunicorn --bind 0.0.0.0:8000 wsgi;;
+        2)startFlaskServer;;
+        *) echo "no valid input. Exiting...";;
+esac
