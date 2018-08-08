@@ -17,10 +17,9 @@ CONFIG_FOLDER = os.path.join(ROOT, 'configurations')
 FEATURED_FILE_PATH = os.path.join(CONFIG_FOLDER, 'featuredContent')
 
 # Enums
-
-class Art(Enum):
-    dohe = 'dohe'
-    kavita = 'kavita'
-    kahani = 'kahani'
-    muhavare = 'muhavare'
-    author = 'author'
+class Art(Enum):# .name => english, .value=> hindi
+    dohe = 'दोहे'
+    kavita = 'कविता'
+    kahani = 'कहानी'
+    muhavare = 'मुहावरे'
+    author = 'रचनाकार'

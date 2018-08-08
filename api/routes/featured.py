@@ -11,11 +11,11 @@ from api.routes.helpers.routeHelper import customError
 
 # without () is a pointer to the function
 fetchedContent = {
-    Art.dohe.value : Dohe.featuredDohe,
-    Art.kahani.value : Kahani.featuredKahani,
-    Art.kavita.value : Kavita.featuredKavita,
-    Art.muhavare.value : Muhavare.featuredMuhavare,
-    Art.author.value : Author.featuredAuthors
+    Art.dohe.name : Dohe.featuredDohe,
+    Art.kahani.name : Kahani.featuredKahani,
+    Art.kavita.name : Kavita.featuredKavita,
+    Art.muhavare.name : Muhavare.featuredMuhavare,
+    Art.author.name : Author.featuredAuthors
 }
 
 @routes.route('/featured/<artType>', methods=['GET'])

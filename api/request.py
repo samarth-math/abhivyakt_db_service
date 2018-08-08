@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 import requests
 from time import sleep
+from api.models import author
+from api.globalHelpers import constants
+from bson.objectid import ObjectId
+
 
 def testKavita():
     #r = requests.get('http://127.0.0.1:5000/kavita?title=क')
@@ -139,3 +143,31 @@ try:
     testDohe()
 except Exception as e:
     print(e)
+
+
+##### Author object tests #####
+
+def testFeaturedAuthor():
+    return author.featuredAuthors()
+
+def testGetAllAuthors():
+    return author.getAllAuthors(10, None)
+
+def testGetAuthorByName():
+    return author.getAuthorByName('प्रेमनन्दन')
+
+def testGetAuthorByDoha():
+    doha = {
+        "title": "कलजुगी दोहे",
+        "authorName": "अंसार कम्बरी",
+        "_id": "5a589b4274ad3522fbfd2cdf"
+    }
+    return author.getAuthorByContent(doha['_id'], constants.Art.dohe)
+
+
+def testGetContentForAuthor():
+    authorInfo = {
+        "name": "कलजुगी",
+        "dohe": [ObjectId("5a589b4274ad3522fbfd2cdc"), ObjectId("5a589b4274ad3522fbfd2cdf")]
+    }
+    return author.getContentForAuthor(authorInfo, constants.Art.dohe)
