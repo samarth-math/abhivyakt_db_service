@@ -8,6 +8,7 @@ from api.globalHelpers.validationUtils import validateNotNone
 from api.models.helpers.collections import collectionByType
 from api.models.helpers.modelHelper import getObjectById
 from api.models.helpers.modelHelper import getObjectByMultifieldSearch
+from api.models.helpers.modelHelper import rewriteFileWithJsonObject
 
 FILE_NAME ="spotlightArts.json"
 
@@ -37,8 +38,3 @@ def spotlight():
                         retrievedArtItem["type"] = artEnum.value
                         featuredObjects.append(retrievedArtItem)
     return featuredObjects
-
-def rewriteFileWithJsonObject(jsonObject, filePointer):
-    filePointer.seek(0)
-    json.dump(jsonObject, filePointer, ensure_ascii=False, indent=4)
-    filePointer.truncate()

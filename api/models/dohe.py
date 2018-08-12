@@ -18,4 +18,4 @@ def getAllDohe(userLimit, lastItem):
 
 
 def featuredDohe():
-    return helper.featured(collection, "featuredDohe.json", "featuredDohe")
+    return helper.featured(collection, "featuredDohe.json", "dohe")

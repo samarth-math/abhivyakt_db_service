@@ -11,6 +11,8 @@ from api.globalHelpers.constants import Error
 from api.globalHelpers.utilities import ValidationError
 from api.globalHelpers.constants import Art
 from api.models.helpers.collections import collectionByType
+from api.globalHelpers.validationUtils import validateNotNone
+
 
 def hasMore(count, limit):
     return True if (count > limit) else False
@@ -93,30 +95,28 @@ def getObjectsByFieldExactSearch(collection, lastItem, userLimit, fieldName, sea
     regx = re.compile(searchTerm, re.IGNORECASE)
     return getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx)
 
+def rewriteFileWithJsonObject(jsonObject, filePointer):
+    filePointer.seek(0)
+    json.dump(jsonObject, filePointer, ensure_ascii=False, indent=4)
+    filePointer.truncate()
 
-def featured(collection, fileName, objectName):
+def featured(collection, fileName, artType):
     lock = threading.Lock()
     with lock:
         with open(os.path.join(FEATURED_FILE_PATH, fileName), "r+") as fp:
-            d = json.load(fp)
+            jsonDataObject = json.load(fp)
             featuredObjects = []
-            for item in d[objectName]:
+            retrievedArtItem = {}
+            for item in jsonDataObject[artType]:
                 if 'objectId' in item and item['objectId'] != "":
                     objectId = item['objectId']
-                    featuredObjects.append(getObjectById(collection, objectId))
+                    retrievedArtItem = getObjectById(collection, objectId)
                 else:
-                    retrievedItem = getObjectByMultifieldSearch(
+                    retrievedArtItem = getObjectByMultifieldSearch(
                         collection, item)
-                    try:
-                        item["objectId"] = retrievedItem["_id"]["$oid"]
-                        featuredObjects.append(retrievedItem)
-                        fp.seek(0)
-                        json.dump(d, fp, ensure_ascii=False, indent=4)
-                        fp.truncate()
-                    except:
-                        if retrievedItem is None:
-                            raise ValueError("Did not find the object you specified in the featured file " + fileName)
-                        else:
-                            raise
-            fp.close()
+                    validateNotNone(retrievedArtItem)
+                    item["objectId"] = retrievedArtItem["_id"]["$oid"]
+                    rewriteFileWithJsonObject(jsonDataObject, fp)
+                retrievedArtItem["type"] = Art[artType].value
+                featuredObjects.append(retrievedArtItem)
     return featuredObjects

@@ -14,4 +14,4 @@ def getAllMuhavare(userLimit, lastItem):
 
 
 def featuredMuhavare():
-    return helper.featured(collection, "featuredMuhavare.json", "featuredMuhavare")
+    return helper.featured(collection, "featuredMuhavare.json", "muhavare")

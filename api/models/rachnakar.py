@@ -49,4 +49,4 @@ def getContentForRachnakar(rachnakar, contentType):
 
 
 def featuredRachnakar():
-    return helper.featured(collection, "featuredRachnakar.json", "featuredRachnakar")
+    return helper.featured(collection, "featuredRachnakar.json", "rachnakar")

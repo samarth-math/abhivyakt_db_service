@@ -21,4 +21,4 @@ def getAllKavita(userLimit, lastItem):
 
 
 def featuredKavita():
-    return helper.featured(collection, "featuredKavitas.json", "featuredKavitas")
+    return helper.featured(collection, "featuredKavitas.json", "kavita")
