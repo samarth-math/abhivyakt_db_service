@@ -6,7 +6,7 @@ kahaniCollection = db.initializeDB('literature', 'kahani')
 kavitaCollection = db.initializeDB('literature', 'kavita')
 muhavareCollection = db.initializeDB('literature', 'muhavare')
 
-authorCollection = db.initializeDB('literature', 'author')
+rachnakarCollection = db.initializeDB('literature', 'author')
 
 collectionByType = {
     Art.dohe : doheCollection,

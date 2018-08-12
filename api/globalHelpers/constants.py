@@ -22,4 +22,4 @@ class Art(Enum):# .name => english, .value=> hindi
     kavita = 'कविता'
     kahani = 'कहानी'
     muhavare = 'मुहावरे'
-    author = 'रचनाकार'
+    rachnakar = 'रचनाकार'

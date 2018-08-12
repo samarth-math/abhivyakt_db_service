@@ -3,34 +3,32 @@ import api.models
 from api.models.helpers import databaseHelperFunctions as db
 from api.models.helpers import modelHelper as helper
 from api.models.helpers.collections import collectionByType
-from api.models.helpers.collections import authorCollection as collection
+from api.models.helpers.collections import rachnakarCollection as collection
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 from api.globalHelpers.utilities import logger
 import json
 
-TAG = "In author.py file"
 
-
-def getAllAuthors(userLimit, lastItem):
+def getAllRachnakar(userLimit, lastItem):
     return helper.getAllObjects(collection, lastItem, userLimit)
 
 
-def getAuthorByContent(contentId, contentType):
+def getRachnakarByContent(contentId, contentType):
     cursor = collection.find_one({contentType.value: ObjectId(contentId)})
     serialized = dumps(cursor)
     return json.loads(serialized)
 
 
-def getAuthorByName(name):
-    authorInfo, _, _ = helper.getObjectsByField(
+def getRachnakarByName(name):
+    rachnakarInfo, _, _ = helper.getObjectsByField(
         collection, None, 1, 'name', name)
-    if authorInfo is not None and len(authorInfo) == 1:
-        return authorInfo[0]
+    if rachnakarInfo is not None and len(rachnakarInfo) == 1:
+        return rachnakarInfo[0]
     return []
 
 #  Expects a dictionary right now like below
-#  authorInfo = {
+#  rachnakarInfo = {
 #        "name": "कलजुगी",
 #        "dohe": [ObjectId("5a589b4274ad3522fbfd2cdc"), ObjectId("5a589b4274ad3522fbfd2cdf")]
 #    }
@@ -43,12 +41,12 @@ def getAuthorByName(name):
 #  }
 
 
-def getContentForAuthor(author, contentType):
+def getContentForRachnakar(rachnakar, contentType):
     contentKey = contentType.value
-    contentIdListToFetch = author[contentKey]
+    contentIdListToFetch = rachnakar[contentKey]
     contentColection = collectionByType[contentType]
     return helper.getObjectsByIds(contentColection, contentIdListToFetch)
 
 
-def featuredAuthors():
-    return helper.featured(collection, "featuredAuthors.json", "featuredAuthors")
+def featuredRachnakar():
+    return helper.featured(collection, "featuredRachnakar.json", "featuredRachnakar")

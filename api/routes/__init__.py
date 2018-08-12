@@ -6,6 +6,6 @@ from .kavita import *
 from .kahani import *
 from .dictionary import *
 from .dohe import *
-from .author import *
+from .rachnakar import *
 from .featured import *
 from .spotlight import *

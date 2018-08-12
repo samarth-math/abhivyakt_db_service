@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import requests
 from time import sleep
-from api.models import author
+from api.models import rachnakar
 from api.globalHelpers import constants
 from bson.objectid import ObjectId
 
@@ -148,13 +148,13 @@ except Exception as e:
 ##### Author object tests #####
 
 def testFeaturedAuthor():
-    return author.featuredAuthors()
+    return rachnakar.featuredRachnakar()
 
 def testGetAllAuthors():
-    return author.getAllAuthors(10, None)
+    return rachnakar.getAllRachnakar(10, None)
 
 def testGetAuthorByName():
-    return author.getAuthorByName('प्रेमनन्दन')
+    return rachnakar.getRachnakarByName('प्रेमनन्दन')
 
 def testGetAuthorByDoha():
     doha = {
@@ -162,7 +162,7 @@ def testGetAuthorByDoha():
         "authorName": "अंसार कम्बरी",
         "_id": "5a589b4274ad3522fbfd2cdf"
     }
-    return author.getAuthorByContent(doha['_id'], constants.Art.dohe)
+    return rachnakar.getRachnakarByContent(doha['_id'], constants.Art.dohe)
 
 
 def testGetContentForAuthor():
@@ -170,4 +170,4 @@ def testGetContentForAuthor():
         "name": "कलजुगी",
         "dohe": [ObjectId("5a589b4274ad3522fbfd2cdc"), ObjectId("5a589b4274ad3522fbfd2cdf")]
     }
-    return author.getContentForAuthor(authorInfo, constants.Art.dohe)
+    return rachnakar.getContentForRachnakar(authorInfo, constants.Art.dohe)

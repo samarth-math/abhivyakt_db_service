@@ -2,7 +2,7 @@ from api.models import kahani as Kahani
 from api.models import kavita as Kavita
 from api.models import dohe as Dohe
 from api.models import muhavare as Muhavare
-from api.models import author as Author
+from api.models import rachnakar as Rachnakar
 from . import routes
 from flask import jsonify
 from api.globalHelpers.constants import Art
@@ -15,7 +15,7 @@ fetchedContent = {
     Art.kahani.name : Kahani.featuredKahani,
     Art.kavita.name : Kavita.featuredKavita,
     Art.muhavare.name : Muhavare.featuredMuhavare,
-    Art.author.name : Author.featuredAuthors
+    Art.rachnakar.name : Rachnakar.featuredRachnakar
 }
 
 @routes.route('/featured/<artType>', methods=['GET'])

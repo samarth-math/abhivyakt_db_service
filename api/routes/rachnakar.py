@@ -1,27 +1,22 @@
-from api.models import author as Author
+from api.models import rachnakar as Rachnakar
 from flask import render_template
 from . import routes
 from flask import request
 from .helpers import routeHelper as helper
 from flask import jsonify
 
-# @routes.route('/author', methods=['GET'])
-# def api_author():
-#     if request.method == 'GET':
-#         return render_template('author.html')
-
-@routes.route('/authorjs', methods=['GET'])
-def api_author_json():
+@routes.route('/rachnakarjs', methods=['GET'])
+def api_rachnakar_json():
     if request.method == 'GET':
         return processGetRequest(request)
 
 
 def processGetRequest(request):
-    nextItemURL = '/authorjs?'
+    nextItemURL = '/rachnakarjs?'
 
     limit, nextItem, _ , _ , _ = helper.getRequestParams(request)
 
-    data, hasMore, lastItem = Author.getAllAuthors(limit, nextItem)
+    data, hasMore, lastItem = Rachnakar.getAllRachnakar(limit, nextItem)
     return helper.createJSONResponse(data,
                                 hasMore,
                                 lastItem,
