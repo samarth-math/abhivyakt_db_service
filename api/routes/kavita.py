@@ -26,42 +26,43 @@ def api_kavita_json():
 
 def processGetRequest(request):
     nextItemURL = '/kavitajs?'
-    limit, nextItem, content, author, title = helper.getRequestParams(request)
+    limit, nextItem, content, author, title, _ = helper.getRequestParams(
+        request)
 
     if title is not None:
         data, hasMore, lastItem = Kavita.getKavitaByTitle(
             title, limit, nextItem)
         return helper.createJSONResponse(data,
-                                     hasMore,
-                                     lastItem,
-                                     nextItemURL,
-                                     'title',
-                                     title)
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL,
+                                         'title',
+                                         title)
 
     if author is not None:
         data, hasMore, lastItem = Kavita.getKavitaByAuthor(
             author, limit, nextItem)
         return helper.createJSONResponse(data,
-                                     hasMore,
-                                     lastItem,
-                                     nextItemURL,
-                                     'author',
-                                     author)
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL,
+                                         'author',
+                                         author)
 
     if content is not None:
         data, hasMore, lastItem = Kavita.getKavitaByContent(
             content, limit, nextItem)
         return helper.createJSONResponse(data,
-                                     hasMore,
-                                     lastItem,
-                                     nextItemURL,
-                                     'content',
-                                     content)
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL,
+                                         'content',
+                                         content)
 
     else:
         data, hasMore, lastItem = Kavita.getAllKavita(
             limit, nextItem)
         return helper.createJSONResponse(data,
-                                     hasMore,
-                                     lastItem,
-                                     nextItemURL)
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL)

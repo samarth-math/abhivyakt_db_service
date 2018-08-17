@@ -27,15 +27,16 @@ def getRequestParams(request):
     author = request.args.get('author')
     content = request.args.get('content')
     limit = request.args.get('limit')
+    startCharacter = request.args.get('startChar')
     if limit is None:
         limit = -1
-    return limit, nextItem, content, author, title
+    return limit, nextItem, content, author, title, startCharacter
 
 
 def createJSONResponse(data, hasMore, lastItem, nextItemURL='', fieldName=None, fieldValue=None):
     if data is None:
         return jsonify(
-            error=Error.END_OF_CONTENT,
+            error=Error.END_OF_CONTENT.value,
             hasMore=False
         )
 

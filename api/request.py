@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 import requests
 from time import sleep
-from api.models import rachnakar
-from api.globalHelpers import constants
 from bson.objectid import ObjectId
+from globalHelpers.utilities import logger
 
 
 def testKavita():
@@ -70,8 +69,6 @@ def testMuhavare():
     print('2nd req. hasMore; ', hasMore)
     print(url)
     print(r.json().get('nextItem'))
-
-
 
 
 def testDohe():
@@ -140,7 +137,8 @@ def testKahani():
 try:
     #testKahani()
     #testMuhavare()
-    testDohe()
+    #testDohe()
+    pass
 except Exception as e:
     print(e)
 
@@ -150,11 +148,14 @@ except Exception as e:
 def testFeaturedAuthor():
     return rachnakar.featuredRachnakar()
 
+
 def testGetAllAuthors():
     return rachnakar.getAllRachnakar(10, None)
 
+
 def testGetAuthorByName():
     return rachnakar.getRachnakarByName('प्रेमनन्दन')
+
 
 def testGetAuthorByDoha():
     doha = {
@@ -171,3 +172,17 @@ def testGetContentForAuthor():
         "dohe": [ObjectId("5a589b4274ad3522fbfd2cdc"), ObjectId("5a589b4274ad3522fbfd2cdf")]
     }
     return rachnakar.getContentForRachnakar(authorInfo, constants.Art.dohe)
+
+
+def testRachnakarByStartCharacter():
+    r = requests.get('http://127.0.0.1:8000/rachnakarjs?startChar=छ')
+    print('Status Code:', r.status_code)
+    print(r.headers['content-type'])
+    print(r.text)
+    js = r.json()
+    data = r.json().get('data')
+    hasMore = js.get('hasMore')
+    print('hasMore; ', hasMore)
+
+
+testRachnakarByStartCharacter()

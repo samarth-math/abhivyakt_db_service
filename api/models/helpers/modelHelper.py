@@ -51,6 +51,7 @@ def getObjectById(collection, objectId):
     data = json.loads(serializedData)
     return data
 
+
 def getObjectsByIds(collection, objectIds):
     if collection is None:
         raise ValidationError(Error.COLLECTION_NONE)
@@ -58,6 +59,7 @@ def getObjectsByIds(collection, objectIds):
     serializedData = dumps(cursor)
     data = json.loads(serializedData)
     return data
+
 
 def getObjectByMultifieldSearch(collection, fieldValueMap):
     if collection is None:
@@ -95,10 +97,12 @@ def getObjectsByFieldExactSearch(collection, lastItem, userLimit, fieldName, sea
     regx = re.compile(searchTerm, re.IGNORECASE)
     return getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx)
 
+
 def rewriteFileWithJsonObject(jsonObject, filePointer):
     filePointer.seek(0)
     json.dump(jsonObject, filePointer, ensure_ascii=False, indent=4)
     filePointer.truncate()
+
 
 def featured(collection, fileName, artType):
     lock = threading.Lock()
@@ -120,3 +124,31 @@ def featured(collection, fileName, artType):
                 retrievedArtItem["type"] = Art[artType].value
                 featuredObjects.append(retrievedArtItem)
     return featuredObjects
+
+
+def getObjectsByStartCharacter(collection, lastItem, userLimit, fieldName,
+                               startCharacter, regx=None):
+    if collection is None:
+        raise ValidationError(Error.COLLECTION_NONE)
+
+    limit = getLimit(userLimit)
+    if regx is None:
+        regx = re.compile('^' + startCharacter + '.*', re.UNICODE)
+
+    if lastItem is not None:
+        cursor = collection.find(
+            {fieldName: regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
+    else:
+        cursor = collection.find({fieldName: regx}).limit(limit)
+        # The count() method is probably deprecated, might need to use
+        # count_documents in future check this link:
+        # http://api.mongodb.com/python/current/changelog.html
+        count = cursor.count()
+        if count == 0:
+            return None, False, str(0)
+        last_index = max(0, min(limit, count) - 1)
+        last_id = cursor.__getitem__(last_index).get("_id")
+        serializedData = dumps(cursor)
+        more = hasMore(count, limit)
+        data = json.loads(serializedData)
+        return data, more, str(last_id)

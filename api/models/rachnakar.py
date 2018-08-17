@@ -50,3 +50,8 @@ def getContentForRachnakar(rachnakar, contentType):
 
 def featuredRachnakar():
     return helper.featured(collection, "featuredRachnakar.json", "rachnakar")
+
+
+def getRachnakarByNamePrefix(userLimit, lastItem, startCharacter):
+    return helper.getObjectsByStartCharacter(collection, lastItem, userLimit,
+                                             'name', startCharacter)

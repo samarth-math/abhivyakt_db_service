@@ -21,22 +21,22 @@ def api_muhavare_json():
 def processGetRequest(request):
     nextItemURL = '/muhavarejs?'
 
-    limit, nextItem, content, _, _ = helper.getRequestParams(request)
+    limit, nextItem, content, _, _, _ = helper.getRequestParams(request)
 
     if content is not None:
         data, hasMore, lastItem = Muhavare.getMuhavareByContent(
             content, limit, nextItem)
         return helper.createJSONResponse(data,
-                                     hasMore,
-                                     lastItem,
-                                     nextItemURL,
-                                     'content',
-                                     content)
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL,
+                                         'content',
+                                         content)
 
     else:
         data, hasMore, lastItem = Muhavare.getAllMuhavare(
             limit, nextItem)
         return helper.createJSONResponse(data,
-                                     hasMore,
-                                     lastItem,
-                                     nextItemURL)
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL)
