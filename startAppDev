@@ -10,7 +10,7 @@ if ! service mongod status | grep "running"; then
 	read -n1 -p "Should I start it for you using sudo start service mongod?(y/n)" answer
 	echo
 	case $answer in
-	    y|Y) echo "Checking..."
+	    y|Y|"") echo "Checking..."
              echo "you are on $(uname)"
              if [ "$(uname)" == "Darwin" ]; then
                 sudo mongod
