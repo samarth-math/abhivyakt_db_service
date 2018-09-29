@@ -1,8 +1,8 @@
 #!/bin/bash
 startFlaskServer() {
-    export FLASK_DEBUG=1
-    export FLASK_APP=api/app.py
-    python -m flask run
+   export FLASK_DEBUG=1
+   export FLASK_APP=api/app.py
+   pipenv run python -m flask run
 }
 
 if ! service mongod status | grep "running"; then
@@ -27,7 +27,7 @@ read -n1 -p "Start development server on
 2. localhost:5000 " answer
 echo
 case $answer in
-        1|"") gunicorn --bind 0.0.0.0:8000 --reload wsgi;;
+        1|"") pipenv run gunicorn --bind 0.0.0.0:8000 --reload wsgi;;
         2)startFlaskServer;;
         *) echo "no valid input. Exiting...";;
 esac
