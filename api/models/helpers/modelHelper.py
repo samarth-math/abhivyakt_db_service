@@ -4,6 +4,7 @@ import re
 import json
 import os
 import threading
+import gridfs
 from api.globalHelpers.utilities import logger
 from api.globalHelpers.constants import API_LIMIT
 from api.globalHelpers.constants import FEATURED_FILE_PATH
@@ -12,6 +13,8 @@ from api.globalHelpers.utilities import ValidationError
 from api.globalHelpers.constants import Art
 from api.models.helpers.collections import collectionByType
 from api.globalHelpers.validationUtils import validateNotNone
+from api.models.helpers.databaseHelperFunctions import getDBHandler
+from bson import ObjectId, errors
 
 
 def hasMore(count, limit):
@@ -152,3 +155,31 @@ def getObjectsByStartCharacter(collection, lastItem, userLimit, fieldName,
         more = hasMore(count, limit)
         data = json.loads(serializedData)
         return data, more, str(last_id)
+
+
+def getFileById(fid):
+    """[Returns a file which has been stored using GridFS convention.]
+
+    Arguments:
+        db {[pymongo.database.Database]} -- [database from where file is to be
+                                             retrieved]
+        fid {[bson.objectid.ObjectId]} -- [file id which needs to be fetched
+                                           from db]
+
+    Returns:
+        [<class 'bytes'>] -- [Returns file in form of bytes]
+    """
+    if fid is None:
+        raise ValidationError(Error.UNEXPECTED_NULL)
+    dbHandler = getDBHandler('literature')
+    fs = gridfs.GridFS(dbHandler)
+    logger.info('file id:' + fid)
+    try:
+        fid = ObjectId(fid)
+        fileOut = fs.find_one({'_id': fid})
+        if fileOut is None:
+            return None
+        fileObj = fileOut.read()
+        return fileObj
+    except errors.InvalidId:
+        return None

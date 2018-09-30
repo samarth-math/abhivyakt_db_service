@@ -7,6 +7,7 @@ class Error(Enum):
     END_OF_CONTENT = 'Oops, looks like we are out of content'
     COLLECTION_NONE = 'Collection object must not be null'
     UNEXPECTED_NULL = 'Unexpected null object'
+    NO_MATCH_FOUND = 'No match found!'
 
 # Limits
 API_LIMIT = 50

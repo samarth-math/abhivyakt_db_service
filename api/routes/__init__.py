@@ -9,3 +9,4 @@ from .dohe import *
 from .rachnakar import *
 from .featured import *
 from .spotlight import *
+from .multimedia import *
