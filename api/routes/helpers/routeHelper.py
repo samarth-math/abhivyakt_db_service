@@ -32,6 +32,15 @@ def getRequestParams(request):
         limit = -1
     return limit, nextItem, content, author, title, startCharacter
 
+def createJSONDataOnlyResponse(data):
+    if data is None:
+        return jsonify(
+            error=Error.END_OF_CONTENT.value
+        )
+    else:
+        return jsonify(
+            content=data
+        )
 
 def createJSONResponse(data, hasMore, lastItem, nextItemURL='', fieldName=None, fieldValue=None):
     if data is None:

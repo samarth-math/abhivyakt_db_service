@@ -27,6 +27,11 @@ def getRachnakarByName(name):
         return rachnakarInfo[0]
     return []
 
+
+def getRachnakarById(objectId):
+    return helper.getObjectById(collection, objectId)
+
+
 #  Expects a dictionary right now like below
 #  rachnakarInfo = {
 #        "name": "कलजुगी",

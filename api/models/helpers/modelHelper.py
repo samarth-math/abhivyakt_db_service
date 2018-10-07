@@ -13,6 +13,7 @@ from api.globalHelpers.utilities import ValidationError
 from api.globalHelpers.constants import Art
 from api.models.helpers.collections import collectionByType
 from api.globalHelpers.validationUtils import validateNotNone
+from api.globalHelpers.validationUtils import validateObjectId
 from api.models.helpers.databaseHelperFunctions import getDBHandler
 from bson import ObjectId, errors
 
@@ -49,6 +50,7 @@ def getAllObjects(collection, lastItem, userLimit):
 def getObjectById(collection, objectId):
     if collection is None:
         raise ValidationError(Error.COLLECTION_NONE)
+    validateObjectId(objectId)
     cursor = collection.find_one({"_id": ObjectId(objectId)})
     serializedData = dumps(cursor)
     data = json.loads(serializedData)
