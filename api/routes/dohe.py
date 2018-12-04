@@ -6,12 +6,6 @@ from .helpers import routeHelper as helper
 from flask import jsonify
 
 
-@routes.route('/dohe', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
-def api_dohe():
-    if request.method == 'GET':
-        return render_template('dohe.html')
-
-
 @routes.route('/dohejs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_dohe_json():
     if request.method == 'GET':

@@ -16,17 +16,7 @@ app.register_blueprint(routes)
 
 @app.route("/")
 def main():
-    return render_template('index.html')
-
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
-
-
-@app.route('/js/<path:path>')
-def send_js(path):
-    return send_from_directory('js', path)
+    return " The Python server is running, but / is not a valid route. for trial use /featured/kavita"
 
 
 if __name__ == '__main__':

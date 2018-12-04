@@ -1,15 +1,9 @@
 from api.models import kahani as Kahani
 from flask import render_template
-from . import routes
+from api.routes import routes
 from flask import request
-from .helpers import routeHelper as helper
+from api.routes.helpers import routeHelper as helper
 from flask import jsonify
-
-
-@routes.route('/kahani', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
-def api_kahani():
-    if request.method == 'GET':
-        return render_template('kahani.html')
 
 
 @routes.route('/kahanijs', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
