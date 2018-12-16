@@ -12,9 +12,15 @@ def api_kavita_json():
         return processGetRequest(request)
 
 
+@routes.route('/kavita/<objectId>', methods=['GET'])
+def kavita_object(objectId):
+    if request.method == 'GET':
+        return helper.createJSONDataOnlyResponse(Kavita.getKavitaById(objectId))
+
+
 def processGetRequest(request):
     nextItemURL = '/kavitajs?'
-    limit, nextItem, content, author, title, _ = helper.getRequestParams(
+    limit, nextItem, content, author, title = helper.getRequestParams(
         request)
 
     if title is not None:

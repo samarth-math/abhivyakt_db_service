@@ -12,9 +12,15 @@ def api_kahani_json():
         return processGetRequest(request)
 
 
+@routes.route('/kahani/<objectId>', methods=['GET'])
+def kahani_object(objectId):
+    if request.method == 'GET':
+        return helper.createJSONDataOnlyResponse(Kahani.getKahaniById(objectId))
+
+
 def processGetRequest(request):
     nextItemURL = '/kahanijs?'
-    limit, nextItem, content, author, title, _ = helper.getRequestParams(
+    limit, nextItem, content, author, title = helper.getRequestParams(
         request)
 
     if title is not None:

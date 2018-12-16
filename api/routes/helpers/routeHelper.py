@@ -27,10 +27,9 @@ def getRequestParams(request):
     author = request.args.get('author')
     content = request.args.get('content')
     limit = request.args.get('limit')
-    startCharacter = request.args.get('startChar')
     if limit is None:
         limit = -1
-    return limit, nextItem, content, author, title, startCharacter
+    return limit, nextItem, content, author, title
 
 def createJSONDataOnlyResponse(data):
     if data is None:

@@ -10,7 +10,13 @@ from api.globalHelpers.utilities import logger
 @routes.route('/rachnakarjs', methods=['GET'])
 def api_rachnakar_json():
     if request.method == 'GET':
-        return processGetRequest(request)
+        nextItemURL = '/rachnakarjs?'
+        limit, nextItem = extractRequestParams(request)
+        data, hasMore, lastItem = Rachnakar.getAllRachnakar(limit, nextItem)
+        return helper.createJSONResponse(data,
+                                         hasMore,
+                                         lastItem,
+                                         nextItemURL)
 
 
 @routes.route('/rachnakar/<objectId>', methods=['GET'])
@@ -19,17 +25,15 @@ def rachnakar_object(objectId):
         return helper.createJSONDataOnlyResponse(Rachnakar.getRachnakarById(objectId))
 
 
-def processGetRequest(request):
-    nextItemURL = '/rachnakarjs?'
-    logger.info("in processGetRequest")
-    limit, nextItem, _, _, _, startCharacter = helper.getRequestParams(request)
-    if startCharacter is not None:
-        data, hasMore, lastItem = Rachnakar.getRachnakarByNamePrefix(
-            limit, nextItem, startCharacter)
-    else:
-        data, hasMore, lastItem = Rachnakar.getAllRachnakar(limit, nextItem)
+@routes.route('/rachnakar/startCharacter/<character>', methods=['GET'])
+def rachnakar_start_char(character):
+    if request.method == 'GET':
+        nextItemURL = '/rachnakar/startCharacter/' + character + '?'
+        limit, nextItem = extractRequestParams(request)
+        data, hasMore, lastItem = Rachnakar.getRachnakarByNamePrefix(limit, nextItem, character)
+        return helper.createJSONResponse(data, hasMore, lastItem, nextItemURL)
 
-    return helper.createJSONResponse(data,
-                                     hasMore,
-                                     lastItem,
-                                     nextItemURL)
+
+def extractRequestParams(request):
+    limit, nextItem, _, _, _ = helper.getRequestParams(request)
+    return limit, nextItem

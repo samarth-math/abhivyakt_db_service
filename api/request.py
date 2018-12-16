@@ -143,7 +143,7 @@ except Exception as e:
     print(e)
 
 
-##### Author object tests #####
+'''##### Author object tests #####
 
 def testFeaturedAuthor():
     return rachnakar.featuredRachnakar()
@@ -172,10 +172,10 @@ def testGetContentForAuthor():
         "dohe": [ObjectId("5a589b4274ad3522fbfd2cdc"), ObjectId("5a589b4274ad3522fbfd2cdf")]
     }
     return rachnakar.getContentForRachnakar(authorInfo, constants.Art.dohe)
-
+'''
 
 def testRachnakarByStartCharacter():
-    r = requests.get('http://127.0.0.1:8000/rachnakarjs?startChar=छ')
+    r = requests.get('http://127.0.0.1:8000/rachnakar/startCharacter/छ')
     print('Status Code:', r.status_code)
     print(r.headers['content-type'])
     print(r.text)

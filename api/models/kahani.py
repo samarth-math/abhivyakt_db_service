@@ -28,3 +28,7 @@ def getAllKahani(userLimit, lastItem):
 
 def featuredKahani():
     return helper.featured(collection, "featuredKahanis.json", "kahani")
+
+
+def getKahaniById(objectId):
+    return helper.getObjectById(collection, objectId)
