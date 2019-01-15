@@ -8,6 +8,11 @@ def getKavitaByTitle(title, userLimit, lastItem):
     return helper.getObjectsByField(collection, lastItem, userLimit, "title", title)
 
 
+def getKavitaByTitlePrefix(userLimit, lastItem, startCharacter):
+    return helper.getObjectsByStartCharacter(collection, lastItem, userLimit,
+                                             'title', startCharacter)
+
+
 def getKavitaByAuthor(author, userLimit, lastItem):
     return helper.getObjectsByField(collection, lastItem, userLimit, "authorName", author)
 

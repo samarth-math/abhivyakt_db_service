@@ -145,18 +145,18 @@ def getObjectsByStartCharacter(collection, lastItem, userLimit, fieldName,
             {fieldName: regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
     else:
         cursor = collection.find({fieldName: regx}).limit(limit)
-        # The count() method is probably deprecated, might need to use
-        # count_documents in future check this link:
-        # http://api.mongodb.com/python/current/changelog.html
-        count = cursor.count()
-        if count == 0:
-            return None, False, str(0)
-        last_index = max(0, min(limit, count) - 1)
-        last_id = cursor.__getitem__(last_index).get("_id")
-        serializedData = dumps(cursor)
-        more = hasMore(count, limit)
-        data = json.loads(serializedData)
-        return data, more, str(last_id)
+    # The count() method is probably deprecated, might need to use
+    # count_documents in future check this link:
+    # http://api.mongodb.com/python/current/changelog.html
+    count = cursor.count()
+    if count == 0:
+        return None, False, str(0)
+    last_index = max(0, min(limit, count) - 1)
+    last_id = cursor.__getitem__(last_index).get("_id")
+    serializedData = dumps(cursor)
+    more = hasMore(count, limit)
+    data = json.loads(serializedData)
+    return data, more, str(last_id)
 
 
 def getFileById(fid):
