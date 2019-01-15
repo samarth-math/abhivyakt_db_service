@@ -7,7 +7,7 @@ from api.globalHelpers.constants import Art
 from api.globalHelpers.validationUtils import validateNotNone
 from api.models.helpers.collections import collectionByType
 from api.models.helpers.modelHelper import getObjectById
-from api.models.helpers.modelHelper import getObjectByMultifieldSearch
+from api.models.helpers.modelHelper import getObjectByMultifieldExactSearch
 from api.models.helpers.modelHelper import rewriteFileWithJsonObject
 
 FILE_NAME ="spotlightArts.json"
@@ -30,7 +30,7 @@ def spotlight():
                             objectId = artItem['objectId']
                             retrievedArtItem = getObjectById(collection, objectId)
                         else:
-                            retrievedArtItem = getObjectByMultifieldSearch(
+                            retrievedArtItem = getObjectByMultifieldExactSearch(
                                 collection, artItem)
                             validateNotNone(retrievedArtItem)
                             artItem["objectId"] = retrievedArtItem["_id"]["$oid"]

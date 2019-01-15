@@ -66,7 +66,7 @@ def getObjectsByIds(collection, objectIds):
     return data
 
 
-def getObjectByMultifieldSearch(collection, fieldValueMap):
+def getObjectByMultifieldExactSearch(collection, fieldValueMap):
     if collection is None:
         raise ValidationError(Error.COLLECTION_NONE)
     cursor = collection.find_one(fieldValueMap)
@@ -121,7 +121,7 @@ def featured(collection, fileName, artType):
                     objectId = item['objectId']
                     retrievedArtItem = getObjectById(collection, objectId)
                 else:
-                    retrievedArtItem = getObjectByMultifieldSearch(
+                    retrievedArtItem = getObjectByMultifieldExactSearch(
                         collection, item)
                     validateNotNone(retrievedArtItem)
                     item["objectId"] = retrievedArtItem["_id"]["$oid"]
