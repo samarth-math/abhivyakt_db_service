@@ -50,14 +50,24 @@ def api_kahani_json():
                                             nextItemURL)
 
 
+# There maybe benefit to going the route way with APIs, instead of
+# adding arguments to the request, especially since we aren't using
+# multiple arguments together for filtering, so just leaving a sample here
+@routes.route('/kahani/author/<authorName>', methods=['GET'])
+def kahani_by_author(authorName):
+    nextItemURL='/kahani/author/' + authorName + '?'
+    limit, nextItem, _, _, _ = extractRequestParams(request)
+    data, hasMore, lastItem = Kahani.getKahaniByAuthor(
+        authorName, limit, nextItem)
+    return helper.createJSONResponse(data, hasMore, lastItem, nextItemURL)
+
 
 @routes.route('/kahani/startCharacter/<character>', methods=['GET'])
 def kahani_start_char(character):
-    if request.method == 'GET':
-        nextItemURL = '/kahani/startCharacter/' + character + '?'
-        limit, nextItem, _, _, _ = extractRequestParams(request)
-        data, hasMore, lastItem = Kahani.getKahaniByTitlePrefix(limit, nextItem, character)
-        return helper.createJSONResponse(data, hasMore, lastItem, nextItemURL)
+    nextItemURL = '/kahani/startCharacter/' + character + '?'
+    limit, nextItem, _, _, _ = extractRequestParams(request)
+    data, hasMore, lastItem = Kahani.getKahaniByTitlePrefix(limit, nextItem, character)
+    return helper.createJSONResponse(data, hasMore, lastItem, nextItemURL)
 
 
 @routes.route('/kahani/<objectId>', methods=['GET'])
