@@ -17,6 +17,8 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 # initializing the Sentry sdk with Data Source Name linked to Abhivyakt
 # account. If we migrate to a different id or account, only this value
 # needs to be changed.
+# Login link: https://sentry.io/auth/login/
+# Username: abhivyakt.com@gmail.com
 sentry_sdk.init(
     dsn="https://2f37e9c5248c451392bd9956dad14444@sentry.io/1375493",
     integrations=[FlaskIntegration()]
