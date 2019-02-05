@@ -15,7 +15,7 @@ def api_dohe_json():
 def processGetRequest(request):
     nextItemURL = '/dohejs?'
 
-    limit, nextItem, content, author, _, _ = helper.getRequestParams(request)
+    limit, nextItem, content, author, _ = helper.getRequestParams(request)
 
     if author is not None:
         data, hasMore, lastItem = Dohe.getDoheByAuthor(
