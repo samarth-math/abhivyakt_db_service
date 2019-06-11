@@ -24,6 +24,11 @@ def rachnakar_object(objectId):
     if request.method == 'GET':
         return helper.createJSONDataOnlyResponse(Rachnakar.getRachnakarById(objectId))
 
+@routes.route('/rachnakar/homeAuthor', methods=['GET'])
+def rachnakar_home_author():
+    if request.method == 'GET':
+        return helper.createJSONDataOnlyResponse(Rachnakar.homePageRachnakar())
+
 
 @routes.route('/rachnakar/startCharacter/<character>', methods=['GET'])
 def rachnakar_start_char(character):
