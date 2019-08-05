@@ -1,10 +1,7 @@
 from api.models import rachnakar as Rachnakar
-from flask import render_template
 from . import routes
 from flask import request
 from .helpers import routeHelper as helper
-from flask import jsonify
-from api.globalHelpers.utilities import logger
 
 
 @routes.route('/rachnakarjs', methods=['GET'])
@@ -24,6 +21,7 @@ def rachnakar_object(objectId):
     if request.method == 'GET':
         return helper.createJSONDataOnlyResponse(Rachnakar.getRachnakarById(objectId))
 
+
 @routes.route('/rachnakar/homeAuthor', methods=['GET'])
 def rachnakar_home_author():
     if request.method == 'GET':
@@ -35,7 +33,20 @@ def rachnakar_start_char(character):
     if request.method == 'GET':
         nextItemURL = '/rachnakar/startCharacter/' + character + '?'
         limit, nextItem = extractRequestParams(request)
-        data, hasMore, lastItem = Rachnakar.getRachnakarByNamePrefix(limit, nextItem, character)
+        data, hasMore, lastItem = Rachnakar.getRachnakarByNamePrefix(
+            limit, nextItem, character)
+        return helper.createJSONResponse(data, hasMore, lastItem, nextItemURL)
+
+
+@routes.route('/rachnakar/<rachnakarId>/content/<contentType>', methods=['GET'])
+def rachnakar_content(rachnakarId, contentType):
+    if request.method == 'GET':
+        nextItemURL = '/rachnakar/' + rachnakarId + '/content/' + contentType + '?'
+        limit, nextItem = extractRequestParams(request)
+        data, hasMore, lastItem = Rachnakar.getContentForRachnakarId(limit,
+                                                                     nextItem,
+                                                                     rachnakarId,
+                                                                     contentType)
         return helper.createJSONResponse(data, hasMore, lastItem, nextItemURL)
 
 

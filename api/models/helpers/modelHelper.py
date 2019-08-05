@@ -11,11 +11,10 @@ from api.globalHelpers.constants import FEATURED_FILE_PATH
 from api.globalHelpers.constants import Error
 from api.globalHelpers.utilities import ValidationError
 from api.globalHelpers.constants import Art
-from api.models.helpers.collections import collectionByType
 from api.globalHelpers.validationUtils import validateNotNone
 from api.globalHelpers.validationUtils import validateObjectId
 from api.models.helpers.databaseHelperFunctions import getDBHandler
-from bson import ObjectId, errors
+from bson import errors
 
 
 def hasMore(count, limit):
@@ -57,13 +56,32 @@ def getObjectById(collection, objectId):
     return data
 
 
-def getObjectsByIds(collection, objectIds):
+def getObjectsByIds(collection, objectIds: list, userLimit, lastItem):  # potential bug on ordering
     if collection is None:
         raise ValidationError(Error.COLLECTION_NONE)
-    cursor = collection.find({'_id': {'$in': objectIds}})
+
+    limit = getLimit(userLimit)
+    modifiedObjectIds = list(map(lambda x: ObjectId(x), objectIds))
+    if lastItem is not None:
+        cursor = collection.find({
+            '$and': [
+                {'_id': {'$in': modifiedObjectIds}},
+                {'_id': {'$gt': ObjectId(lastItem)}}
+            ]
+        }).limit(limit)
+    else:
+        cursor = collection.find({
+            '_id': {'$in': modifiedObjectIds}
+        }).limit(limit)
+    count = cursor.count()
+    if count == 0:
+        return None, False, str(0)
+    lastIndex = max(0, min(limit, count) - 1)
+    lastId = cursor.__getitem__(lastIndex).get("_id")
     serializedData = dumps(cursor)
-    data = json.loads(serializedData)
-    return data
+    more = hasMore(count, limit)
+    data = json.loads(serializedData, encoding='utf-8')
+    return data, more, str(lastId)
 
 
 def getObjectByMultifieldExactSearch(collection, fieldValueMap):
@@ -75,18 +93,24 @@ def getObjectByMultifieldExactSearch(collection, fieldValueMap):
     return data
 
 
-def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx=None):
+def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm):
+    regx = re.compile(".*" + searchTerm + ".*", re.IGNORECASE)
+    return getObjectsByRegex(collection, lastItem, userLimit, fieldName, regx)
+
+
+def getObjectsByRegex(collection, lastItem, userLimit, fieldName, regx):
     if collection is None:
         raise ValidationError(Error.COLLECTION_NONE)
 
     limit = getLimit(userLimit)
-    if regx is None:
-        regx = re.compile(".*" + searchTerm + ".*", re.IGNORECASE)
     if lastItem is not None:
         cursor = collection.find(
             {fieldName: regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
     else:
         cursor = collection.find({fieldName: regx}).limit(limit)
+    # The count() method is probably deprecated, might need to use
+    # count_documents in future check this link:
+    #  # http://api.mongodb.com/python/current/changelog.html
     count = cursor.count()
     if count == 0:
         return None, False, str(0)
@@ -100,7 +124,7 @@ def getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, re
 
 def getObjectsByFieldExactSearch(collection, lastItem, userLimit, fieldName, searchTerm):
     regx = re.compile(searchTerm, re.IGNORECASE)
-    return getObjectsByField(collection, lastItem, userLimit, fieldName, searchTerm, regx)
+    return getObjectsByRegex(collection, lastItem, userLimit, fieldName, regx)
 
 
 def rewriteFileWithJsonObject(jsonObject, filePointer):
@@ -133,30 +157,8 @@ def featured(collection, fileName, artType):
 
 def getObjectsByStartCharacter(collection, lastItem, userLimit, fieldName,
                                startCharacter, regx=None):
-    if collection is None:
-        raise ValidationError(Error.COLLECTION_NONE)
-
-    limit = getLimit(userLimit)
-    if regx is None:
-        regx = re.compile('^' + startCharacter + '.*', re.UNICODE)
-
-    if lastItem is not None:
-        cursor = collection.find(
-            {fieldName: regx, '_id': {'$gt': ObjectId(lastItem)}}).limit(limit)
-    else:
-        cursor = collection.find({fieldName: regx}).limit(limit)
-    # The count() method is probably deprecated, might need to use
-    # count_documents in future check this link:
-    # http://api.mongodb.com/python/current/changelog.html
-    count = cursor.count()
-    if count == 0:
-        return None, False, str(0)
-    last_index = max(0, min(limit, count) - 1)
-    last_id = cursor.__getitem__(last_index).get("_id")
-    serializedData = dumps(cursor)
-    more = hasMore(count, limit)
-    data = json.loads(serializedData)
-    return data, more, str(last_id)
+    regx = re.compile('^' + startCharacter + '.*', re.UNICODE)
+    return getObjectsByRegex(collection, lastItem, userLimit, fieldName, regx)
 
 
 def getFileById(fid):

@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import api.models
-from api.models.helpers import databaseHelperFunctions as db
 from api.models.helpers import modelHelper as helper
-from api.models.helpers.collections import collectionByType
+from api.models.helpers.collections import collectionByTypeString
 from api.models.helpers.collections import rachnakarCollection as collection
 from bson.objectid import ObjectId
 from bson.json_util import dumps
-from api.globalHelpers.utilities import logger
+import api.globalHelpers.validationUtils as validationUtils
 import json
 
 
@@ -32,29 +30,26 @@ def getRachnakarById(objectId):
     return helper.getObjectById(collection, objectId)
 
 
-#  Expects a dictionary right now like below
-#  rachnakarInfo = {
-#        "name": "कलजुगी",
-#        "dohe": [ObjectId("5a589b4274ad3522fbfd2cdc"), ObjectId("5a589b4274ad3522fbfd2cdf")]
-#    }
-#
-#  Need to make it work with a db object like below
-#  {
-#     '_id': {'$oid': '5b05955936178aa452dc0606'},
-#     'name': 'Kabir',
-#     'dohe': [{'$oid': '5a589b4274ad3522fbfd2cdc'}, {'$oid': '5a589b4274ad3522fbfd2cdf'}]
-#  }
+def getContentForRachnakarId(userLimit, lastItem, rachnakarId: str, artType: str):
+    validationUtils.validateObjectId(rachnakarId)
+    validationUtils.validateArtType(artType)
+    artList = extractArtIdsFromRachnakar(rachnakarId, artType)
+    response = helper.getObjectsByIds(collectionByTypeString(artType), artList, userLimit, lastItem)
+    return response
 
 
-def getContentForRachnakar(rachnakar, contentType):
-    contentKey = contentType.value
-    contentIdListToFetch = rachnakar[contentKey]
-    contentColection = collectionByType[contentType]
-    return helper.getObjectsByIds(contentColection, contentIdListToFetch)
+def extractArtIdsFromRachnakar(rachnakarId: str, artType: str):
+    rachnakar = getRachnakarById(rachnakarId)
+    artIdList = []
+    if artType in rachnakar.keys():
+        for id in rachnakar[artType]:
+            artIdList.append(id['$oid'])
+    return artIdList
 
 
 def featuredRachnakar():
     return helper.featured(collection, "featuredRachnakar.json", "rachnakar")
+
 
 def homePageRachnakar():
     return helper.featured(collection, "homePageRachnakar.json", "rachnakar")
