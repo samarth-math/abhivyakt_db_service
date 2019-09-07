@@ -41,9 +41,10 @@ def getContentForRachnakarId(userLimit, lastItem, rachnakarId: str, artType: str
 def extractArtIdsFromRachnakar(rachnakarId: str, artType: str):
     rachnakar = getRachnakarById(rachnakarId)
     artIdList = []
-    if artType in rachnakar.keys():
-        for id in rachnakar[artType]:
-            artIdList.append(id['$oid'])
+    if 'works' in rachnakar:
+        if artType in rachnakar["works"].keys():
+            for id in rachnakar["works"][artType]:
+                artIdList.append(id['$oid'])
     return artIdList
 
 
