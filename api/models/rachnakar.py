@@ -31,8 +31,8 @@ def getRachnakarById(objectId):
 
 
 def getContentForRachnakarId(userLimit, lastItem, rachnakarId: str, artType: str):
-    validationUtils.validateObjectId(rachnakarId)
-    validationUtils.validateArtType(artType)
+    rachnakarId = validationUtils.validateObjectId(rachnakarId)
+    artType = validationUtils.validateArtType(artType)
     artList = extractArtIdsFromRachnakar(rachnakarId, artType)
     response = helper.getObjectsByIds(collectionByTypeString(artType), artList, userLimit, lastItem)
     return response

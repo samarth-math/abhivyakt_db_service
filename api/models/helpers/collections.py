@@ -19,5 +19,13 @@ def getArtTypesAsStrings():
     return map(lambda x: x.name, collectionByType.keys())
 
 
+def getArtTypesAsStringsEnglish():
+    return map(lambda x: x.name, collectionByType.keys())
+
+
+def getArtTypesAsStringsHindi():
+    return map(lambda x: x.value, collectionByType.keys())
+
+
 def collectionByTypeString(artType: str):
     return collectionByType[Art[artType]]
